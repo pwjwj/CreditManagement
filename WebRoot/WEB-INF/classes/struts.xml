@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<package name="default" extends="json-default">
+	
+	<action name="login" class="baseInfoAction" method="login">
+ 			<result name="superAdmin">/manager.jsp</result>
+ 			<result name="commAdmin">/manager.jsp</result>
+ 			<result name="commUser">/default/index.jsp</result>
+ 			<result name="error">/login.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		<action name="getAllStudentBaseInfo" class="baseInfoAction" method="getAllStudentBaseInfo">
+ 			<result type="json"/>
+ 		</action>
+ 		<action name="getAllStudentCreditActivity" class="creditActivityAction" method="getAllStudentCreditActivity">
+ 			<result type="json"/>
+ 		</action>
+ 		<action name="getAllCreditCategory" class="creditCategoryAction" method="getAllCreditCategory">
+ 			<result type="json"/>
+ 		</action> 	
+ 		<action name="getAllInfo" class="infoAction" method="getAllInfo">
+ 			<result type="json"/>
+ 		</action>
+ 		<action name="getAllGoods" class="goodsAction" method="getAllGoods">
+ 			<result type="json"/>
+ 		</action>
+
+</package>
+</struts>    
