@@ -48,10 +48,18 @@
 		
 		<bean id="baseInfoServiceImp" class="com.sonic.serviceImp.BaseInfoServiceImp">
 			<property name="genericDao" ref="genericDaoImp"></property>
-		</bean>	
+		</bean>	 
 		<bean id="baseInfoAction" class="com.sonic.action.BaseInfoAction" >
 			<property name="userService" ref="baseInfoServiceImp"/>
 		</bean>
+		
+		<!-- 新增基本信息管理 -->
+		
+		
+		<!-- <bean id="addBaseInfoAction" class="com.sonic.action.AddBaseInfoAction" >
+			<property name="userService" ref="baseInfoServiceImp"/>
+		</bean> -->
+		
 		
 		<!-- 信用活动管理 -->
 		

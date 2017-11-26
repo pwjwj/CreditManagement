@@ -4,11 +4,37 @@
 <package name="default" extends="json-default">
 	
 	<action name="login" class="baseInfoAction" method="login">
- 			<result name="superAdmin">/manager.jsp</result>
- 			<result name="commAdmin">/manager.jsp</result>
- 			<result name="commUser">/default/index.jsp</result>
+ 			<result name="superAdmin">/adminSu/manager.jsp</result>
+ 			<result name="commAdmin">/admin/manager.jsp</result>
+ 			<result name="stu">/stu/manager.jsp</result>
  			<result name="error">/login.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		<action name="logout" class="baseInfoAction" method="logout">
+ 			<result name="success">/login.jsp</result>
+ 		</action>
+ 		<!-- 这里就得看一下这个该url -->
+ 		<action name="stuSearch" class="baseInfoAction" method="stuSearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		<action name="addStuBase" class="baseInfoAction" method="addStuBase">
+ 			<result name="success">/admin/BaseInfo.jsp</result>
+ 		</action>
+ 		<action name="deleteStuById"  class="baseInfoAction" method="deleteStuById">
+ 			<result name="success">/admin/BaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
+ 			<result name="success">/admin/StuInfo.jsp</result>
+ 		</action>
+ 		<action name="changeInfo" class="baseInfoAction" method="changeInfo">
+ 			<result name="error">/message.jsp</result><!-- 无权限页面 -->
+ 			<result name="inputErro" type="chain">getUserByUserName</result>
+ 			<result name="indexpage" type="chain">getUserByUserName</result>
+ 			<result name="mangerpage" type="chain">getUserByUserName</result>
+ 			<!-- <result name="changePWD">/login.jsp</result> -->
+ 			<result name="notlogin">/login.jsp</result>
  		</action>
  		<action name="getAllStudentBaseInfo" class="baseInfoAction" method="getAllStudentBaseInfo">
  			<result type="json"/>

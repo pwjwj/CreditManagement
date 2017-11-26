@@ -2,11 +2,9 @@ package com.sonic.service;
 
 import java.util.List;
 
-import com.sonic.pojo.Application;
-import com.sonic.pojo.Creditactivity;
-import com.sonic.pojo.Creditcategory;
-import com.sonic.pojo.Goods;
-import com.sonic.pojo.Info;
+
+import com.sonic.pojo.Admin;
+import com.sonic.pojo.AdminSu;
 import com.sonic.pojo.StuBase;
 
 
@@ -28,7 +26,16 @@ public interface BaseInfoService {
 	
 	//public List<StuBase> getUserList(String page,String rows);
 	//public int getUserTotalByAuthority(String Authority);
-	public StuBase getUser(String id);
+	public Admin getTUser(String id);
+	public AdminSu getSUser(String id);
+	public StuBase getUser(String userId);
 	//public void saveUserOrUpdate(StuBase user);
 	//public void delete(List<StuBase> list);
+	
+	public List<StuBase> getStuSearchList(String hql, String page, String rows);
+	public int getSearchedTotal(String hql);
+	
+	public void saveStuBaseOrUpdate(StuBase stu);
+	
+	public void deleteStu(int newsId);
 }

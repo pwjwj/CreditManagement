@@ -54,7 +54,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });   
           
     });  
-    function formatOper2(val,row,index){ 
+    
+    <%-- function formatOper2(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
 	function changeInfo2(index){
@@ -64,23 +65,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var url = '<%=basePath %>getUserByUserId.action?userId='+rows[0].username;
             window.location.href=url;
         }  
-	} 
-	function formatOper2_1(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeClass2_1('+index+')">升为普通管理员</a>';   
-	}
-	//点击  普通会员   的方法  
-	function changeClass2_1(index){
-		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
+	}  --%>
+	 function formatOper2(val,row,index){ 
+    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
+	}  
+	function delete2(index){
+		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>changeAuthority.action?authority=1&userId='+rows[0].username;
+            var url = '<%=basePath %>deleteStuById.action?stuId='+rows[0].number;
+             window.location.href=url;
+        }  
+	}
+	function formatOper2_1(val,row,index){ 
+    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
+	}  
+	function changeInfo2(index){
+		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
+    	var rows = $("#commUserDatagrid").datagrid("getSelections");
+    	if (rows.length==1){    
+            var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].name;
             window.location.href=url;
         }  
+	}
+	
+	function changeUrl(){
+		alert("进来了");
+		/* $('#commUserDatagrid').datagrid('url','stuSearch.action');// 关键在这里     */
+    	/* $("#commUserDatagrid").datagrid('options').url="stuSearch.action";
+		$("#commUserDatagrid").datagrid('load'); */
+		$('#commUserDatagrid').datagrid({  
+    		url:'stuSearch.action'  
+   			
+		});  
 	}
 </script>  
   </head>
   
   <body>
+  <s:form action="stuSearch.action" method="post" enctype="multipart/form-data" theme="simple" onclick="changeUrl()">
+  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
+  		 <input type="text" name="keyword"> &nbsp;&nbsp;&nbsp;&nbsp;
+  		 <input type="submit" value="搜索">
+  </s:form>
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  
@@ -91,12 +118,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th data-options="field:'college',width:100,align:'center'">院系</th> 
                 <th data-options="field:'class_',width:100,align:'center'">班级</th>
                 <th data-options="field:'credit',width:80,align:'center'">信用分</th>
-                <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
+                <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
+                <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th>
             </tr>  
         </thead>  
     </table>
    
     </div>
+    
   </body>
 </html>
 
