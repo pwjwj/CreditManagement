@@ -91,22 +91,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function changeUrl(){
 		alert("进来了");
+		var form1=document.getElementById("key");
 		/* $('#commUserDatagrid').datagrid('url','stuSearch.action');// 关键在这里     */
-    	/* $("#commUserDatagrid").datagrid('options').url="stuSearch.action";
-		$("#commUserDatagrid").datagrid('load'); */
-		$('#commUserDatagrid').datagrid({  
-    		url:'stuSearch.action'  
+		alert(key.value);
+    	$("#commUserDatagrid").datagrid('options').url='stuSearch.action?keyword='+key.value;
+    	
+		$("#commUserDatagrid").datagrid('load');
+		
+		
+		/* $('#commUserDatagrid').datagrid({  
+    		url:'stuSearch.action?keyword='+form1.value;  
    			
-		});  
+		});   */
 	}
 </script>  
   </head>
   
   <body>
-  <s:form action="stuSearch.action" method="post" enctype="multipart/form-data" theme="simple" onclick="changeUrl()">
+  <%-- action="stuSearch.action" --%>
+  <s:form  action="stuSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
   		 <span id="userPwdTip">&nbsp;输入关键字:</span>
-  		 <input type="text" name="keyword"> &nbsp;&nbsp;&nbsp;&nbsp;
-  		 <input type="submit" value="搜索">
+  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
+  		 <input type="submit" value="搜索" ">
   </s:form>
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  

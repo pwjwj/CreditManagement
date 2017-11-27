@@ -25,11 +25,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<div style="margin: e10px 0px 0px 15px">
   	这里还有字符串格式的问题
-    <s:form action = "addCreditActivity.action" theme="simple">
-    	<s:textarea name = "number" placeholder="学号"  cssStyle="height:28px;width:500px"/><br/>
+    <s:form action = "addCrditCategory.action" theme="simple">
     	<s:textarea name = "categoryId" placeholder="分类号"  cssStyle="height:28px;width:500px"/><br/>
+    	<s:textarea name = "categoryName" placeholder="分类名"  cssStyle="height:28px;width:500px"/><br/>
     	<s:textarea name = "detail" placeholder="事项详情"  cssStyle="height:28px;width:500px"/><br/>
-    	<s:textarea name = "dates"  placeholder="日期 YYYY-MM-DD"  cssStyle="height:28px;width:500px"/><br/>
+    	<s:textarea name = "score" placeholder="分值"  cssStyle="height:28px;width:500px"/><br/>
     	
     	<s:submit value = "新增" cssStyle="height:28px;width:60px"/>
     </s:form>

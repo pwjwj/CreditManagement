@@ -55,16 +55,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
     });  
     function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
+    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
 	}  
-	function changeInfo2(index){
+	function delete2(index){
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>getUserByUserId.action?userId='+rows[0].username;
-            window.location.href=url;
+            var url = '<%=basePath %>deleteGoodsById.action?GoodsId='+rows[0].id;
+             window.location.href=url;
         }  
-	} 
+	}
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeClass2_1('+index+')">升为普通管理员</a>';   
 	}
@@ -81,6 +81,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <s:form  action="goodsSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
+  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
+  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
+  		 <input type="submit" value="搜索" ">
+  </s:form>
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  
@@ -90,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th data-options="field:'goodsNumberRemain',width:100,align:'center'">当前库存量</th>  
                 <th data-options="field:'goodsNumberBorrowed',width:100,align:'center'">外借数量</th> 
                 <th data-options="field:'goodsBorrower',width:100,align:'center'">外借人</th>
-                <!-- <th data-options="field:'credit',width:80,align:'center'">信用分</th> -->
+                <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
                 <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
             </tr>  
         </thead>  

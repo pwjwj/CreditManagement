@@ -10,4 +10,7 @@ public interface CreditActivityService {
 	public List<Creditactivity> getStuCreditActivityList(String page,String rows);
 	public int getCreditActivityTotal();
 	public void saveCreditActivityOrUpdate(Creditactivity ca);
+	public List<Creditactivity> getCreditActivitySearchList(String hql, String page, String rows);
+	public int getCreditActivitySearchedTotal(String hql);
+	public void deleteCreditActivity(int creditActivityId);
 }

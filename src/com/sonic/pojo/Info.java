@@ -1,7 +1,5 @@
 package com.sonic.pojo;
 
-import java.sql.Timestamp;
-
 /**
  * Info entity. @author MyEclipse Persistence Tools
  */
@@ -13,7 +11,7 @@ public class Info implements java.io.Serializable {
 	private Integer id;
 	private String infoTittle;
 	private String infoContent;
-	private Timestamp infoTime;
+	private String infoTime;
 
 	// Constructors
 
@@ -22,7 +20,7 @@ public class Info implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Info(String infoTittle, String infoContent, Timestamp infoTime) {
+	public Info(String infoTittle, String infoContent, String infoTime) {
 		this.infoTittle = infoTittle;
 		this.infoContent = infoContent;
 		this.infoTime = infoTime;
@@ -54,11 +52,11 @@ public class Info implements java.io.Serializable {
 		this.infoContent = infoContent;
 	}
 
-	public Timestamp getInfoTime() {
+	public String getInfoTime() {
 		return this.infoTime;
 	}
 
-	public void setInfoTime(Timestamp infoTime) {
+	public void setInfoTime(String infoTime) {
 		this.infoTime = infoTime;
 	}
 

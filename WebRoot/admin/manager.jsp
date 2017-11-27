@@ -271,6 +271,7 @@ float:left;
 				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/Creditcategory.jsp');">奖惩事项管理</a>
 			</div>
 			<div class="div3">
+			<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/AddCreditcategory.jsp');">新增事项</a></li>
 				<%-- <ul>
 					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/newPc.jsp');">新增台式机</a></li>
 					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/newLap.jsp');">新增笔记本</a></li>
@@ -283,11 +284,12 @@ float:left;
 			
 			<div class="div2">
 				<div class="pjgl"></div>
-				申请管理
+				
+				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/Application.jsp');">申请管理</a>
 			</div>
 			<div class="div3">
 				<ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/orders.jsp');">资金申请</a></li>
+					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/ApplicationMoney.jsp');">资金申请</a></li>
 					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/orders.jsp');">物资申请</a></li>
 				</ul>
 			</div>
@@ -299,7 +301,7 @@ float:left;
 			</div>
 			<div class="div3">
 				<ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/judgement.jsp');">发布通知</a></li>
+					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/AddInfo.jsp');">发布通知</a></li>
 					<%-- <li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/badJudge.jsp');">浏览差评</a></li> --%>
 				</ul>
 			</div>
@@ -310,7 +312,7 @@ float:left;
 			</div>
 			<div class="div3">
 				<ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/judgement.jsp');">物资添加</a></li>
+					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/AddGoods.jsp');">物资添加</a></li>
 					<%-- <li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/badJudge.jsp');">浏览差评</a></li> --%>
 				</ul>
 			</div>

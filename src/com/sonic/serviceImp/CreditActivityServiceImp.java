@@ -39,4 +39,28 @@ public class CreditActivityServiceImp implements CreditActivityService{
 		genericDao.saveOrUpdate(ca);
 	}
 
+	@Override
+	public void deleteCreditActivity(int creditActivityId) {
+		// TODO Auto-generated method stub
+		genericDao.delById(Creditactivity.class, creditActivityId);
+	}
+
+	@Override
+	public List<Creditactivity> getCreditActivitySearchList(String hql,
+			String page, String rows) {
+		// TODO Auto-generated method stub
+		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
+						: page);// 第几页
+		int pagesize = Integer.parseInt((rows == null || rows == "0") ? "10"
+						: rows);// 每页多少行
+
+		return genericDao.query(hql, currentpage, pagesize);
+	}
+
+	@Override
+	public int getCreditActivitySearchedTotal(String hql) {
+		// TODO Auto-generated method stub
+		return genericDao.countQuery(hql);
+	}
+
 }

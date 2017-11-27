@@ -16,8 +16,8 @@
         <property name="infoContent" type="java.lang.String">
             <column name="infoContent" not-null="true" />
         </property>
-        <property name="infoTime" type="java.sql.Timestamp">
-            <column name="infoTime" length="19" not-null="true" />
+        <property name="infoTime" type="java.lang.String">
+            <column name="infoTime" length="20" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

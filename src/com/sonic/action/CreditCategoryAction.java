@@ -1,5 +1,8 @@
 package com.sonic.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +14,8 @@ import net.sf.json.JsonConfig;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.sonic.pojo.Creditactivity;
+import com.sonic.pojo.Creditcategory;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.CreditCategoryService;
 import com.sonic.utills.DateJsonValueProcessor;
@@ -23,7 +28,61 @@ public class CreditCategoryAction extends ActionSupport {
     private StuBase user;
     private String userId;
     
-    public JSONObject getJsonObj() {
+    private Integer categoryId;
+	private String categoryName;
+	private String detail;
+	private Integer score;
+    
+	private List<Creditcategory> list;
+    
+	private Integer keyword;
+	
+	private Integer creditCategoryId;
+	
+	
+    public Integer getCreditCategoryId() {
+		return creditCategoryId;
+	}
+	public void setCreditCategoryId(Integer creditCategoryId) {
+		this.creditCategoryId = creditCategoryId;
+	}
+	public Integer getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(Integer keyword) {
+		this.keyword = keyword;
+	}
+	public List<Creditcategory> getList() {
+		return list;
+	}
+	public void setList(List<Creditcategory> list) {
+		this.list = list;
+	}
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public Integer getScore() {
+		return score;
+	}
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+	public JSONObject getJsonObj() {
 		return jsonObj;
 	}
 	public void setJsonObj(JSONObject jsonObj) {
@@ -86,4 +145,53 @@ public class CreditCategoryAction extends ActionSupport {
 		}
         return null;  
     }  
+   
+    public String addCrditCategory() {
+		Creditcategory cc = new Creditcategory();
+		
+		cc.setCategoryId(categoryId);
+		cc.setCategoryName(categoryName);
+		cc.setDetail(detail);
+		cc.setScore(score);
+		
+		System.out.println("addcc access");
+		try {
+			creditcategoryService.saveCreditCategoryOrUpdate(cc);
+			return "success";
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			return "input";
+		}
+	}
+    
+    public String creditCategorySearch() {
+		List<Creditcategory> list1 = list;
+		try {
+			System.out.println("keyword   " + keyword);
+			String hql = "from Creditcategory where categoryId like '%" + keyword
+					+ "%'or categoryName like '%" + keyword + "%'";
+			list = creditcategoryService.getCreditCategorySearchList(hql, page, rows);
+			System.out.println("result list size  " + list.size());
+			toBeJson(list, creditcategoryService.getCreditCategorySearchedTotal(hql));
+			return null;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			list = list1;
+			return SUCCESS;
+		}
+	}
+    
+    public String deleteCategoryById() {
+		try {
+			
+			creditcategoryService.deleteCreditCategoryById(creditCategoryId);
+			return "success";
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			return "input";
+
+		}
+	}
+    
+    
 }

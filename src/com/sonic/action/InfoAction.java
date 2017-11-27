@@ -1,18 +1,21 @@
 package com.sonic.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.ServletActionContext;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
+import com.sonic.pojo.Creditcategory;
+import com.sonic.pojo.Info;
 import com.sonic.pojo.StuBase;
-import com.sonic.service.CreditCategoryService;
 import com.sonic.service.InfoService;
 import com.sonic.utills.DateJsonValueProcessor;
 
@@ -24,7 +27,43 @@ public class InfoAction extends ActionSupport {
     private StuBase user;
     private String userId;
     
-    public JSONObject getJsonObj() {
+    private String infoTittle;
+	private String infoContent;
+	private Integer infoId;
+	private List<Info> list;
+	private Integer keyword;
+	
+    public Integer getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(Integer keyword) {
+		this.keyword = keyword;
+	}
+	public List<Info> getList() {
+		return list;
+	}
+	public void setList(List<Info> list) {
+		this.list = list;
+	}
+	public Integer getInfoId() {
+		return infoId;
+	}
+	public void setInfoId(Integer infoId) {
+		this.infoId = infoId;
+	}
+	public String getInfoTittle() {
+		return infoTittle;
+	}
+	public void setInfoTittle(String infoTittle) {
+		this.infoTittle = infoTittle;
+	}
+	public String getInfoContent() {
+		return infoContent;
+	}
+	public void setInfoContent(String infoContent) {
+		this.infoContent = infoContent;
+	}
+	public JSONObject getJsonObj() {
 		return jsonObj;
 	}
 	public void setJsonObj(JSONObject jsonObj) {
@@ -87,4 +126,52 @@ public class InfoAction extends ActionSupport {
 		}
         return null;  
     }  
+    
+    public String addInfo() {
+		Info info = new Info();
+		
+		info.setInfoTittle(infoTittle);
+		info.setInfoContent(infoContent);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		info.setInfoTime(df.format(new Date()));
+		
+		
+		System.out.println("addinfo access");
+		try {
+			infoService.saveInfoOrUpdate(info);
+			return "success";
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			return "input";
+		}
+	}
+    
+    public String deleteInfoById() {
+		try {
+			
+			infoService.deleteInfoById(infoId);
+			return "success";
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			return "input";
+
+		}
+	}
+    
+    public String infoSearch() {
+		List<Info> list1 = list;
+		try {
+			System.out.println("keyword   " + keyword);
+			String hql = "from Creditcategory where id like '%" + keyword
+					+ "%'";
+			list = infoService.getInfoSearchList(hql, page, rows);
+			System.out.println("result list size  " + list.size());
+			toBeJson(list, infoService.getInfoSearchedTotal(hql));
+			return null;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			list = list1;
+			return SUCCESS;
+		}
+	}
 }

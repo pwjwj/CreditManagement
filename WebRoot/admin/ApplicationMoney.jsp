@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             striped : true,//设置为true将交替显示行背景。  
             collapsible : true,//显示可折叠按钮 
             toolbar:"#tb2",//在添加 增添、删除、修改操作的按钮要用到这个  
-            url:'getAllCreditCategory.action',//url调用Action方法  
+            url:'getAllMoneyApplication.action',//url调用Action方法  
             loadMsg : '数据装载中......',  
             singleSelect:true,//为true时只能选择单行 
             nowrap:false,  
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>deleteCategoryById.action?creditCategoryId='+rows[0].id;
+            var url = '<%=basePath %>deleteMoneyApplicationById.action?applicationId='+rows[0].id;
              window.location.href=url;
         }  
 	}
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <s:form  action="creditCategorySearch.action" method="post" enctype="multipart/form-data" theme="simple" >
+  <s:form  action="applicationMoneySearch.action" method="post" enctype="multipart/form-data" theme="simple" >
   		 <span id="userPwdTip">&nbsp;输入关键字:</span>
   		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
   		 <input type="submit" value="搜索" ">
@@ -91,10 +91,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <thead>  
             <tr>  
                 <th data-options="field:'id',width:100,align:'center'">序号</th> 
-                <th data-options="field:'categoryId',width:100,align:'center'">分类号</th>  
-                <th data-options="field:'categoryName',width:100,align:'center'">分类名</th>  
-                <th data-options="field:'detail',width:100,align:'center'">详情</th> 
-                <th data-options="field:'score',width:100,align:'center'">分值</th>
+                <th data-options="field:'applicationName',width:100,align:'center'">申请人学号</th>  
+                <th data-options="field:'applicationNumber',width:100,align:'center'">申请人学号</th>  
+                <th data-options="field:'applicationCategory',width:100,align:'center'">申请类别</th> 
+                <th data-options="field:'applicationWhat',width:100,align:'center'">申请内容</th> 
+                <th data-options="field:'applicationTime',width:100,align:'center'">申请时间</th> 
+                
+                <!-- <th data-options="field:'dates',width:100,align:'center'">时间</th> -->
+                <!-- <th data-options="field:'credit',width:80,align:'center'">信用分</th> -->
                 <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
                 <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
             </tr>  

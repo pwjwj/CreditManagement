@@ -1,29 +1,37 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'user1.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
+<head>
+<base href="<%=basePath%>">
+
+<title>My JSP 'user1.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
-	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
+<script type="text/javascript"
+	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js"
+	charset="utf-8"></script>
 <script type="text/javascript">  
     $(function() {  
         $('#commUserDatagrid').datagrid({  
@@ -55,16 +63,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
     });  
     function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
+    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
 	}  
-	function changeInfo2(index){
+	function delete2(index){
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>getUserByUserId.action?userId='+rows[0].username;
-            window.location.href=url;
+            var url = '<%=basePath%>deleteCreditActivityById.action?creditActivityId='+rows[0].id;
+             window.location.href=url;
         }  
-	} 
+	}
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeClass2_1('+index+')">升为普通管理员</a>';   
 	}
@@ -73,30 +81,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>changeAuthority.action?authority=1&userId='+rows[0].username;
-            window.location.href=url;
-        }  
+            var url = '<%=basePath%>changeAuthority.action?authority=1&userId='
+					+ rows[0].username;
+			window.location.href = url;
+		}
 	}
-</script>  
-  </head>
-  
-  <body>
-    <div style="margin: 10px 0px 0px 15px">
-	<table id="commUserDatagrid">  
-       <thead>  
-            <tr>  
-                <th data-options="field:'id',width:100,align:'center'">序号</th> 
-                <th data-options="field:'number',width:100,align:'center'">学号</th>  
-                <th data-options="field:'categoryId',width:100,align:'center'">分类号</th>  
-                <th data-options="field:'detail',width:100,align:'center'">事项详情</th> 
-                <th data-options="field:'dates',width:100,align:'center'">时间</th>
-                <!-- <th data-options="field:'credit',width:80,align:'center'">信用分</th> -->
-                <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
-            </tr>  
-        </thead>  
-    </table>
-   
-    </div>
-  </body>
+</script>
+</head>
+
+<body>
+	<div style="margin: 10px 0px 0px 15px">
+		<s:form action="creditActivitySearch.action" method="post"
+			enctype="multipart/form-data" theme="simple" onclick="changeUrl()">
+			<span id="userPwdTip">&nbsp;输入关键字:</span>
+			<input type="text" name="keyword"> &nbsp;&nbsp;&nbsp;&nbsp;
+  		 	<input type="submit" value="搜索">
+		</s:form>
+		<table id="commUserDatagrid">
+			<thead>
+				<tr>
+					<th data-options="field:'id',width:100,align:'center'">序号</th>
+					<th data-options="field:'number',width:100,align:'center'">学号</th>
+					<th data-options="field:'categoryId',width:100,align:'center'">分类号</th>
+					<th data-options="field:'detail',width:100,align:'center'">事项详情</th>
+					<th data-options="field:'dates',width:100,align:'center'">时间</th>
+					<th
+						data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
+					<th
+						data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th>
+				</tr>
+			</thead>
+		</table>
+
+	</div>
+</body>
 </html>
 

@@ -23,9 +23,8 @@ public class Creditactivity implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Creditactivity(Integer id, Integer number, String categoryId,
-			String detail, Date dates) {
-		this.id = id;
+	public Creditactivity(Integer number, String categoryId, String detail,
+			Date dates) {
 		this.number = number;
 		this.categoryId = categoryId;
 		this.detail = detail;

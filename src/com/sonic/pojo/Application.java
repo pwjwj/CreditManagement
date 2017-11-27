@@ -1,7 +1,5 @@
 package com.sonic.pojo;
 
-import java.sql.Timestamp;
-
 /**
  * Application entity. @author MyEclipse Persistence Tools
  */
@@ -13,8 +11,9 @@ public class Application implements java.io.Serializable {
 	private Integer id;
 	private String applicationName;
 	private Integer applicationNumber;
+	private String applicationCategory;
 	private String applicationWhat;
-	private Timestamp applicationTime;
+	private String applicationTime;
 	private String isPass;
 
 	// Constructors
@@ -24,12 +23,12 @@ public class Application implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Application(Integer id, String applicationName,
-			Integer applicationNumber, String applicationWhat,
-			Timestamp applicationTime, String isPass) {
-		this.id = id;
+	public Application(String applicationName, Integer applicationNumber,
+			String applicationCategory, String applicationWhat,
+			String applicationTime, String isPass) {
 		this.applicationName = applicationName;
 		this.applicationNumber = applicationNumber;
+		this.applicationCategory = applicationCategory;
 		this.applicationWhat = applicationWhat;
 		this.applicationTime = applicationTime;
 		this.isPass = isPass;
@@ -61,6 +60,14 @@ public class Application implements java.io.Serializable {
 		this.applicationNumber = applicationNumber;
 	}
 
+	public String getApplicationCategory() {
+		return this.applicationCategory;
+	}
+
+	public void setApplicationCategory(String applicationCategory) {
+		this.applicationCategory = applicationCategory;
+	}
+
 	public String getApplicationWhat() {
 		return this.applicationWhat;
 	}
@@ -69,11 +76,11 @@ public class Application implements java.io.Serializable {
 		this.applicationWhat = applicationWhat;
 	}
 
-	public Timestamp getApplicationTime() {
+	public String getApplicationTime() {
 		return this.applicationTime;
 	}
 
-	public void setApplicationTime(Timestamp applicationTime) {
+	public void setApplicationTime(String applicationTime) {
 		this.applicationTime = applicationTime;
 	}
 

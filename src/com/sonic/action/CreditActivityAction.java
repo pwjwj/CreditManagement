@@ -1,5 +1,7 @@
 package com.sonic.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +16,6 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sonic.pojo.Creditactivity;
 import com.sonic.pojo.StuBase;
-import com.sonic.service.BaseInfoService;
 import com.sonic.service.CreditActivityService;
 import com.sonic.utills.DateJsonValueProcessor;
 
@@ -30,10 +31,33 @@ public class CreditActivityAction extends ActionSupport {
 	private Integer number;
 	private String categoryId;
 	private String detail;
-	private Date dates;
+	private String dates;
+	
+	private Integer creditActivityId;
+	
+	private List<Creditactivity> list;
+	
+	private Integer keyword;
 	
 	
-    
+	public Integer getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(Integer keyword) {
+		this.keyword = keyword;
+	}
+	public List<Creditactivity> getList() {
+		return list;
+	}
+	public void setList(List<Creditactivity> list) {
+		this.list = list;
+	}
+	public Integer getCreditActivityId() {
+		return creditActivityId;
+	}
+	public void setCreditActivityId(Integer creditActivityId) {
+		this.creditActivityId = creditActivityId;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -58,10 +82,10 @@ public class CreditActivityAction extends ActionSupport {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public Date getDates() {
+	public String getDates() {
 		return dates;
 	}
-	public void setDates(Date dates) {
+	public void setDates(String dates) {
 		this.dates = dates;
 	}
 	public JSONObject getJsonObj() {
@@ -132,23 +156,58 @@ public class CreditActivityAction extends ActionSupport {
 	    }  
 	    
 	    
-	    public String addCreditActivity() {
+	    public String addCreditActivity() throws ParseException {
 			Creditactivity ca = new Creditactivity();
 			System.out.println("number  " + number);
 			ca.setNumber(number);
-			ca.setDates(dates);
+			SimpleDateFormat sdf  =new SimpleDateFormat("yyyy-MM-dd");  
+			String times=sdf.format(new Date());  
+			Date d=sdf.parse(dates);  
+			ca.setDates(d);
 			ca.setDetail(detail);
 			ca.setCategoryId(categoryId);
-			
+			//ca.setId(1);
 			System.out.println("ca.number   " + ca.getNumber());
 			System.out.println("number   " + getNumber());
-			System.out.println("addStuBase access");
+			System.out.println("addCreditActivity access");
 			try {
 				creditactivityService.saveCreditActivityOrUpdate(ca);
+				
 				return "success";
 			} catch (Exception e) {
 				System.out.print(e.getMessage());
 				return "input";
 			}
 		}
+	    
+	    public String deleteCreditActivityById() {
+			try {
+				System.out.println("stuId  " + creditActivityId);
+				creditactivityService.deleteCreditActivity(creditActivityId);
+				return "success";
+			} catch (Exception e) {
+				System.out.print(e.getMessage());
+				return "input";
+
+			}
+		}
+	    
+	    
+	    public String creditActivitySearch() {
+			List<Creditactivity> list1 = list;
+			try {
+				System.out.println("keyword   " + keyword);
+				String hql = "from Creditactivity where id like '%" + keyword
+						+ "%'or number like '%" + keyword + "%'";
+				list = creditactivityService.getCreditActivitySearchList(hql, page, rows);
+				System.out.println("result list size  " + list.size());
+				toBeJson(list, creditactivityService.getCreditActivitySearchedTotal(hql));
+				return null;
+			} catch (Exception e) {
+				System.out.print(e.getMessage());
+				list = list1;
+				return SUCCESS;
+			}
+		}
+	    
 }

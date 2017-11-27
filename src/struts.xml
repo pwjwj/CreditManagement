@@ -42,17 +42,91 @@
  		<action name="getAllStudentCreditActivity" class="creditActivityAction" method="getAllStudentCreditActivity">
  			<result type="json"/>
  		</action>
+ 		<action name="addCreditActivity" class="creditActivityAction" method="addCreditActivity">
+			<result name="success">/admin/CreditActivity.jsp</result>
+		</action>
+		
+		<action name="creditActivitySearch" class="creditActivityAction" method="creditActivitySearch">
+ 			<result  type="json"/>
+ 		</action>
+		<action name="deleteCreditActivityById"  class="creditActivityAction" method="deleteCreditActivityById">
+ 			<result name="success">/admin/CreditActivity.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
  		<action name="getAllCreditCategory" class="creditCategoryAction" method="getAllCreditCategory">
  			<result type="json"/>
  		</action> 	
+ 		
+ 		<action name="addCrditCategory" class="creditCategoryAction" method="addCrditCategory">
+			<result name="success">/admin/Creditcategory.jsp</result>
+		</action>
+		
+		<action name="creditCategorySearch" class="creditCategoryAction" method="creditCategorySearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		
+ 		<action name="deleteCategoryById"  class="creditCategoryAction" method="deleteCategoryById">
+ 			<result name="success">/admin/Creditcategory.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
  		<action name="getAllInfo" class="infoAction" method="getAllInfo">
  			<result type="json"/>
+ 		</action>
+ 		
+ 		<action name="addInfo" class="infoAction" method="addInfo">
+			<result name="success">/admin/Info.jsp</result>
+		</action>
+		
+		<action name="deleteInfoById"  class="infoAction" method="deleteInfoById">
+ 			<result name="success">/admin/Info.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+		
+		<action name="infoSearch" class="infoAction" method="infoSearch">
+ 			<result  type="json"/>
  		</action>
  		<action name="getAllGoods" class="goodsAction" method="getAllGoods">
  			<result type="json"/>
  		</action>
-		<action name="addCreditActivity" class="creditActivityAction" method="addCreditActivity">
-			<result name="success">/admin/CreditActivity.jsp</result>
+ 		
+ 		<action name="addGoods" class="goodsAction" method="addGoods">
+			<result name="success">/admin/Goods.jsp</result>
 		</action>
+		
+		<action name="goodsSearch" class="goodsAction" method="goodsSearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		
+		<action name="deleteGoodsById"  class="goodsAction" method="deleteGoodsById">
+ 			<result name="success">/admin/Goods.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getAllApplication" class="applicationAction" method="getAllApplication">
+ 			<result type="json"/>
+ 		</action>
+ 		
+ 		<action name="applicationSearch" class="applicationAction" method="applicationSearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		
+ 		
+ 		<action name="deleteApplicationById"  class="applicationAction" method="deleteApplicationById">
+ 			<result name="success">/admin/Application.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getAllMoneyApplication" class="applicationMoneyAction" method="getAllMoneyApplication">
+ 			<result type="json"/>
+ 		</action>
+ 		<action name="applicationMoneySearch" class="applicationMoneyAction" method="applicationMoneySearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		
+ 		
+ 		<action name="deleteMoneyApplicationById"  class="applicationMoneyAction" method="deleteMoneyApplicationById">
+ 			<result name="success">/admin/ApplicationMoney.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
 </package>
 </struts>    

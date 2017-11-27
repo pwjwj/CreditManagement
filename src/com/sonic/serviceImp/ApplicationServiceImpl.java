@@ -3,11 +3,11 @@ package com.sonic.serviceImp;
 import java.util.List;
 
 import com.sonic.dao.GenericDao;
-import com.sonic.pojo.Creditactivity;
-import com.sonic.pojo.Creditcategory;
-import com.sonic.service.CreditCategoryService;
+import com.sonic.pojo.Application;
+import com.sonic.pojo.Info;
+import com.sonic.service.ApplicationService;
 
-public class CreditCategoryServiceImp implements CreditCategoryService {
+public class ApplicationServiceImpl implements ApplicationService {
 	private GenericDao genericDao;
 
 	public GenericDao getGenericDao() {
@@ -19,31 +19,28 @@ public class CreditCategoryServiceImp implements CreditCategoryService {
 	}
 
 	@Override
-	public List<Creditcategory> getCreditCategoryList(String page, String rows) {
+	public List<Application> getApplicationList(String page, String rows) {
 		// TODO Auto-generated method stub
+		
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
 				: page);// 第几页
 		int pagesize = Integer.parseInt((rows == null || rows == "0") ? "10"
 				: rows);// 每页多少行
 
-		return genericDao.query("from Creditcategory", currentpage, pagesize);
+		return genericDao.query("from Application", currentpage, pagesize);
 	}
 
 	@Override
-	public int getCreditCategoryTotal() {
+	public int getApplicationTotal() {
 		// TODO Auto-generated method stub
-		return genericDao.countQuery("from Creditcategory");
+		return genericDao.countQuery("from Application");
 	}
 
 	@Override
-	public void saveCreditCategoryOrUpdate(Creditcategory cc) {
+	public List<Application> getApplicationSearchList(String hql, String page,
+			String rows) {
 		// TODO Auto-generated method stub
-		genericDao.saveOrUpdate(cc);
-	}
-
-	@Override
-	public List<Creditcategory> getCreditCategorySearchList(String hql,
-			String page, String rows) {
+		// TODO Auto-generated method stub
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
 				: page);// 第几页
 		int pagesize = Integer.parseInt((rows == null || rows == "0") ? "10"
@@ -53,15 +50,15 @@ public class CreditCategoryServiceImp implements CreditCategoryService {
 	}
 
 	@Override
-	public int getCreditCategorySearchedTotal(String hql) {
+	public int getApplicationSearchedTotal(String hql) {
 		// TODO Auto-generated method stub
 		return genericDao.countQuery(hql);
 	}
 
 	@Override
-	public void deleteCreditCategoryById(int creditCategoryId) {
+	public void deleteApplicationById(int applicationId) {
 		// TODO Auto-generated method stub
-		genericDao.delById(Creditcategory.class, creditCategoryId);
+		genericDao.delById(Application.class, applicationId);
 	}
 
 }

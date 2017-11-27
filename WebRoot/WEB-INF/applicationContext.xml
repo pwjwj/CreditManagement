@@ -11,7 +11,7 @@
 			value="com.mysql.jdbc.Driver">
 		</property>
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/pcmall">
+			value="jdbc:mysql://localhost:3306/creditmanagement">
 		</property>
 		
 		<property name="username" value="root"></property>
@@ -96,6 +96,24 @@
 		</bean>	
 		<bean id="goodsAction" class="com.sonic.action.GoodsAction" >
 			<property name="goodsService" ref="goodsServiceImp"/>
+		</bean>
+		
+		<!-- 申请管理 -->
+		
+		<bean id="applicationServiceImp" class="com.sonic.serviceImp.ApplicationServiceImpl">
+			<property name="genericDao" ref="genericDaoImp"></property>
+		</bean>	
+		<bean id="applicationAction" class="com.sonic.action.ApplicationAction" >
+			<property name="applicationService" ref="applicationServiceImp"/>
+		</bean>
+		
+		<!-- 申请资金管理 -->
+		
+		<bean id="applicationMoneyServiceImpl" class="com.sonic.serviceImp.ApplicationMoneyServiceImpl">
+			<property name="genericDao" ref="genericDaoImp"></property>
+		</bean>	
+		<bean id="applicationMoneyAction" class="com.sonic.action.ApplicationMoneyAction" >
+			<property name="applicationService" ref="applicationMoneyServiceImpl"/>
 		</bean>
 		
 </beans>
