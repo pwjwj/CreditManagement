@@ -3,6 +3,7 @@ package com.sonic.serviceImp;
 import java.util.List;
 
 import com.sonic.dao.GenericDao;
+import com.sonic.pojo.Creditactivity;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.CreditActivityService;
 
@@ -16,7 +17,7 @@ public class CreditActivityServiceImp implements CreditActivityService{
 		this.genericDao = genericDaoImp;
 	}
 	@Override
-	public List<StuBase> getStuCreditActivityList(String page, String rows) {
+	public List<Creditactivity> getStuCreditActivityList(String page, String rows) {
 		// TODO Auto-generated method stub
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
 				: page);// µÚ¼¸Ò³
@@ -30,6 +31,12 @@ public class CreditActivityServiceImp implements CreditActivityService{
 	public int getCreditActivityTotal() {
 		// TODO Auto-generated method stub
 		return genericDao.countQuery("from Creditactivity");
+	}
+
+	@Override
+	public void saveCreditActivityOrUpdate(Creditactivity ca) {
+		// TODO Auto-generated method stub
+		genericDao.saveOrUpdate(ca);
 	}
 
 }

@@ -51,6 +51,8 @@
  		<action name="getAllGoods" class="goodsAction" method="getAllGoods">
  			<result type="json"/>
  		</action>
-
+		<action name="addCreditActivity" class="creditActivityAction" method="addCreditActivity">
+			<result name="success">/admin/CreditActivity.jsp</result>
+		</action>
 </package>
 </struts>    

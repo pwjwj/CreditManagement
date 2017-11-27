@@ -1,5 +1,6 @@
 package com.sonic.action;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import net.sf.json.JsonConfig;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.sonic.pojo.Creditactivity;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.BaseInfoService;
 import com.sonic.service.CreditActivityService;
@@ -24,7 +26,44 @@ public class CreditActivityAction extends ActionSupport {
     private StuBase user;
     private String userId;
    
+    private Integer id;
+	private Integer number;
+	private String categoryId;
+	private String detail;
+	private Date dates;
+	
+	
     
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getNumber() {
+		return number;
+	}
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+	public String getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public Date getDates() {
+		return dates;
+	}
+	public void setDates(Date dates) {
+		this.dates = dates;
+	}
 	public JSONObject getJsonObj() {
 		return jsonObj;
 	}
@@ -91,4 +130,25 @@ public class CreditActivityAction extends ActionSupport {
 			}
 	        return null;  
 	    }  
+	    
+	    
+	    public String addCreditActivity() {
+			Creditactivity ca = new Creditactivity();
+			System.out.println("number  " + number);
+			ca.setNumber(number);
+			ca.setDates(dates);
+			ca.setDetail(detail);
+			ca.setCategoryId(categoryId);
+			
+			System.out.println("ca.number   " + ca.getNumber());
+			System.out.println("number   " + getNumber());
+			System.out.println("addStuBase access");
+			try {
+				creditactivityService.saveCreditActivityOrUpdate(ca);
+				return "success";
+			} catch (Exception e) {
+				System.out.print(e.getMessage());
+				return "input";
+			}
+		}
 }

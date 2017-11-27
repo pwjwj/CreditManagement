@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'register.jsp' starting page</title>
+    <title></title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -61,11 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:form action="changeInfo.action" theme="simple">
     	<div class="box center_div">
     		姓名：<span id="userPwdTip" style="font-size:24px"><s:text name="%{#request.currentUser.name}" /></span>
-    		<s:hidden name="user.name" value="%{#request.currentUser.name}"/>
+    		<s:hidden name="prepairToChangeUser.name" value="%{#request.currentUser.name}"/>
         </div>
         <div class="box center_div">
          	 <span id="userPwdTip">密码</span>
-			<s:password name="user.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
+			<s:password name="prepairToChangeUser.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
         </div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>

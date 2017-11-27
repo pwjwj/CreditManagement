@@ -259,6 +259,7 @@ float:left;
 				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/CreditActivity.jsp');">信用管理管理</a>
 			</div>
 			<div class="div3">
+			<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/AddCreditActivity.jsp');">新增学生信用活动</a></li>
 				<%-- <ul>
 					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/addNotice.jsp');">新增公告</a></li>
 					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/announcement.jsp');">公告管理</a></li>
