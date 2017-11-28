@@ -196,6 +196,7 @@ public class BaseInfoAction extends ActionSupport {
 			if (users != null) {
 				if (((Admin) users).getPwd().equals(user.getPwd())) {
 					result = "commAdmin";
+					ServletActionContext.getRequest().getSession().setAttribute("userName", ((Admin)users).getUsername());
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
 							"√‹¬ÎªÚ’À∫≈¥ÌŒÛ");
@@ -211,6 +212,7 @@ public class BaseInfoAction extends ActionSupport {
 				if (((AdminSu) users).getPwd().equals(user.getPwd())) {
 					System.out.println("a user");
 					result = "superAdmin";
+					ServletActionContext.getRequest().getSession().setAttribute("userName", ((AdminSu)users).getUsername());
 					System.out.println("superAdmin send completeed");
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
@@ -223,6 +225,7 @@ public class BaseInfoAction extends ActionSupport {
 			if (users != null) {
 				if (((StuBase) users).getPwd().equals(user.getPwd())) {
 					result = "stu";
+					ServletActionContext.getRequest().getSession().setAttribute("userName", ((StuBase)users).getName());
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
 							"√‹¬ÎªÚ’À∫≈¥ÌŒÛ");
@@ -250,9 +253,11 @@ public class BaseInfoAction extends ActionSupport {
 		return result;
 	}
 
-	public String getCurrentUser() {
+	public String getCurrentAdmin() {
+		
 		String Name = (String) ServletActionContext.getRequest().getSession()
-				.getAttribute("stuName");
+				.getAttribute("userName");
+		System.out.println("Name  "+Name);
 		if (Name == null)
 			return "login";
 		ServletActionContext.getRequest().setAttribute("currentUser",

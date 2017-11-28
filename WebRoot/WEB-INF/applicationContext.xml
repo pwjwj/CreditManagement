@@ -123,5 +123,22 @@
 		<bean id="applicationGoodsAction" class="com.sonic.action.ApplicationGoodsAction" >
 			<property name="applicationService" ref="applicationGoodsServiceImpl"/>
 		</bean>
+		<!-- 超级管理员对事务管理员的信息管理 -->
 		
+		<bean id="adminSuServiceImp" class="com.sonic.serviceImp.AdminSuServiceImpl">
+			<property name="genericDao" ref="genericDaoImp"></property>
+		</bean>	 
+		<bean id="adminSuAction" class="com.sonic.action.AdminSuAction" >
+			<property name="userService" ref="adminSuServiceImp"/>
+			
+		</bean>
+		<!-- 学生自己看到的 -->
+		
+		<bean id="stuServiceImpl" class="com.sonic.serviceImp.StuServiceImpl">
+			<property name="genericDao" ref="genericDaoImp"></property>
+		</bean>	 
+		<bean id="stuAction" class="com.sonic.action.StuAction" >
+			<property name="userService" ref="stuServiceImpl"/>
+			
+		</bean>
 </beans>

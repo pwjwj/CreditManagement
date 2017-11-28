@@ -10,6 +10,11 @@
  			<result name="error">/login.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
+
+ 		<action name="getCurrentAdmin"  class="baseInfoAction" method="getCurrentAdmin">
+ 			<result name="login">login.jsp</result>
+ 			<result name="success">/myInfo.jsp</result>
+ 		</action>
  		<action name="logout" class="baseInfoAction" method="logout">
  			<result name="success">/login.jsp</result>
  		</action>
@@ -147,5 +152,42 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+ 		
+ 		<action name="getAllAdminBaseInfo" class="adminSuAction" method="getAllAdminBaseInfo">
+ 			<result type="json"/>
+ 		</action>
+ 		<action name="adminSearch" class="adminSuAction" method="adminSearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		<action name="addAdminBase" class="adminSuAction" method="addAdminBase">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
+ 		</action>
+ 		<action name="deleteAdminById"  class="adminSuAction" method="deleteAdminById">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getCurrentAdminSu"  class="adminSuAction" method="getCurrentAdminSu">
+ 			<result name="login">login.jsp</result>
+ 			<result name="success">/myInfo.jsp</result>
+ 		</action>
+ 		
+ 		
+ 		<action name="getCurrentStu"  class="stuAction" method="getCurrentStu">
+ 			<result name="login">login.jsp</result>
+ 			<result name="success">/myInfo.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getStuSelfBaseInfo" class="stuAction" method="getStuSelfBaseInfo">
+ 			<result type="json"/>
+ 		</action>
+ 		
+ 		<action name="getStuSelfCreditActivity" class="stuAction" method="getStuSelfCreditActivity">
+ 			<result type="json"/>
+ 		</action>
+ 		
+ 		<action name="stuCreditActivitySearch" class="stuAction" method="stuSearch">
+ 			<result type="json"/>
+ 		</action>
 </package>
 </struts>    

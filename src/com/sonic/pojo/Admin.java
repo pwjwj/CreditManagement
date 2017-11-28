@@ -8,6 +8,7 @@ public class Admin implements java.io.Serializable {
 
 	// Fields
 
+	private Integer id;
 	private String username;
 	private String pwd;
 	private String tel;
@@ -35,6 +36,14 @@ public class Admin implements java.io.Serializable {
 	}
 
 	// Property accessors
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return this.username;

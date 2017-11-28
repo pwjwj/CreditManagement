@@ -235,7 +235,7 @@ float:left;
 			<h3>高校征信管理系统</h3>
 		</div>
 		<div class="fr top-link">
-			<a href="getCurrentUser.action" target="mainCont"><span><s:property value="#session.userId"/></span></a> 
+			<a href="getCurrentAdminSu.action" target="mainCont"><span><s:property value="#session.userName"/></span></a> 
 			<a href="<%=basePath %>logout.action" class="easyui-linkbutton" plain="true">退出</a>
 		</div>
 	</div>
@@ -245,74 +245,15 @@ float:left;
 			<div class="div2">
 				<div class="spgl"></div>
 				<!-- 基本管理 -->
-				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/BaseInfo.jsp');">管理员信息管理</a>
-			</div>
-			<div class="div3">
-				<%-- <ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/BaseInfo.jsp');">普通用户</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/adminUser.jsp');">普通管理员</a></li>
-				</ul> --%>
-			</div>
-			<div class="div2">
-				<div class="spgl"></div>
-				
-				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/CreditActivity.jsp');">信用管理管理</a>
-			</div>
-			<div class="div3">
-				<%-- <ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/addNotice.jsp');">新增公告</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/announcement.jsp');">公告管理</a></li>
-				</ul> --%>
-			</div>
-			<div class="div2">
-				<div class="yhgl"></div>
-				
-				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/Creditcategory.jsp');">奖惩事项管理</a>
-			</div>
-			<div class="div3">
-				<%-- <ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/newPc.jsp');">新增台式机</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/newLap.jsp');">新增笔记本</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/newPart.jsp');">新增配件</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/searchPc.jsp');">台式机信息变更</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/searchLap.jsp');">笔记本信息变更</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/searchPart.jsp');">配件信息变更</a></li>
-				</ul> --%>
-			</div>
-			
-			<div class="div2">
-				<div class="pjgl"></div>
-				申请管理
+				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>adminSu/adminBaseInfo.jsp');">管理员信息管理</a>
 			</div>
 			<div class="div3">
 				<ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/orders.jsp');">资金申请</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/orders.jsp');">物资申请</a></li>
+					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>adminSu/addAdmin.jsp');">添加管理员</a></li>
+					<%-- <li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/adminUser.jsp');">普通管理员</a></li> --%>
 				</ul>
 			</div>
 			
-			<div class="div2">
-				<div class="pjgl"></div>
-				
-				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/Info.jsp');">通知管理</a>
-			</div>
-			<div class="div3">
-				<ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/judgement.jsp');">发布通知</a></li>
-					<%-- <li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/badJudge.jsp');">浏览差评</a></li> --%>
-				</ul>
-			</div>
-			<div class="div2">
-				<div class="pjgl"></div>
-				
-				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/Goods.jsp');">物资管理</a>
-			</div>
-			<div class="div3">
-				<ul>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/judgement.jsp');">物资添加</a></li>
-					<%-- <li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/badJudge.jsp');">浏览差评</a></li> --%>
-				</ul>
-			</div>
 		</div>	
 	</div>
 

@@ -235,7 +235,7 @@ float:left;
 			<h3>高校征信管理系统</h3>
 		</div>
 		<div class="fr top-link">
-			<a href="getCurrentUser.action" target="mainCont"><span><s:property value="#session.userId"/></span></a> 
+			<a href="getCurrentAdmin.action" target="mainCont"><span><s:property value="#session.userName"/></span></a> 
 			<a href="<%=basePath %>logout.action" class="easyui-linkbutton" plain="true">退出</a>
 		</div>
 	</div>

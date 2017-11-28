@@ -235,7 +235,7 @@ float:left;
 			<h3>高校征信管理系统</h3>
 		</div>
 		<div class="fr top-link">
-			<a href="getCurrentUser.action" target="mainCont"><span><s:property value="#session.userId"/></span></a> 
+			<a href="getCurrentStu.action" target="mainCont"><span><s:property value="#session.userName"/></span></a> 
 			<a href="<%=basePath %>logout.action" class="easyui-linkbutton" plain="true">退出</a>
 		</div>
 	</div>
@@ -245,7 +245,7 @@ float:left;
 			<div class="div2">
 				<div class="spgl"></div>
 				<!-- 基本管理 -->
-				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/BaseInfo.jsp');">基本信息管理</a>
+				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>stu/stuBaseInfo.jsp');">基本信息</a>
 			</div>
 			<div class="div3">
 				<%-- <ul>
@@ -256,7 +256,7 @@ float:left;
 			<div class="div2">
 				<div class="spgl"></div>
 				
-				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/CreditActivity.jsp');">信用管理管理</a>
+				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>stu/creditActivity.jsp');">信用查看</a>
 			</div>
 			<div class="div3">
 				<%-- <ul>
