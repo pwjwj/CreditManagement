@@ -290,7 +290,7 @@ float:left;
 			<div class="div3">
 				<ul>
 					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/ApplicationMoney.jsp');">资金申请</a></li>
-					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/orders.jsp');">物资申请</a></li>
+					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>admin/ApplicationGoods.jsp');">物资申请</a></li>
 				</ul>
 			</div>
 			

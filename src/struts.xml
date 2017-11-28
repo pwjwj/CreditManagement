@@ -128,5 +128,24 @@
  			<result name="success">/admin/ApplicationMoney.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		<action name="getAllGoodsApplication" class="applicationGoodsAction" method="getAllGoodsApplication">
+ 			<result type="json"/>
+ 		</action>
+ 		<action name="applicationGoodsSearch" class="applicationGoodsAction" method="applicationGoodsSearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		
+ 		
+ 		<action name="deleteGoodsApplicationById"  class="applicationGoodsAction" method="deleteGoodsApplicationById">
+ 			<result name="success">/admin/ApplicationGoods.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
 </package>
 </struts>    

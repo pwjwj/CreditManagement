@@ -115,5 +115,13 @@
 		<bean id="applicationMoneyAction" class="com.sonic.action.ApplicationMoneyAction" >
 			<property name="applicationService" ref="applicationMoneyServiceImpl"/>
 		</bean>
+		<!-- 申请物资管理 -->
+		
+		<bean id="applicationGoodsServiceImpl" class="com.sonic.serviceImp.ApplicationGoodsServiceImpl">
+			<property name="genericDao" ref="genericDaoImp"></property>
+		</bean>	
+		<bean id="applicationGoodsAction" class="com.sonic.action.ApplicationGoodsAction" >
+			<property name="applicationService" ref="applicationGoodsServiceImpl"/>
+		</bean>
 		
 </beans>
