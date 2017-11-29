@@ -38,9 +38,23 @@ public class CreditCategoryAction extends ActionSupport {
 	private Integer keyword;
 	
 	private Integer creditCategoryId;
+	private Integer idss;
+	private Creditcategory prepairToChangeCategory;
 	
+    public Creditcategory getPrepairToChangeCategory() {
+		return prepairToChangeCategory;
+	}
+	public void setPrepairToChangeCategory(Creditcategory prepairToChangeCategory) {
+		this.prepairToChangeCategory = prepairToChangeCategory;
+	}
 	
-    public Integer getCreditCategoryId() {
+	public Integer getIdss() {
+		return idss;
+	}
+	public void setIdss(Integer idss) {
+		this.idss = idss;
+	}
+	public Integer getCreditCategoryId() {
 		return creditCategoryId;
 	}
 	public void setCreditCategoryId(Integer creditCategoryId) {
@@ -194,4 +208,28 @@ public class CreditCategoryAction extends ActionSupport {
 	}
     
     
+    public String getCreditCategoryById() {
+		
+		if (idss == null || idss.equals("")) {
+			idss = (Integer) ServletActionContext.getRequest().getAttribute(
+					"idss");
+			System.out.println("idss   "+idss);
+		}
+		System.out.println("idss  "+idss);
+		ServletActionContext.getRequest().setAttribute("currentCreditCategory",
+				creditcategoryService.getCreditCategory(idss));
+		return SUCCESS;
+	}
+    
+    public String modifyCreditCategory(){
+		
+		
+		try{
+			creditcategoryService.saveCreditCategoryOrUpdate(prepairToChangeCategory);
+			return SUCCESS;
+		}catch(Exception e){
+			System.out.print(e.getMessage());
+			return INPUT;
+		}
+	}
 }

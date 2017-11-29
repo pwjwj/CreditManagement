@@ -1,7 +1,5 @@
 package com.sonic.pojo;
 
-import java.util.Date;
-
 /**
  * Creditactivity entity. @author MyEclipse Persistence Tools
  */
@@ -12,9 +10,10 @@ public class Creditactivity implements java.io.Serializable {
 
 	private Integer id;
 	private Integer number;
+	private String name;
 	private String categoryId;
 	private String detail;
-	private Date dates;
+	private String dates;
 
 	// Constructors
 
@@ -23,9 +22,10 @@ public class Creditactivity implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Creditactivity(Integer number, String categoryId, String detail,
-			Date dates) {
+	public Creditactivity(Integer number, String name, String categoryId,
+			String detail, String dates) {
 		this.number = number;
+		this.name = name;
 		this.categoryId = categoryId;
 		this.detail = detail;
 		this.dates = dates;
@@ -49,6 +49,14 @@ public class Creditactivity implements java.io.Serializable {
 		this.number = number;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getCategoryId() {
 		return this.categoryId;
 	}
@@ -65,11 +73,11 @@ public class Creditactivity implements java.io.Serializable {
 		this.detail = detail;
 	}
 
-	public Date getDates() {
+	public String getDates() {
 		return this.dates;
 	}
 
-	public void setDates(Date dates) {
+	public void setDates(String dates) {
 		this.dates = dates;
 	}
 

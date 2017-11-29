@@ -74,17 +74,15 @@
         }  
 	}
 	function formatOper2_1(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeClass2_1('+index+')">升为普通管理员</a>';   
-	}
-	//点击  普通会员   的方法  
-	function changeClass2_1(index){
-		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
+    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
+	}  
+	function changeInfo2(index){
+		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath%>changeAuthority.action?authority=1&userId='
-					+ rows[0].username;
-			window.location.href = url;
-		}
+            var url = '<%=basePath %>getCreditActivityById.action?activityId='+rows[0].id;
+            window.location.href=url;
+        }  
 	}
 </script>
 </head>
@@ -101,10 +99,13 @@
 			<thead>
 				<tr>
 					<th data-options="field:'id',width:100,align:'center'">序号</th>
-					<th data-options="field:'number',width:100,align:'center'">学号</th>
+					<th data-options="field:'name',width:100,align:'center'">学号</th>
+					<th data-options="field:'number',width:100,align:'center'">姓名</th>
+					
 					<th data-options="field:'categoryId',width:100,align:'center'">分类号</th>
 					<th data-options="field:'detail',width:100,align:'center'">事项详情</th>
 					<th data-options="field:'dates',width:100,align:'center'">时间</th>
+					<th data-options="field:'credit',width:100,align:'center'">信用分</th>
 					<th
 						data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
 					<th

@@ -1,5 +1,6 @@
 package com.sonic.action;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -294,43 +295,17 @@ public class BaseInfoAction extends ActionSupport {
 		return flag;
 	}
 
-	public String changeInfo() {
-		System.out.println("changeInfo " + stuName);
-		System.out.println("changeInfo user " + user.getName());
-		System.out.println("changeInfo user " + user.getPwd());
-		System.out.println("changeInfo prepairToChangeUser "
-				+ prepairToChangeUser.getName());
-		System.out.println("changeInfo prepairToChangeUser "
-				+ prepairToChangeUser.getPwd());
-
-		//StuBase currUser = userService.getUser(stuName);// 从数据库取得一个user对象
-													// 当前要修改的用户同名
-		String result = ERROR;
-
-		if (check(prepairToChangeUser)) {
-			try {
-				System.out.println("进来try");
-				userService.saveStuBaseOrUpdate(prepairToChangeUser);
-				// userService.saveUserOrUpdate(usertmp);
-				result = "mangerpage";
-				System.out.println("result   " + result);
-				System.out.println("一个result赋值之后");
-				ServletActionContext.getRequest().getSession()
-						.setAttribute("userId", user.getName());
-			} catch (Exception e) {
-				ServletActionContext.getRequest().setAttribute("tipMessage",
-						"此用户名已存在!");
-			}
-
-		} else {
-			result = "inputErro";
-			System.out.println("result   "+result);
+	
+	public String modify(){
+		System.out.println("prepairToChangeUser.getPwd()  "+prepairToChangeUser.getPwd());
+		
+		try{
+			userService.saveStuBaseOrUpdate(prepairToChangeUser);
+			return SUCCESS;
+		}catch(Exception e){
+			System.out.print(e.getMessage());
+			return INPUT;
 		}
-		System.out.println("result  " + result);
-		ServletActionContext.getRequest().setAttribute("userId",
-				user.getName());
-
-		return result;
 	}
 
 	public String logout() {

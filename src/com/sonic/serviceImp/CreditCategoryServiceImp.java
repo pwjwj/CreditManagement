@@ -64,4 +64,10 @@ public class CreditCategoryServiceImp implements CreditCategoryService {
 		genericDao.delById(Creditcategory.class, creditCategoryId);
 	}
 
+	@Override
+	public Creditcategory getCreditCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return (Creditcategory) genericDao.get("from Creditcategory where id ='"+categoryId+"'");
+	}
+
 }

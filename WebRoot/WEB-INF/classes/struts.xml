@@ -33,13 +33,10 @@
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
- 		<action name="changeInfo" class="baseInfoAction" method="changeInfo">
- 			<result name="error">/message.jsp</result><!-- 无权限页面 -->
- 			<result name="inputErro" type="chain">getUserByUserName</result>
- 			<result name="indexpage" type="chain">getUserByUserName</result>
- 			<result name="mangerpage" type="chain">getUserByUserName</result>
- 			<!-- <result name="changePWD">/login.jsp</result> -->
- 			<result name="notlogin">/login.jsp</result>
+ 		
+ 		<action name="modify" class="baseInfoAction" method="modify">
+ 			<result name="success">/admin/BaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
  		</action>
  		<action name="getAllStudentBaseInfo" class="baseInfoAction" method="getAllStudentBaseInfo">
  			<result type="json"/>
@@ -47,10 +44,18 @@
  		<action name="getAllStudentCreditActivity" class="creditActivityAction" method="getAllStudentCreditActivity">
  			<result type="json"/>
  		</action>
+ 		
+ 		<action name="getCreditActivityById"  class="creditActivityAction" method="getCreditActivityById">
+ 			<result name="success">/admin/CreditActivityDetails.jsp</result>
+ 		</action>
  		<action name="addCreditActivity" class="creditActivityAction" method="addCreditActivity">
 			<result name="success">/admin/CreditActivity.jsp</result>
 		</action>
 		
+		<action name="modifyCreditActivity" class="creditActivityAction" method="modifyCreditActivity">
+ 			<result name="success">/admin/CreditActivity.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
 		<action name="creditActivitySearch" class="creditActivityAction" method="creditActivitySearch">
  			<result  type="json"/>
  		</action>
@@ -62,6 +67,9 @@
  			<result type="json"/>
  		</action> 	
  		
+ 		<action name="getCreditCategoryById"  class="creditCategoryAction" method="getCreditCategoryById">
+ 			<result name="success">/admin/CreditCategoryDetails.jsp</result>
+ 		</action>
  		<action name="addCrditCategory" class="creditCategoryAction" method="addCrditCategory">
 			<result name="success">/admin/Creditcategory.jsp</result>
 		</action>
@@ -70,6 +78,10 @@
  			<result  type="json"/>
  		</action>
  		
+ 		<action name="modifyCreditCategory" class="creditCategoryAction" method="modifyCreditCategory">
+ 			<result name="success">/admin/Creditcategory.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
  		<action name="deleteCategoryById"  class="creditCategoryAction" method="deleteCategoryById">
  			<result name="success">/admin/Creditcategory.jsp</result>
  			<result name="input">/MyJsp.jsp</result>

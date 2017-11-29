@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2017-11-28 17:10:19
+Date: 2017-11-29 21:20:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `admin` (
   `tel` varchar(11) NOT NULL,
   `other` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin
@@ -79,15 +79,17 @@ CREATE TABLE `creditactivity` (
   `name` varchar(10) NOT NULL,
   `categoryId` varchar(10) NOT NULL,
   `detail` varchar(255) NOT NULL,
-  `dates` date NOT NULL,
+  `dates` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of creditactivity
 -- ----------------------------
 INSERT INTO `creditactivity` VALUES ('2', '1703', 'hahah', '1', 'shishi', '2017-11-11');
 INSERT INTO `creditactivity` VALUES ('3', '170320000', 'tom', '1', 'detail', '2017-12-12');
+INSERT INTO `creditactivity` VALUES ('4', '170320001', 'sss', '1', 'shiiqng', '2017-11-11');
+INSERT INTO `creditactivity` VALUES ('5', '1703', 'hahah', '2', 'shishi', '2017-11-12');
 
 -- ----------------------------
 -- Table structure for creditcategory
@@ -105,7 +107,7 @@ CREATE TABLE `creditcategory` (
 -- ----------------------------
 -- Records of creditcategory
 -- ----------------------------
-INSERT INTO `creditcategory` VALUES ('1', '1', '赛会得奖', '国奖一', '50');
+INSERT INTO `creditcategory` VALUES ('1', '1', '????', '???', '60');
 INSERT INTO `creditcategory` VALUES ('2', '1', '赛会得奖', '国奖二', '40');
 INSERT INTO `creditcategory` VALUES ('4', '2', '社会公益', '敬老院服务', '30');
 INSERT INTO `creditcategory` VALUES ('5', '2', '社会公益', '支教', '30');
@@ -164,6 +166,24 @@ CREATE TABLE `stu_base` (
 -- ----------------------------
 -- Records of stu_base
 -- ----------------------------
-INSERT INTO `stu_base` VALUES ('hahah', '1703', '2423523452344234234', 'shuji', '17-1', '80');
+INSERT INTO `stu_base` VALUES ('hahah', '1703', '22222222222', 'shuji', '17-1', '80');
 INSERT INTO `stu_base` VALUES ('tom', '170320000', '123', '数计', '17-1', '80');
 INSERT INTO `stu_base` VALUES ('sss', '170320001', '123', '数计', '17-2', '90');
+
+-- ----------------------------
+-- View structure for creditactivityview
+-- ----------------------------
+DROP VIEW IF EXISTS `creditactivityview`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `creditactivityview` AS SELECT
+stu_base.credit,
+creditactivity.id,
+creditactivity.number,
+creditactivity.`name`,
+creditactivity.categoryId,
+creditactivity.detail,
+creditactivity.dates
+FROM
+stu_base ,
+creditactivity
+WHERE
+stu_base.number = creditactivity.number ;

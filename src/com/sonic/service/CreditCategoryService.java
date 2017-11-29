@@ -11,6 +11,7 @@ public interface CreditCategoryService {
 		public int getCreditCategoryTotal();
 		
 		
+		public Creditcategory getCreditCategory(int activityId);
 		public void saveCreditCategoryOrUpdate(Creditcategory cc);
 		
 		public List<Creditcategory> getCreditCategorySearchList(String hql, String page, String rows);

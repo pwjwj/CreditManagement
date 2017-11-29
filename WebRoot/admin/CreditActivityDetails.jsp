@@ -58,40 +58,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           margin-right: 280px;
         }
       </style>
-    <s:form action="modify.action" theme="simple">
+        如果什么也没修改  需要使用js来拦截一下
+    <s:form action="modifyCreditActivity.action" theme="simple">
     	<div class="box center_div">
-    		姓名：<span id="userPwdTip" style="font-size:24px"><s:text name="%{#request.currentUser.name}" /></span>
-    		<s:hidden name="prepairToChangeUser.name" value="%{#request.currentUser.name}"/>
-    		<s:hidden name="prepairToChangeUser.number" value="%{#request.currentUser.number}"/>
-    		<s:hidden name="prepairToChangeUser.college" value="%{#request.currentUser.college}"/>
-    		<s:hidden name="prepairToChangeUser.class_" value="%{#request.currentUser.class_}"/>
-    		<s:hidden name="prepairToChangeUser.credit" value="%{#request.currentUser.credit}"/>
+    		
+    		<s:hidden name="prepairToChangeUser.id" value="%{#request.currentCreditActivity.id}"/>
     		
         </div>
         <div class="box center_div">
-         	 <span id="userPwdTip">密码</span>
-			<s:password name="prepairToChangeUser.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
+         	 
+			<s:textarea name="prepairToChangeActivity.number" placeholder="学号" value="%{#request.currentCreditActivity.number}"  cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
         </div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>
         </font>
-        <%-- <div class="box center_div">
-            <span id="userIdSpt">邮箱</span>
-			<s:textfield name="user.email" placeholder="邮箱" value="%{#request.currentUser.email}" cssStyle="margin-bottom: 0;height: 40px;width: 300px;" cssClass="email ui-autocomplete-input jv-box-default user_id_password"/>    	
-        </div>
-        <font color="#FF0000" size="3">
-        	<s:property value="#request.emailErro"/>
-        </font>
         <div class="box center_div">
-            <span id="userIdSpt">联系电话</span>
-			<s:textfield name="user.mobile" placeholder="联系电话" value="%{#request.currentUser.mobile}" cssStyle="margin-bottom: 0;height: 40px;width: 300px;" cssClass="email ui-autocomplete-input jv-box-default user_id_password"/>    	
+         	 
+			<s:textarea name="prepairToChangeActivity.name" placeholder="姓名" value="%{#request.currentCreditActivity.name}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
         </div>
-         <font color="#FF0000" size="3">
-        	<s:property value="#request.mobileErro"/>
-        </font>   --%>
+        <div class="box center_div">
+         	 
+			<s:textarea name="prepairToChangeActivity.categoryId" placeholder="分类号" value="%{#request.currentCreditActivity.categoryId}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
+        </div>
+        <div class="box center_div">
+			<s:textarea name="prepairToChangeActivity.detail" placeholder="事项详情" value="%{#request.currentCreditActivity.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
+        </div>
+        <div class="box center_div">
+         	 
+			<s:textarea name="prepairToChangeActivity.dates" placeholder="日期" value="%{#request.currentCreditActivity.dates}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
+        </div>
+        
         <br/>  
         <s:submit value="修改" cssClass="center_div " cssStyle="height: 40px;width: 400px; margin:0 0 0 -10;background-color:#00a1d6;"/><br>
-        <s:if test="#request.currentUser.name == #session.stuName ">
+        <s:if test="#request.currentUser.activityId == #session.activityId ">
         	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页></a>
         </s:if>
 	</s:form>

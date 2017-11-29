@@ -1,8 +1,6 @@
 package com.sonic.action;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +30,38 @@ public class CreditActivityAction extends ActionSupport {
 	private String categoryId;
 	private String detail;
 	private String dates;
+	private String name;
+	private Integer credit;
 	
+	private Integer activityId;
+	private Creditactivity prepairToChangeActivity;
+	
+	public Creditactivity getPrepairToChangeActivity() {
+		return prepairToChangeActivity;
+	}
+	public void setPrepairToChangeActivity(Creditactivity prepairToChangeActivity) {
+		this.prepairToChangeActivity = prepairToChangeActivity;
+	}
+	public Integer getActivityId() {
+		return activityId;
+	}
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+	public Integer getCredit() {
+		return credit;
+	}
+	public void setCredit(Integer credit) {
+		this.credit = credit;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	private Integer creditActivityId;
 	
 	private List<Creditactivity> list;
@@ -138,10 +167,12 @@ public class CreditActivityAction extends ActionSupport {
 	         JSONObject jobj = new JSONObject();//new一个JSON  
 	         jobj.accumulate("total",total );//total代表一共有多少数据  
 	         jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
-	  
+	         System.out.println(jobj.toString());
 	         response.setCharacterEncoding("utf-8");//指定为utf-8  
-	         response.getWriter().write(jobj.toString());     
-	    }  
+	         response.getWriter().write(jobj.toString());   
+	         
+	    } 
+	 
 	//信用信息查看  
 	    public String getAllStudentCreditActivity() { 
 	    	
@@ -160,10 +191,11 @@ public class CreditActivityAction extends ActionSupport {
 			Creditactivity ca = new Creditactivity();
 			System.out.println("number  " + number);
 			ca.setNumber(number);
-			SimpleDateFormat sdf  =new SimpleDateFormat("yyyy-MM-dd");  
-			String times=sdf.format(new Date());  
-			Date d=sdf.parse(dates);  
-			ca.setDates(d);
+			ca.setName(name);
+//			SimpleDateFormat sdf  =new SimpleDateFormat("yyyy-MM-dd");  
+//			String times=sdf.format(new Date());  
+//			Date d=sdf.parse(dates);  
+			ca.setDates(dates);
 			ca.setDetail(detail);
 			ca.setCategoryId(categoryId);
 			//ca.setId(1);
@@ -207,6 +239,29 @@ public class CreditActivityAction extends ActionSupport {
 				System.out.print(e.getMessage());
 				list = list1;
 				return SUCCESS;
+			}
+		}
+	    
+	    public String getCreditActivityById() {
+			
+			if (activityId == null || activityId.equals("")) {
+				activityId = (Integer) ServletActionContext.getRequest().getAttribute(
+						"activityId");
+			}
+			ServletActionContext.getRequest().setAttribute("currentCreditActivity",
+					creditactivityService.getCreditActivity(activityId));
+			return SUCCESS;
+		}
+	    
+	    public String modifyCreditActivity(){
+			
+			
+			try{
+				creditactivityService.saveCreditactivityBaseOrUpdate(prepairToChangeActivity);
+				return SUCCESS;
+			}catch(Exception e){
+				System.out.print(e.getMessage());
+				return INPUT;
 			}
 		}
 	    

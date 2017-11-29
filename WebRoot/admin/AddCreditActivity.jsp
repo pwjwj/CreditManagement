@@ -27,6 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	这里还有字符串格式的问题
     <s:form action = "addCreditActivity.action" theme="simple">
     	<s:textarea name = "number" placeholder="学号"  cssStyle="height:28px;width:500px"/><br/>
+    	<s:textarea name = "name" placeholder="姓名"  cssStyle="height:28px;width:500px"/><br/>
     	<s:textarea name = "categoryId" placeholder="分类号"  cssStyle="height:28px;width:500px"/><br/>
     	<s:textarea name = "detail" placeholder="事项详情"  cssStyle="height:28px;width:500px"/><br/>
     	<s:textarea name = "dates"  placeholder="日期 YYYY-MM-DD"  cssStyle="height:28px;width:500px"/><br/>
