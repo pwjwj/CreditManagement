@@ -13,7 +13,19 @@
 
  		<action name="getCurrentAdmin"  class="baseInfoAction" method="getCurrentAdmin">
  			<result name="login">login.jsp</result>
- 			<result name="success">/myInfo.jsp</result>
+ 			<result name="success">/admin/CurrentAdminInfo.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getAdminSelfInfo" class="baseInfoAction" method="getAdminSelfInfo">
+ 			<result type="json"/>
+ 		</action>
+ 		
+ 		<action name="modifyAdminInfo" class="baseInfoAction" method="modifyAdminInfo">
+ 			<result name="success">/admin/CurrentAdminInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		<action name="getAdminById"  class="baseInfoAction" method="getAdminById">
+ 			<result name="success">/admin/CurrentAdminInfoChange.jsp</result>
  		</action>
  		<action name="logout" class="baseInfoAction" method="logout">
  			<result name="success">/login.jsp</result>
@@ -99,6 +111,14 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
 		
+		<action name="getInfoById"  class="infoAction" method="getInfoById">
+ 			<result name="success">/admin/InfoDeatails.jsp</result>
+ 		</action>
+ 		
+ 		<action name="modifyInfo" class="infoAction" method="modifyInfo">
+ 			<result name="success">/admin/Info.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
 		<action name="infoSearch" class="infoAction" method="infoSearch">
  			<result  type="json"/>
  		</action>
@@ -187,7 +207,7 @@
  		
  		<action name="getCurrentStu"  class="stuAction" method="getCurrentStu">
  			<result name="login">login.jsp</result>
- 			<result name="success">/myInfo.jsp</result>
+ 			<result name="success">/stu/stuBaseInfo.jsp</result>
  		</action>
  		
  		<action name="getStuSelfBaseInfo" class="stuAction" method="getStuSelfBaseInfo">
@@ -201,5 +221,29 @@
  		<action name="stuCreditActivitySearch" class="stuAction" method="stuSearch">
  			<result type="json"/>
  		</action>
+ 		
+ 		<action name="getCurrentStuByNumber"  class="stuAction" method="getCurrentStuByNumber">
+ 			<result name="success">/stu/stuBaseInfoDetails.jsp</result>
+ 		</action>
+ 		
+ 		<action name="modifyLoginedStuInfo" class="stuAction" method="modifyLoginedStuInfo">
+ 			<result name="success">/stu/stuBaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getAllInfoStu" class="stuAction" method="getAllInfoStu">
+ 			<result type="json"/>
+ 		</action>
+ 		
+ 		<action name="infoSearchStuInfo" class="stuAction" method="infoSearchStuInfo">
+ 			<result  type="json"/>
+ 		</action>
+ 		
+ 		<action name="getAllApplicationStu" class="stuAction" method="getAllApplicationStu">
+ 			<result type="json"/>
+ 		</action>
+ 		<action name="addStuApplication" class="stuAction" method="addStuApplication">
+			<result name="success">/stu/application.jsp</result>
+		</action>
 </package>
 </struts>    

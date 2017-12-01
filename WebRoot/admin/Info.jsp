@@ -66,14 +66,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }  
 	}
 	function formatOper2_1(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeClass2_1('+index+')">升为普通管理员</a>';   
-	}
-	//点击  普通会员   的方法  
-	function changeClass2_1(index){
-		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
+    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
+	}  
+	function changeInfo2(index){
+		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>changeAuthority.action?authority=1&userId='+rows[0].username;
+            var url = '<%=basePath %>getInfoById.action?infoSelectedId='+rows[0].id;
             window.location.href=url;
         }  
 	}

@@ -1,20 +1,22 @@
 package com.sonic.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.ServletActionContext;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
-import com.sonic.pojo.Admin;
+import com.sonic.pojo.Application;
 import com.sonic.pojo.Creditactivity;
+import com.sonic.pojo.Info;
 import com.sonic.pojo.StuBase;
-import com.sonic.service.AdminSuService;
 import com.sonic.service.StuService;
 import com.sonic.utills.DateJsonValueProcessor;
 
@@ -141,6 +143,50 @@ public class StuAction extends ActionSupport {
 	private Integer credit;
 
 	private List<Creditactivity> list;
+	private List<Info> infoList;
+	private Integer currentStuNumber;
+	private StuBase prepairToChangeStuBase;
+	private String applicationCategory;
+	private String applicationWhat;
+	public String getApplicationCategory() {
+		return applicationCategory;
+	}
+
+	public void setApplicationCategory(String applicationCategory) {
+		this.applicationCategory = applicationCategory;
+	}
+
+	public String getApplicationWhat() {
+		return applicationWhat;
+	}
+
+	public void setApplicationWhat(String applicationWhat) {
+		this.applicationWhat = applicationWhat;
+	}
+
+	public List<Info> getInfoList() {
+		return infoList;
+	}
+
+	public void setInfoList(List<Info> infoList) {
+		this.infoList = infoList;
+	}
+
+	public StuBase getPrepairToChangeStuBase() {
+		return prepairToChangeStuBase;
+	}
+
+	public void setPrepairToChangeStuBase(StuBase prepairToChangeStuBase) {
+		this.prepairToChangeStuBase = prepairToChangeStuBase;
+	}
+
+	public Integer getCurrentStuNumber() {
+		return currentStuNumber;
+	}
+
+	public void setCurrentStuNumber(Integer currentStuNumber) {
+		this.currentStuNumber = currentStuNumber;
+	}
 
 	public List<Creditactivity> getList() {
 		return list;
@@ -173,7 +219,8 @@ public class StuAction extends ActionSupport {
 		try {
 			String Name = (String) ServletActionContext.getRequest()
 					.getSession().getAttribute("userName");
-			toBeJson(userService.getStuSelfBaseList(Name), 1);
+			String actualName=(Name.split("/"))[0];
+			toBeJson(userService.getStuSelfBaseList(actualName), 1);
 			// authority = null;
 			System.out.println("查询完毕");
 
@@ -187,11 +234,12 @@ public class StuAction extends ActionSupport {
 
 		String Name = (String) ServletActionContext.getRequest().getSession()
 				.getAttribute("userName");
+		String actualName=(Name.split("/"))[0];
 		System.out.println("Name  " + Name);
-		if (Name == null)
+		if (actualName == null)
 			return "login";
 		ServletActionContext.getRequest().setAttribute("currentUser",
-				userService.getUser(Name));
+				userService.getUser(actualName));
 		return SUCCESS;
 	}
 
@@ -199,9 +247,10 @@ public class StuAction extends ActionSupport {
 		List<Creditactivity> list1 = list;
 		String Name = (String) ServletActionContext.getRequest().getSession()
 				.getAttribute("userName");
+		String actualName=(Name.split("/"))[0];
 		try {
 			System.out.println("keyword   " + keyword);
-			String hql = "from Creditactivity where name='" + Name
+			String hql = "from Creditactivity where name='" + actualName
 					+ "' and  detail like '%" + keyword + "%'";
 			list = userService.getStuCreditActivitySearchList(hql, page, rows);
 			System.out.println("result list size  " + list.size());
@@ -220,10 +269,11 @@ public class StuAction extends ActionSupport {
 		try {
 			String Name = (String) ServletActionContext.getRequest()
 					.getSession().getAttribute("userName");
-			String hql = "from Creditactivity where name='" + Name
+			String actualName=(Name.split("/"))[0];
+			String hql = "from Creditactivity where name='" + actualName
 					+ "' ";
-			//toBeJson(userService.getStuSelfCreditActivityList(Name), 1);
-			toBeJson(userService.getStuSelfCreditActivityList(page, rows,Name),
+			//toBeJson(userService.getStuSelfCreditActivityList(actualName), 1);
+			toBeJson(userService.getStuSelfCreditActivityList(page, rows,actualName),
 					userService.getStuSelfCreditActivityTotal(hql));
 			// authority = null;
 			System.out.println("查询完毕");
@@ -234,4 +284,98 @@ public class StuAction extends ActionSupport {
 		return null;
 	}
 
+	
+	public String getCurrentStuByNumber() {
+		System.out.println("currentStuNumber"+currentStuNumber);
+		if (currentStuNumber == null || currentStuNumber.equals("")) {
+			currentStuNumber = (Integer) ServletActionContext.getRequest().getAttribute(
+					"currentStuNumber");
+		}
+		ServletActionContext.getRequest().setAttribute("currentLoginStu",
+				userService.getStuByNumber(currentStuNumber));
+		return SUCCESS;
+	}
+	
+	public String modifyLoginedStuInfo(){
+		
+		
+		try{
+			
+			userService.saveStuBaseOrUpdate(prepairToChangeStuBase);
+			return SUCCESS;
+		}catch(Exception e){
+			System.out.print(e.getMessage());
+			return INPUT;
+		}
+	}
+	
+	public String getAllInfoStu() { 
+    	
+        try {
+			toBeJson(userService.getAllInfoList(page, rows),userService.getInfoTotal());
+			//authority = null;
+			 
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+        return null;  
+    }  
+	
+	public String infoSearchStuInfo() {
+		System.out.println("jinlaile infoSearchStuInfo");
+		List<Info> list1 = infoList;
+		try {
+			System.out.println("keyword   " + keyword);
+			String hql = "from Info where infoTittle like '%" + keyword
+					+ "%'or infoContent like '%" + keyword + "%'";
+			infoList = userService.getInfoSearchList(hql, page, rows);
+			System.out.println("result list size  " + infoList.size());
+			toBeJson(infoList, userService.getInfoSearchedTotal(hql));
+			
+			return null;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			infoList = list1;
+			return SUCCESS;
+		}
+	}
+	
+	public String getAllApplicationStu() { 
+    	
+        try {
+        	String Name = (String) ServletActionContext.getRequest().getSession()
+    				.getAttribute("userName");
+        	String actualName=(Name.split("/"))[0];
+        	int actualNumber=Integer.parseInt((Name.split("/"))[1]);
+			toBeJson(userService.getAllApplicationsList(page, rows,actualName,actualNumber),userService.getApplicationsTotal(actualName,actualNumber));
+			//authority = null;
+			
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+        return null;  
+    }  
+	
+	public String addStuApplication() {
+		String Name = (String) ServletActionContext.getRequest().getSession()
+				.getAttribute("userName");
+    	String actualName=(Name.split("/"))[0];
+    	int actualNumber=Integer.parseInt((Name.split("/"))[1]);
+    	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	Application application = new Application();
+		application.setApplicationCategory(applicationCategory);
+		application.setApplicationWhat(applicationWhat);
+		application.setApplicationName(actualName);
+		application.setApplicationNumber(actualNumber);
+		application.setApplicationTime(df.format(new Date()));
+		application.setIsPass("false");
+		System.out.println("addApplicationStuSelf access");
+		try {
+			userService.saveApplocationSelfOrUpdate(application);
+			return "success";
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			return "input";
+		}
+	}
 }

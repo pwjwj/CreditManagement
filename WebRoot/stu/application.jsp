@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             striped : true,//设置为true将交替显示行背景。  
             collapsible : true,//显示可折叠按钮 
             toolbar:"#tb2",//在添加 增添、删除、修改操作的按钮要用到这个  
-            url:'getStuSelfBaseInfo.action',//url调用Action方法  
+            url:'getAllApplicationStu.action',//url调用Action方法  
             loadMsg : '数据装载中......',  
             singleSelect:true,//为true时只能选择单行 
             nowrap:false,  
@@ -54,70 +54,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });   
           
     });  
-    
-    <%-- function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
-	}  
-	function changeInfo2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>getUserByUserId.action?userId='+rows[0].username;
-            window.location.href=url;
-        }  
-	}  --%>
-	function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
-	}  
-	function changeInfo2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>getCurrentStuByNumber.action?currentStuNumber='+rows[0].number;
-            window.location.href=url;
-        }  
-	}
-	
-	
-	function changeUrl(){
-		alert("进来了");
-		var form1=document.getElementById("key");
-		/* $('#commUserDatagrid').datagrid('url','stuSearch.action');// 关键在这里     */
-		alert(key.value);
-    	$("#commUserDatagrid").datagrid('options').url='stuSearch.action?keyword='+key.value;
-    	
-		$("#commUserDatagrid").datagrid('load');
-		
-		
-		/* $('#commUserDatagrid').datagrid({  
-    		url:'stuSearch.action?keyword='+form1.value;  
-   			
-		});   */
-	}
+   
 </script>  
   </head>
   
   <body>
-  <%-- action="stuSearch.action" --%>
-
+  
+  这里的isPass  看看是不是可以进行判断  输出是与否
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  
             <tr>  
-            	<th data-options="field:'number',width:100,align:'center'">学号</th> 
-                <th data-options="field:'name',width:100,align:'center'">姓名</th> 
-                <!-- <th data-options="field:'pwd',width:100,align:'center'">密码</th>  --> 
-                <th data-options="field:'college',width:100,align:'center'">院系</th>  
-                <th data-options="field:'class_',width:100,align:'center'">班级</th> 
-               <th data-options="field:'credit',width:100,align:'center'">信用分</th> 
-                <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
-                <!-- <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> -->
+                <th data-options="field:'applicationCategory',width:100,align:'center'">申请分类</th> 
+                <th data-options="field:'applicationWhat',width:100,align:'center'">申请详情</th>  
+                <th data-options="field:'applicationTime',width:100,align:'center'">申请时间</th>  
+                <th data-options="field:'isPass',width:100,align:'center'">是否通过</th> 
+                
             </tr>  
         </thead>  
     </table>
    
     </div>
-    
   </body>
 </html>
 
