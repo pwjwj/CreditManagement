@@ -264,7 +264,22 @@ float:left;
 					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>bgpages/announcement.jsp');">公告管理</a></li>
 				</ul> --%>
 			</div>
-			
+			<div class="div2">
+				<div class="spgl"></div>
+				
+				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>stu/Info.jsp');">通知查看</a>
+			</div>
+			<div class="div2">
+				<div class="spgl"></div>
+				
+				<a class="a1" href="javascript:void(0);"onClick="openurl('<%=basePath %>stu/application.jsp');">申请查看</a>
+			</div>
+			<div class="div3">
+				<ul>
+					<li><a class="a" href="javascript:void(0);"onClick="openurl('<%=basePath %>stu/addApplication.jsp');">创建申请</a></li>
+					
+				</ul>
+			</div>
 		</div>	
 	</div>
 

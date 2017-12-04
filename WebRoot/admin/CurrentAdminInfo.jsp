@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             striped : true,//设置为true将交替显示行背景。  
             collapsible : true,//显示可折叠按钮 
             toolbar:"#tb2",//在添加 增添、删除、修改操作的按钮要用到这个  
-            url:'getAllApplication.action',//url调用Action方法  
+            url:'getAdminSelfInfo.action',//url调用Action方法  
             loadMsg : '数据装载中......',  
             singleSelect:true,//为true时只能选择单行 
             nowrap:false,  
@@ -54,60 +54,71 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });   
           
     });  
-    function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
+    
+    <%-- function formatOper2(val,row,index){ 
+    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
-	function delete2(index){
+	function changeInfo2(index){
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>deleteApplicationById.action?applicationId='+rows[0].id;
-             window.location.href=url;
-        }  
-	}
-	function formatOper2_1(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="chekToPass('+index+')">审核</a>';   
-	}
-	
-	function chekToPass(index){
-		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>chekToPass.action?checkId='+rows[0].id+'&checkName='+rows[0].applicationName+'&checkNumber='+rows[0].applicationNumber+'&checkCategory='+rows[0].applicationCategory+'&checkWhat='+rows[0].applicationWhat+'&checkTime='+rows[0].applicationTime;
+            var url = '<%=basePath %>getUserByUserId.action?userId='+rows[0].username;
             window.location.href=url;
         }  
+	}  --%>
+	function formatOper2(val,row,index){ 
+    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
+	}  
+	function changeInfo2(index){
+		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
+    	var rows = $("#commUserDatagrid").datagrid("getSelections");
+    	if (rows.length==1){    
+            var url = '<%=basePath %>getAdminById.action?adminId='+rows[0].id;
+            window.location.href=url;
+        }  
+	}
+	
+	
+	
+	function changeUrl(){
+		alert("进来了");
+		var form1=document.getElementById("key");
+		/* $('#commUserDatagrid').datagrid('url','stuSearch.action');// 关键在这里     */
+		alert(key.value);
+    	$("#commUserDatagrid").datagrid('options').url='stuSearch.action?keyword='+key.value;
+    	
+		$("#commUserDatagrid").datagrid('load');
+		
+		
+		/* $('#commUserDatagrid').datagrid({  
+    		url:'stuSearch.action?keyword='+form1.value;  
+   			
+		});   */
 	}
 </script>  
   </head>
   
   <body>
-  字符编码
-  <s:form  action="applicationSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
-  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
-  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
-  		 <input type="submit" value="搜索" ">
-  </s:form>
+  <%-- action="stuSearch.action" --%>
+	这里可以试一下能不能让第一个id不显示
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  
             <tr>  
-                <th data-options="field:'id',width:100,align:'center'">序号</th> 
-                <th data-options="field:'applicationName',width:100,align:'center'">申请人学号</th>  
-                <th data-options="field:'applicationNumber',width:100,align:'center'">申请人学号</th>  
-                <th data-options="field:'applicationCategory',width:100,align:'center'">申请类别</th> 
-                <th data-options="field:'applicationWhat',width:100,align:'center'">申请内容</th> 
-                <th data-options="field:'applicationTime',width:100,align:'center'">申请时间</th> 
-                <th data-options="field:'isPass',width:100,align:'center'">状态</th> 
+            	<th data-options="field:'id',width:100,align:'center'">id</th> 
+            	<th data-options="field:'username',width:100,align:'center'">用户名</th> 
+                <th data-options="field:'tel',width:100,align:'center'">联系方式</th> 
                 
-                <!-- <th data-options="field:'dates',width:100,align:'center'">时间</th> -->
-                <!-- <th data-options="field:'credit',width:80,align:'center'">信用分</th> -->
+                <th data-options="field:'other',width:100,align:'center'">备注信息</th>  
+                
                 <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
-                <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
+                <!-- <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> -->
             </tr>  
         </thead>  
     </table>
    
     </div>
+    
   </body>
 </html>
 

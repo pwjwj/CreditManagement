@@ -64,5 +64,11 @@ public class InfoServiceImpl implements InfoService{
 		return genericDao.countQuery(hql);
 	}
 
+	@Override
+	public Info getInfo(int infoSelectedId) {
+		// TODO Auto-generated method stub
+		return (Info) genericDao.get("from Info where id ='"+infoSelectedId+"'");
+	}
+
 
 }

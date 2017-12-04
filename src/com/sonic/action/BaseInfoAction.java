@@ -30,6 +30,25 @@ public class BaseInfoAction extends ActionSupport {
 	private String page;// 当前第几页
 	private StuBase user;
 	private StuBase prepairToChangeUser;
+	private Admin prepairToChangeAdmin;
+	public Admin getPrepairToChangeAdmin() {
+		return prepairToChangeAdmin;
+	}
+
+	public void setPrepairToChangeAdmin(Admin prepairToChangeAdmin) {
+		this.prepairToChangeAdmin = prepairToChangeAdmin;
+	}
+
+	private Integer adminId;
+	
+	
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
 
 	public StuBase getPrepairToChangeUser() {
 		return prepairToChangeUser;
@@ -226,7 +245,7 @@ public class BaseInfoAction extends ActionSupport {
 			if (users != null) {
 				if (((StuBase) users).getPwd().equals(user.getPwd())) {
 					result = "stu";
-					ServletActionContext.getRequest().getSession().setAttribute("userName", ((StuBase)users).getName());
+					ServletActionContext.getRequest().getSession().setAttribute("userName", ((StuBase)users).getName()+"/"+((StuBase)users).getNumber());
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
 							"密码或账号错误");
@@ -381,20 +400,42 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 
-	/*
-	 * //获取所有通知 public String getAllInfo() {
-	 * 
-	 * try { toBeJson(userService.getAllInfoList(page,
-	 * rows),userService.getInfoTotal()); //authority = null;
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } return null; }
-	 */
-	/*
-	 * //获取所有物资 public String getAllGoods() {
-	 * 
-	 * try { toBeJson(userService.getAllGoodsList(page,
-	 * rows),userService.getGoodsTotal()); //authority = null;
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } return null; }
-	 */
+	
+	public String getAdminSelfInfo() {
+
+		try {
+			String Name = (String) ServletActionContext.getRequest()
+					.getSession().getAttribute("userName");
+			toBeJson(userService.getAdminSelfBaseList(Name), 1);
+			// authority = null;
+			System.out.println("查询完毕");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getAdminById() {
+		System.out.println("adminId");
+		if (adminId == null || adminId.equals("")) {
+			adminId = (Integer) ServletActionContext.getRequest().getAttribute(
+					"adminId");
+		}
+		ServletActionContext.getRequest().setAttribute("currentAdmin",
+				userService.getUserById(adminId));
+		return SUCCESS;
+	}
+	
+	public String modifyAdminInfo(){
+		
+		
+		try{
+			userService.saveAdminOrUpdate(prepairToChangeAdmin);
+			return SUCCESS;
+		}catch(Exception e){
+			System.out.print(e.getMessage());
+			return INPUT;
+		}
+	}
 }
