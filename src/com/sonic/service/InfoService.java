@@ -2,6 +2,7 @@ package com.sonic.service;
 
 import java.util.List;
 
+import com.sonic.pojo.Creditactivity;
 import com.sonic.pojo.Creditcategory;
 import com.sonic.pojo.Info;
 
@@ -19,4 +20,5 @@ public interface InfoService {
 	public int getInfoSearchedTotal(String hql);
 	
 	
+	public Info getInfo(int infoSelectedId);
 }

@@ -76,6 +76,7 @@ public class CreditActivityServiceImp implements CreditActivityService{
 	@Override
 	public void saveCreditactivityBaseOrUpdate(Creditactivity ca) {
 		// TODO Auto-generated method stub
+		System.out.println("ca.getDetail()   "+ca.getDetail());
 		genericDao.saveOrUpdate(ca);
 	}
 

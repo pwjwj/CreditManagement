@@ -8,7 +8,8 @@ public interface ApplicationGoodsService {
 	public List<Application> getGoodsApplicationList(String page,String rows);
 	public int getGoodsApplicationTotal();
 	
-
+	
+	public void saveApplicationOrUpdate(Application application);
 	public List<Application> getGoodsApplicationSearchList(String hql, String page, String rows);
 	public int getGoodsApplicationSearchedTotal(String hql);
 	
