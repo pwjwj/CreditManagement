@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2017-11-29 21:20:35
+Date: 2017-12-05 17:53:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES ('1', 'Ta1', 'a1', '10010', 'beizhu');
-INSERT INTO `admin` VALUES ('2', 'Tadmin', 'admin', '10086', '备注信息');
+INSERT INTO `admin` VALUES ('2', 'Tadmin', '123', '10086', '备注');
 
 -- ----------------------------
 -- Table structure for admin_su
@@ -62,12 +62,14 @@ CREATE TABLE `application` (
   `applicationTime` varchar(20) NOT NULL,
   `isPass` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of application
 -- ----------------------------
-INSERT INTO `application` VALUES ('1', 'san', '1703200', 'goods', '周三下午使用xx教室', '2017-11-14 11:10:16', 'false');
+INSERT INTO `application` VALUES ('1', 'san', '1703200', 'goods', '周三上午使用XXX教室', '2017-11-14 11:10:16', 'true');
+INSERT INTO `application` VALUES ('2', 'tom', '170320000', 'goods', '周四上午使用XX教室', '2017-11-14 11:10:16', 'true');
+INSERT INTO `application` VALUES ('4', 'tom', '170320000', 'money', '100', '2017-12-01 11:53:51', 'true');
 
 -- ----------------------------
 -- Table structure for creditactivity
@@ -81,15 +83,21 @@ CREATE TABLE `creditactivity` (
   `detail` varchar(255) NOT NULL,
   `dates` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of creditactivity
 -- ----------------------------
 INSERT INTO `creditactivity` VALUES ('2', '1703', 'hahah', '1', 'shishi', '2017-11-11');
-INSERT INTO `creditactivity` VALUES ('3', '170320000', 'tom', '1', 'detail', '2017-12-12');
-INSERT INTO `creditactivity` VALUES ('4', '170320001', 'sss', '1', 'shiiqng', '2017-11-11');
-INSERT INTO `creditactivity` VALUES ('5', '1703', 'hahah', '2', 'shishi', '2017-11-12');
+INSERT INTO `creditactivity` VALUES ('3', '170320000', 'tom', '1', '国奖一', '2017-12-12');
+INSERT INTO `creditactivity` VALUES ('4', '170320001', 'sss', '1', '事项详情', '2017-11-11');
+INSERT INTO `creditactivity` VALUES ('5', '1703', 'hahah', '2', '事情', '2017-11-12');
+INSERT INTO `creditactivity` VALUES ('10', '1703', 'hahah', '1', '事项详情', '2017-11-11');
+INSERT INTO `creditactivity` VALUES ('11', '1703', 'hahah', '1', '详情', '2017-11-11');
+INSERT INTO `creditactivity` VALUES ('12', '1703', 'hahah', '1', '事项', '2017-11-11');
+INSERT INTO `creditactivity` VALUES ('13', '1703', 'hahah', '1', '事项', '2017-11-11');
+INSERT INTO `creditactivity` VALUES ('14', '1703', 'hahah', '1', '事项', '2017-11-11');
+INSERT INTO `creditactivity` VALUES ('16', '1703', 'hahah', '2', '事情123', '2017-11-12');
 
 -- ----------------------------
 -- Table structure for creditcategory
@@ -107,11 +115,11 @@ CREATE TABLE `creditcategory` (
 -- ----------------------------
 -- Records of creditcategory
 -- ----------------------------
-INSERT INTO `creditcategory` VALUES ('1', '1', '????', '???', '60');
+INSERT INTO `creditcategory` VALUES ('1', '1', '赛会得奖', '国奖一', '60');
 INSERT INTO `creditcategory` VALUES ('2', '1', '赛会得奖', '国奖二', '40');
 INSERT INTO `creditcategory` VALUES ('4', '2', '社会公益', '敬老院服务', '30');
 INSERT INTO `creditcategory` VALUES ('5', '2', '社会公益', '支教', '30');
-INSERT INTO `creditcategory` VALUES ('6', '1', '12', '??', '20');
+INSERT INTO `creditcategory` VALUES ('6', '1', '赛会得奖', '省赛一', '20');
 
 -- ----------------------------
 -- Table structure for goods
@@ -147,7 +155,7 @@ CREATE TABLE `info` (
 -- ----------------------------
 -- Records of info
 -- ----------------------------
-INSERT INTO `info` VALUES ('1', '标题1', '内容1', '2017-11-22 11:16:50');
+INSERT INTO `info` VALUES ('1', '通知标题', '通知内容', '2017-11-22 11:16:50');
 
 -- ----------------------------
 -- Table structure for stu_base
@@ -166,8 +174,8 @@ CREATE TABLE `stu_base` (
 -- ----------------------------
 -- Records of stu_base
 -- ----------------------------
-INSERT INTO `stu_base` VALUES ('hahah', '1703', '22222222222', 'shuji', '17-1', '80');
-INSERT INTO `stu_base` VALUES ('tom', '170320000', '123', '数计', '17-1', '80');
+INSERT INTO `stu_base` VALUES ('hahah', '1703', '11111111', '数计', '17-1', '80');
+INSERT INTO `stu_base` VALUES ('tom', '170320000', '22222', '数计', '17-1', '80');
 INSERT INTO `stu_base` VALUES ('sss', '170320001', '123', '数计', '17-2', '90');
 
 -- ----------------------------
