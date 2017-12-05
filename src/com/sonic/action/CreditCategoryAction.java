@@ -35,7 +35,7 @@ public class CreditCategoryAction extends ActionSupport {
     
 	private List<Creditcategory> list;
     
-	private Integer keyword;
+	private String keyword;
 	
 	private Integer creditCategoryId;
 	private Integer idss;
@@ -60,10 +60,11 @@ public class CreditCategoryAction extends ActionSupport {
 	public void setCreditCategoryId(Integer creditCategoryId) {
 		this.creditCategoryId = creditCategoryId;
 	}
-	public Integer getKeyword() {
+	
+	public String getKeyword() {
 		return keyword;
 	}
-	public void setKeyword(Integer keyword) {
+	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
 	public List<Creditcategory> getList() {
@@ -151,7 +152,13 @@ public class CreditCategoryAction extends ActionSupport {
     public String getAllCreditCategory() { 
     	
         try {
-			toBeJson(creditcategoryService.getCreditCategoryList(page, rows),creditcategoryService.getCreditCategoryTotal());
+        	String hql="from Creditcategory";
+			if(keyword != null){
+        		hql+=" where detail like '%"+keyword+"%'";
+        		System.out.println("after add number  "+hql);
+        		keyword=null;
+        	}
+			toBeJson(creditcategoryService.getCreditCategoryList(hql,page, rows),creditcategoryService.getCreditCategoryTotal());
 			//authority = null;
 			
         } catch (Exception e) {

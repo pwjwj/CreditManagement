@@ -31,7 +31,7 @@ public class InfoAction extends ActionSupport {
 	private String infoContent;
 	private Integer infoId;
 	private List<Info> list;
-	private Integer keyword;
+	private String keyword;
 	private Integer infoSelectedId;
 	private Info prepairToInfo;
 	
@@ -47,10 +47,11 @@ public class InfoAction extends ActionSupport {
 	public void setInfoSelectedId(Integer infoSelectedId) {
 		this.infoSelectedId = infoSelectedId;
 	}
-	public Integer getKeyword() {
+	
+	public String getKeyword() {
 		return keyword;
 	}
-	public void setKeyword(Integer keyword) {
+	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
 	public List<Info> getList() {
@@ -132,7 +133,16 @@ public class InfoAction extends ActionSupport {
     public String getAllInfo() { 
     	
         try {
-			toBeJson(infoService.getAllInfoList(page, rows),infoService.getInfoTotal());
+        	
+        	String hql="from Info";
+        	System.out.println("number all  "+keyword);
+        	if(keyword != null){
+        		hql+=" where infoTittle like '%" + keyword
+    					+ "%'or infoContent like '%" + keyword + "%'";
+        		System.out.println("after add number  "+hql);
+        		keyword=null;
+        	}
+			toBeJson(infoService.getAllInfoList(hql,page, rows),infoService.getInfoTotal());
 			//authority = null;
 			
         } catch (Exception e) {

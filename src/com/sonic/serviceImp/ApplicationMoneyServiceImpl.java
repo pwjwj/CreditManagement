@@ -18,7 +18,7 @@ public class ApplicationMoneyServiceImpl implements ApplicationMoneyService {
 	}
 
 	@Override
-	public List<Application> getMoneyApplicationList(String page, String rows) {
+	public List<Application> getMoneyApplicationList(String hql,String page, String rows) {
 		// TODO Auto-generated method stub
 
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
@@ -27,7 +27,7 @@ public class ApplicationMoneyServiceImpl implements ApplicationMoneyService {
 				: rows);// 每页多少行
 
 		return genericDao.query(
-				"from Application where applicationCategory ='money'",
+				hql,
 				currentpage, pagesize);
 	}
 

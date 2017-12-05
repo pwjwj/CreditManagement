@@ -19,7 +19,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
-	public List<Application> getApplicationList(String page, String rows) {
+	public List<Application> getApplicationList(String hql,String page, String rows) {
 		// TODO Auto-generated method stub
 		
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
@@ -27,7 +27,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 		int pagesize = Integer.parseInt((rows == null || rows == "0") ? "10"
 				: rows);// 每页多少行
 
-		return genericDao.query("from Application", currentpage, pagesize);
+		return genericDao.query(hql, currentpage, pagesize);
 	}
 
 	@Override

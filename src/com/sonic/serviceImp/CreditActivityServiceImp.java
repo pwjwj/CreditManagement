@@ -18,7 +18,7 @@ public class CreditActivityServiceImp implements CreditActivityService{
 		this.genericDao = genericDaoImp;
 	}
 	@Override
-	public List<Object> getStuCreditActivityList(String page, String rows) {
+	public List<Object> getStuCreditActivityList(String hql,String page, String rows) {
 		// TODO Auto-generated method stub
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
 				: page);// µÚ¼¸Ò³
@@ -28,7 +28,7 @@ public class CreditActivityServiceImp implements CreditActivityService{
 		//String hql = "select new com.test.UsersVoGoods(u.userName, u.teltphone, u.address, g.goodsName) from Users u, Goods g where u.userId=g.userId";
 		/*String hql="select c.id,c.name,c.number,c.categoryId,c.detail,c.dates,stu.credit " +
 				"from Creditactivity c,StuBase stu where c.number=stu.number";*/
-		return genericDao.query("from Creditactivity", currentpage, pagesize);
+		return genericDao.query(hql, currentpage, pagesize);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import com.sonic.pojo.Creditcategory;
 
 public interface CreditCategoryService {
 	//获取信用类目信息
-		public List<Creditcategory> getCreditCategoryList(String page,String rows);
+		public List<Creditcategory> getCreditCategoryList(String hql,String page,String rows);
 		public int getCreditCategoryTotal();
 		
 		

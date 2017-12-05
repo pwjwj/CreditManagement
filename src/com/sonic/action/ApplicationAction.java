@@ -29,7 +29,7 @@ public class ApplicationAction extends ActionSupport {
     
 	
 	private List<Application> list;
-	private String keyword;
+	private Integer keyword;
 	
 	private Integer applicationId;
 	
@@ -156,16 +156,18 @@ public class ApplicationAction extends ActionSupport {
 		this.list = list;
 	}
 
-	public String getKeyword() {
+	
+
+	
+	
+	public Integer getKeyword() {
 		return keyword;
 	}
 
-	public void setKeyword(String keyword) {
+	public void setKeyword(Integer keyword) {
 		this.keyword = keyword;
 	}
 
-	
-	
 	private void toBeJson(List list,int total) throws Exception{ 
     	JsonConfig jconfig = new JsonConfig();
     	JSONArray ja = new JSONArray(); 
@@ -185,7 +187,16 @@ public class ApplicationAction extends ActionSupport {
     public String getAllApplication() { 
     	
         try {
-			toBeJson(applicationService.getApplicationList(page, rows),applicationService.getApplicationTotal());
+        	
+        	String hql="from Application";
+			if(keyword != null){
+				System.out.println("keyword  "+keyword);
+        		hql+=" where applicationNumber ="+keyword;
+        		System.out.println("after add number  "+hql);
+        		keyword=null;
+        	}
+        	
+			toBeJson(applicationService.getApplicationList(hql,page, rows),applicationService.getApplicationTotal());
 			//authority = null;
 			
         } catch (Exception e) {

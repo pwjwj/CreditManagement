@@ -59,7 +59,7 @@ public class BaseInfoAction extends ActionSupport {
 	}
 
 	private String userId;
-	private String keyword;
+	private Integer keyword;
 	private String name;
 	private String college;
 	private String class_;
@@ -123,11 +123,13 @@ public class BaseInfoAction extends ActionSupport {
 		this.number = number;
 	}
 
-	public String getKeyword() {
+	
+
+	public Integer getKeyword() {
 		return keyword;
 	}
 
-	public void setKeyword(String keyword) {
+	public void setKeyword(Integer keyword) {
 		this.keyword = keyword;
 	}
 
@@ -337,12 +339,19 @@ public class BaseInfoAction extends ActionSupport {
 	public String getAllStudentBaseInfo() {
 
 		try {
-			toBeJson(userService.getStuBaseList(page, rows),
+			String hql="from StuBase";
+			if(keyword != null){
+				System.out.println("keyword  "+keyword);
+        		hql+=" where number ="+keyword;
+        		System.out.println("after add number  "+hql);
+        		keyword=null;
+        	}
+			toBeJson(userService.getStuBaseList(hql,page, rows),
 					userService.getUserTotal());
 			// authority = null;
 			System.out.println("²éÑ¯Íê±Ï");
 			System.out.println(userService.getUserTotal());
-			System.out.println(userService.getStuBaseList(page, rows).get(0)
+			System.out.println(userService.getStuBaseList(hql,page, rows).get(0)
 					.getName());
 		} catch (Exception e) {
 			e.printStackTrace();

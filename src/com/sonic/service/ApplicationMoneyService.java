@@ -5,7 +5,7 @@ import java.util.List;
 import com.sonic.pojo.Application;
 
 public interface ApplicationMoneyService {
-	public List<Application> getMoneyApplicationList(String page,String rows);
+	public List<Application> getMoneyApplicationList(String hql,String page,String rows);
 	public int getMoneyApplicationTotal();
 	
 	

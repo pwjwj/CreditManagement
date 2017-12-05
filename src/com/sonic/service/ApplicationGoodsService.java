@@ -5,7 +5,7 @@ import java.util.List;
 import com.sonic.pojo.Application;
 
 public interface ApplicationGoodsService {
-	public List<Application> getGoodsApplicationList(String page,String rows);
+	public List<Application> getGoodsApplicationList(String hql,String page,String rows);
 	public int getGoodsApplicationTotal();
 	
 	

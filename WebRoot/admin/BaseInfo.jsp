@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">  
     $(function() {  
         $('#commUserDatagrid').datagrid({  
-            title : '普通用户列表',  
+            title : '学生信息列表',  
             iconCls : 'icon-ok',  
             width : 1080,  
             pageSize : 5,//默认选择的分页是每页5行数据  
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             nowrap : true,//设置为true，当数据长度超出列宽时将会自动截取  
             striped : true,//设置为true将交替显示行背景。  
             collapsible : true,//显示可折叠按钮 
-            toolbar:"#tb2",//在添加 增添、删除、修改操作的按钮要用到这个  
+            toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个  
             url:'getAllStudentBaseInfo.action',//url调用Action方法  
             loadMsg : '数据装载中......',  
             singleSelect:true,//为true时只能选择单行 
@@ -89,31 +89,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }  
 	}
 	
-	function changeUrl(){
-		alert("进来了");
-		var form1=document.getElementById("key");
-		/* $('#commUserDatagrid').datagrid('url','stuSearch.action');// 关键在这里     */
-		alert(key.value);
-    	$("#commUserDatagrid").datagrid('options').url='stuSearch.action?keyword='+key.value;
-    	
-		$("#commUserDatagrid").datagrid('load');
-		
-		
-		/* $('#commUserDatagrid').datagrid({  
-    		url:'stuSearch.action?keyword='+form1.value;  
-   			
-		});   */
-	}
+	function doSearch(value){
+		/* alert($('#keyword').val());
+		$('#commUserDatagrid').datagrid('load',{
+		number: $('#keyword').val()
+		}
+	); */
+	/* alert(value); */
+	$('#commUserDatagrid').datagrid({  
+            title : '学生信息列表',  
+            iconCls : 'icon-ok',  
+            width : 1080,  
+            pageSize : 5,//默认选择的分页是每页5行数据  
+            pageList : [1, 5, 10, 15, 20 ],//可以选择的分页集合  
+            nowrap : true,//设置为true，当数据长度超出列宽时将会自动截取  
+            striped : true,//设置为true将交替显示行背景。  
+            collapsible : true,//显示可折叠按钮 
+            toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个  
+            url:'getAllStudentBaseInfo.action?keyword='+value,//url调用Action方法  
+            loadMsg : '数据装载中......',  
+            singleSelect:true,//为true时只能选择单行 
+            nowrap:false,  
+            fitColumns:true,//允许表格自动缩放，以适应父容器   
+            fit:false,//允许表格自动缩放，以适应父容器  
+            //sortName : 'xh',//当数据表格初始化时以哪一列来排序  
+            //sortOrder : 'desc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）。  
+            remoteSort : false,  
+             frozenColumns : [ [ {  
+                field : 'ck',  
+                checkbox : true  
+            } ] ],   
+            pagination : true,//分页  
+            rownumbers : true//行数  
+        });   
+}
 </script>  
   </head>
   
   <body>
   <%-- action="stuSearch.action" --%>
-  <s:form  action="stuSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
+  <%-- <s:form  action="stuSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
   		 <span id="userPwdTip">&nbsp;输入关键字:</span>
   		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
   		 <input type="submit" value="搜索" ">
-  </s:form>
+  </s:form> --%>
+  <div id="tb" style="float: right;">  
+             <input id="keyword" name="keyword" class="easyui-searchbox"  
+               searcher="doSearch" prompt="请输入学号搜索"  
+               style="width: 130px; vertical-align: middle;"></input>   
+         </div>  
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  

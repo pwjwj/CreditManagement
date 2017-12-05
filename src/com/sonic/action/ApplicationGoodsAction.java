@@ -27,7 +27,7 @@ public class ApplicationGoodsAction extends ActionSupport {
     
 	
 	private List<Application> list;
-	private String keyword;
+	private Integer keyword;
 	
 	private Integer applicationId;
 	
@@ -111,10 +111,11 @@ public class ApplicationGoodsAction extends ActionSupport {
 	public void setList(List<Application> list) {
 		this.list = list;
 	}
-	public String getKeyword() {
+	
+	public Integer getKeyword() {
 		return keyword;
 	}
-	public void setKeyword(String keyword) {
+	public void setKeyword(Integer keyword) {
 		this.keyword = keyword;
 	}
 	public Integer getApplicationId() {
@@ -142,7 +143,14 @@ public class ApplicationGoodsAction extends ActionSupport {
     public String getAllGoodsApplication() { 
     	
         try {
-			toBeJson(applicationService.getGoodsApplicationList(page, rows),applicationService.getGoodsApplicationTotal());
+        	String hql="from Application where applicationCategory ='goods'";
+			if(keyword != null){
+				System.out.println("keyword  "+keyword);
+        		hql+=" where applicationNumber ="+keyword;
+        		System.out.println("after add number  "+hql);
+        		keyword=null;
+        	}
+			toBeJson(applicationService.getGoodsApplicationList(hql,page, rows),applicationService.getGoodsApplicationTotal());
 			//authority = null;
 			
         } catch (Exception e) {

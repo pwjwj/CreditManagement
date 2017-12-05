@@ -7,7 +7,7 @@ import com.sonic.pojo.StuBase;
 
 public interface CreditActivityService {
 	//获取信用活动信息
-	public List<Object> getStuCreditActivityList(String page,String rows);
+	public List<Object> getStuCreditActivityList(String hql,String page,String rows);
 	public int getCreditActivityTotal();
 	public void saveCreditActivityOrUpdate(Creditactivity ca);
 	public List<Creditactivity> getCreditActivitySearchList(String hql, String page, String rows);

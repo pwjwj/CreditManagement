@@ -32,7 +32,7 @@
  		</action>
  		<!-- 这里就得看一下这个该url -->
  		<action name="stuSearch" class="baseInfoAction" method="stuSearch">
- 			<result  type="json"/>
+ 			<result  type="json"/> 
  		</action>
  		<action name="addStuBase" class="baseInfoAction" method="addStuBase">
  			<result name="success">/admin/BaseInfo.jsp</result>
@@ -69,6 +69,11 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
 		<action name="creditActivitySearch" class="creditActivityAction" method="creditActivitySearch">
+ 			<result  type="json"/>
+ 		</action>
+ 		
+ 		
+ 		<action name="creditActivitySearchTest" class="creditActivityAction" method="creditActivitySearchTest">
  			<result  type="json"/>
  		</action>
 		<action name="deleteCreditActivityById"  class="creditActivityAction" method="deleteCreditActivityById">

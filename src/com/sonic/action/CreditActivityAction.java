@@ -177,7 +177,15 @@ public class CreditActivityAction extends ActionSupport {
 	    public String getAllStudentCreditActivity() { 
 	    	
 	        try {
-				toBeJson(creditactivityService.getStuCreditActivityList(page, rows),creditactivityService.getCreditActivityTotal());
+	        	String hql="from Creditactivity";
+	        	System.out.println("number all  "+keyword);
+	        	if(keyword != null){
+	        		hql+=" where number ="+keyword;
+	        		System.out.println("after add number  "+hql);
+	        		keyword=null;
+	        	}
+	        	
+				toBeJson(creditactivityService.getStuCreditActivityList(hql,page, rows),creditactivityService.getCreditActivityTotal());
 				//authority = null;
 				
 	        } catch (Exception e) {
@@ -189,6 +197,7 @@ public class CreditActivityAction extends ActionSupport {
 	    
 	    public String addCreditActivity() throws ParseException {
 			Creditactivity ca = new Creditactivity();
+			
 			System.out.println("number  " + number);
 			ca.setNumber(number);
 			ca.setName(name);
@@ -199,6 +208,7 @@ public class CreditActivityAction extends ActionSupport {
 			ca.setDetail(detail);
 			ca.setCategoryId(categoryId);
 			//ca.setId(1);
+			
 			System.out.println("ca.number   " + ca.getNumber());
 			System.out.println("number   " + getNumber());
 			System.out.println("addCreditActivity access");
@@ -242,6 +252,21 @@ public class CreditActivityAction extends ActionSupport {
 			}
 		}
 	    
+	    public String creditActivitySearchTest() {
+			List<Creditactivity> list1 = list;
+			try {
+				System.out.println("number  "+number);
+				String hql = "from Creditactivity where number = " + number;
+				list = creditactivityService.getCreditActivitySearchList(hql, page, rows);
+				System.out.println("result list size  " + list.size());
+				toBeJson(list, creditactivityService.getCreditActivitySearchedTotal(hql));
+				return null;
+			} catch (Exception e) {
+				System.out.print(e.getMessage());
+				list = list1;
+				return SUCCESS;
+			}
+		}
 	    public String getCreditActivityById() {
 			
 			if (activityId == null || activityId.equals("")) {

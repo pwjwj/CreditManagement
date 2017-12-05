@@ -10,7 +10,7 @@ import com.sonic.pojo.StuBase;
 
 public interface BaseInfoService {
 	//在基本信息管理里面获取对应学生的信息list
-	public List<StuBase> getStuBaseList(String page,String rows);
+	public List<StuBase> getStuBaseList(String hql,String page,String rows);
 	public int getUserTotal();
 	
 	public List<Admin> getAdminSelfBaseList(String name);

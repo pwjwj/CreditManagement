@@ -17,7 +17,7 @@ public class ApplicationGoodsServiceImpl implements ApplicationGoodsService{
 		this.genericDao = genericDaoImp;
 	}
 	@Override
-	public List<Application> getGoodsApplicationList(String page, String rows) {
+	public List<Application> getGoodsApplicationList(String hql,String page, String rows) {
 		// TODO Auto-generated method stub
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
 				: page);// 第几页
@@ -25,7 +25,7 @@ public class ApplicationGoodsServiceImpl implements ApplicationGoodsService{
 				: rows);// 每页多少行
 
 		return genericDao.query(
-				"from Application where applicationCategory ='goods'",
+				hql,
 				currentpage, pagesize);
 	}
 

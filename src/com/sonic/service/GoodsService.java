@@ -7,7 +7,7 @@ import com.sonic.pojo.Info;
 
 public interface GoodsService {
 	//获取物资信息
-	public List<Info> getAllGoodsList(String page,String rows);
+	public List<Info> getAllGoodsList(String hql,String page,String rows);
 	public int getGoodsTotal();
 	
 	

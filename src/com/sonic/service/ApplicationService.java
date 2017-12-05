@@ -6,7 +6,7 @@ import com.sonic.pojo.Application;
 import com.sonic.pojo.Info;
 
 public interface ApplicationService {
-	public List<Application> getApplicationList(String page,String rows);
+	public List<Application> getApplicationList(String hql,String page,String rows);
 	public int getApplicationTotal();
 	
 	

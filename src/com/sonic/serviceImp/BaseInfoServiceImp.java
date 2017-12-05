@@ -20,14 +20,14 @@ public class BaseInfoServiceImp implements BaseInfoService {
 
 
 	@Override
-	public List<StuBase> getStuBaseList(String page, String rows) {
+	public List<StuBase> getStuBaseList(String hql,String page, String rows) {
 		//获取学生基本信息的list
 		int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
 				: page);// 第几页
 		int pagesize = Integer.parseInt((rows == null || rows == "0") ? "10"
 				: rows);// 每页多少行
 
-		return genericDao.query("from StuBase", currentpage, pagesize);
+		return genericDao.query(hql, currentpage, pagesize);
 	}
 
 	@Override

@@ -144,7 +144,16 @@ public class GoodsAction extends ActionSupport {
     public String getAllGoods() { 
     	
         try {
-			toBeJson(goodsService.getAllGoodsList(page, rows),goodsService.getGoodsTotal());
+        	
+        	String hql="from Goods";
+        	System.out.println("number all  "+keyword);
+        	if(keyword != null){
+        		hql+=" where goodsName like '%" + keyword
+    					+ "%'or goodsBorrower like '%" + keyword + "%'";
+        		System.out.println("after add number  "+hql);
+        		keyword=null;
+        	}
+			toBeJson(goodsService.getAllGoodsList(hql,page, rows),goodsService.getGoodsTotal());
 			//authority = null;
 			
         } catch (Exception e) {
