@@ -17,9 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
@@ -34,96 +32,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=basePath %>/bilibili/loc" charset="utf-8"></script>
 
 <link charset="utf-8" rel="stylesheet" href="<%=basePath %>/bilibili/jquery-ui.css">
-<link charset="utf-8" rel="stylesheet" href="<%=basePath %>/bilibili/white.css">
-<link id="css" rel="stylesheet" type="text/css" href="<%=basePath %>/bilibili/zclc2.1460959081.css">
-<link rel="stylesheet" href="<%=basePath %>/bilibili/base.css">
+<link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
   </head>
   
   <body>
-   <div class="" style="left: 0px; top: 0px; position: fixed; visibility: hidden;">
-	<div class="d-outer"><table class="d-border"><tbody><tr><td class="d-nw"></td><td class="d-n"></td><td class="d-ne"></td></tr><tr><td class="d-w"></td><td class="d-c"><div class="d-inner"><table class="d-dialog"><tbody><tr><td class="d-header"><div class="d-titleBar"><div class="d-title" style="display: block;"></div><a class="d-close" href="javascript:/*artDialog*/;" style="display: none;">×</a></div></td></tr><tr><td class="d-main" style="width: auto; height: auto;"><div class="d-content" style="padding: 20px 25px;"></div></td></tr><tr><td class="d-footer"><div class="d-buttons"></div></td></tr></tbody></table></div></td><td class="d-e"></td></tr><tr><td class="d-sw"></td><td class="d-s"></td><td class="d-se"></td></tr></tbody></table></div></div>
-    		<div class="z_top_container">
-			
-		</div>
-	<div class="top_bg">
-		<div class="top"></div>
-	</div>
-<div class="head_foot_content">
-  <div class=" ">
-    <div class="line"></div>
-   <div class="reg-title title1" style="background-image:url('./bilibili/t3.png')"></div>
-    <div class="center_title">
-      <style>
-        .blue{
-          margin-right: 280px;
-        }
-      </style>
+  <div class="header">
+  <div class="center_title">学生信息</div>
+  </div>
+  <div class="center_body">
     <s:form action="modify.action" theme="simple">
-    	<div class="box center_div">
-    		姓名：<span id="userPwdTip" style="font-size:24px"><s:text name="%{#request.currentUser.name}" /></span>
-    		<s:hidden name="prepairToChangeUser.name" value="%{#request.currentUser.name}"/>
+    <div class="info_center"><div class="title-left">账号：</div><span id="userPwdTip" style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.name}"/></span>
+    	<s:hidden name="prepairToChangeUser.name" value="%{#request.currentUser.name}"/>
     		<s:hidden name="prepairToChangeUser.number" value="%{#request.currentUser.number}"/>
     		<s:hidden name="prepairToChangeUser.college" value="%{#request.currentUser.college}"/>
     		<s:hidden name="prepairToChangeUser.class_" value="%{#request.currentUser.class_}"/>
-    		<s:hidden name="prepairToChangeUser.credit" value="%{#request.currentUser.credit}"/>
-    		
-        </div>
-        <div class="box center_div">
-         	 <span id="userPwdTip">密码</span>
+    		<s:hidden name="prepairToChangeUser.credit" value="%{#request.currentUser.credit}"/></div>
+    	<div class="info_center"><div class="title-left">学号：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.number}"/></span></div>
+    	
+    		<div class="info_center"><div class="title-left">院系：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.college}"/></span></div>
+    		<div class="info_center"><div class="title-left">班级：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.class_}"/></span></div>
+    		<div class="info_center"><div class="title-left">信用：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.credit}"/></span></div>
+        <div class="info_center"><div class="title-left">密码:</div>
 			<s:password name="prepairToChangeUser.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
         </div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>
         </font>
-        <%-- <div class="box center_div">
-            <span id="userIdSpt">邮箱</span>
-			<s:textfield name="user.email" placeholder="邮箱" value="%{#request.currentUser.email}" cssStyle="margin-bottom: 0;height: 40px;width: 300px;" cssClass="email ui-autocomplete-input jv-box-default user_id_password"/>    	
-        </div>
-        <font color="#FF0000" size="3">
-        	<s:property value="#request.emailErro"/>
-        </font>
-        <div class="box center_div">
-            <span id="userIdSpt">联系电话</span>
-			<s:textfield name="user.mobile" placeholder="联系电话" value="%{#request.currentUser.mobile}" cssStyle="margin-bottom: 0;height: 40px;width: 300px;" cssClass="email ui-autocomplete-input jv-box-default user_id_password"/>    	
-        </div>
-         <font color="#FF0000" size="3">
-        	<s:property value="#request.mobileErro"/>
-        </font>   --%>
-        <br/>  
-        <s:submit value="修改" cssClass="center_div " cssStyle="height: 40px;width: 400px; margin:0 0 0 -10;background-color:#00a1d6;"/><br>
+        <div class="info_center"></div>
+        <div class="info_center" >
+        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/>
         <s:if test="#request.currentUser.name == #session.stuName ">
-        	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页></a>
+        	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页</a>
         </s:if>
+        </div>
 	</s:form>
-    </div>
-  </div>
-</div>
-
-	<div class="footer">
-	<div class="footer-wrp">
-		<div class="footer-cnt clearfix">
-			<div class="partner">
-				<div class="block left">
-					<div class="partner-banner"></div>
-				</div>
-				<div class="block left" style="margin: 0 0 0 20px;">
-					<p>广播电视节目制作经营许可证：<span>（沪）字第1248号 </span></p>
-					<p>网络文化经营许可证：<span>沪网文[2013]0480-056号</span></p>
-					<p>信息网络传播视听节目许可证：<span>0910417</span></p>
-				</div>
-				<div class="block left" style="margin: 0 0 0 20px;">
-					<p>互联网ICP备案：<span>沪ICP备13002172号-3</span></p>
-					<p>沪ICP证：<span>沪B2-20100043</span></p>
-				</div>
-				<div class="block right" style="width: 274px;">
-					<p>违法不良信息举报邮箱：<span>help@hotelDemo</span></p>
-					<p>违法不良信息举报电话：<span>4000233233 转 3</span></p>
-					<p><a href="http://www.shjbzx.cn/" target="_blank"><i class="icons-footer icons-footer-report"></i><span>上海互联网举报中心</span></a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>		
-	
+ </div>
   </body>
 </html>

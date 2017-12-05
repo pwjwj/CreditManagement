@@ -1,0 +1,80 @@
+body {
+	color:white;
+	margin:0;
+}
+* {
+	font-size:14px;
+	font-family:'microsoft yahei';
+}
+a {
+	color:white;
+	text-decoration:none;
+}
+a:link {
+	color:white;
+}    /* 未被访问的链接 */
+a:visited {
+	color:#00FF00;
+} /* 已被访问的链接 */
+a:hover {
+	color:gray;
+}   /* 鼠标指针移动到链接上 */
+a:active {
+	color:red;
+}  /* 正在被点击的链接 */
+ul,li {
+	padding:0;
+	list-style:none;
+	margin:0;
+}
+.header {
+	position: relative;
+	top:0%;
+	width: 100%;
+	height: 12%;
+	color: white;
+	opacity:1.0;
+}
+.center_title {
+	text-align: center;
+	font-size: 32px;
+	color: #FFFFFF;
+	
+	font-family: 隶书;
+	width: 50%;
+	height: 100%;
+	position:absolute;
+	left:25%;
+	top:15%;
+
+}
+.center_body {
+	position: relative;
+	width: 100%;
+	height: 86%;
+	color: white;
+	opacity:1.0;
+	left: 0%;
+	top: 2%;
+	
+}
+.info_center {
+	font-size: 24px;
+	position: relative;
+	width: 70%;
+	height: 8%;
+	color: white;
+	opacity:1.0;
+	left: 30%;
+	top: 1%;
+}
+.title-left {
+	text:align: center;
+	font-size: 24px;
+	float:left;
+	width: 20%;
+	height: 80%;
+	color: white;
+	opacity:1.0;
+	top: 10%;
+}
