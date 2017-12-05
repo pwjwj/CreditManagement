@@ -155,7 +155,6 @@ body {
 	height: 30px;
 	line-height: 30px;
 	list-style: none;
-	border-bottom: #ccc 1px dotted;
 	text-align: center;
 }
 
