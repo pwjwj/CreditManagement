@@ -33,6 +33,62 @@ public class ApplicationAction extends ActionSupport {
 	
 	private Integer applicationId;
 	
+	private Integer checkId;
+	private String checkName;
+	private Integer checkNumber;
+	private String checkWhat;
+	private String checkCategory;
+	private String checkTime;
+	
+	
+	
+	public Integer getCheckId() {
+		return checkId;
+	}
+
+	public void setCheckId(Integer checkId) {
+		this.checkId = checkId;
+	}
+
+	public String getCheckName() {
+		return checkName;
+	}
+
+	public void setCheckName(String checkName) {
+		this.checkName = checkName;
+	}
+
+	public Integer getCheckNumber() {
+		return checkNumber;
+	}
+
+	public void setCheckNumber(Integer checkNumber) {
+		this.checkNumber = checkNumber;
+	}
+
+	public String getCheckWhat() {
+		return checkWhat;
+	}
+
+	public void setCheckWhat(String checkWhat) {
+		this.checkWhat = checkWhat;
+	}
+
+	public String getCheckCategory() {
+		return checkCategory;
+	}
+
+	public void setCheckCategory(String checkCategory) {
+		this.checkCategory = checkCategory;
+	}
+
+	public String getCheckTime() {
+		return checkTime;
+	}
+
+	public void setCheckTime(String checkTime) {
+		this.checkTime = checkTime;
+	}
 
 	public Integer getApplicationId() {
 		return applicationId;
@@ -164,6 +220,28 @@ public class ApplicationAction extends ActionSupport {
 			System.out.print(e.getMessage());
 			return "input";
 
+		}
+	}
+    
+    public String chekToPass(){
+		
+		
+		try{
+			Application application=new Application();
+			application.setApplicationCategory(checkCategory);
+			application.setApplicationName(checkName);
+			application.setApplicationNumber(checkNumber);
+			application.setApplicationTime(checkTime);
+			application.setApplicationWhat(checkWhat);
+			application.setId(checkId);
+			
+			application.setIsPass("true");
+			
+			applicationService.saveApplicationOrUpdate(application);
+			return SUCCESS;
+		}catch(Exception e){
+			System.out.print(e.getMessage());
+			return INPUT;
 		}
 	}
 }

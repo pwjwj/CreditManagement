@@ -61,4 +61,10 @@ public class ApplicationMoneyServiceImpl implements ApplicationMoneyService {
 		genericDao.delById(Application.class, applicationId);
 	}
 
+	@Override
+	public void saveApplicationOrUpdate(Application application) {
+		// TODO Auto-generated method stub
+		genericDao.saveOrUpdate(application);
+	}
+
 }

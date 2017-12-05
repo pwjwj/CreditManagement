@@ -58,39 +58,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           margin-right: 280px;
         }
       </style>
-        如果什么也没修改  需要使用js来拦截一下
-    <s:form action="modifyCreditActivity.action" theme="simple">
+      班级显示的有问题
+    <s:form action="modifyLoginedStuInfo.action" theme="simple">
     	<div class="box center_div">
+    		学号：<span style="font-size:24px"><s:text name="%{#request.currentLoginStu.number}" /></span>
+    		姓名：<span  style="font-size:24px"><s:text name="%{#request.currentLoginStu.name}" /></span>
+    		院系：<span  style="font-size:24px"><s:text name="%{#request.currentLoginStu.college}" /></span>
+    		班级：<span style="font-size:24px"><s:text name="%{#request.currentLoginStu.class_}" /></span>
+    		<s:hidden name="prepairToChangeStuBase.credit" value="%{#request.currentLoginStu.credit}"/>
+    		<s:hidden name="prepairToChangeStuBase.number" value="%{#request.currentLoginStu.number}"/>
+    		<s:hidden name="prepairToChangeStuBase.name" value="%{#request.currentLoginStu.name}"/>
+    		<s:hidden name="prepairToChangeStuBase.college" value="%{#request.currentLoginStu.college}"/>
+    		<s:hidden name="prepairToChangeStuBase.class_" value="%{#request.currentLoginStu.class_}"/>
     		
-    		<s:hidden name="prepairToChangeActivity.id" value="%{#request.currentCreditActivity.id}"/>
     		
         </div>
         <div class="box center_div">
          	 
-			<s:textarea name="prepairToChangeActivity.number" placeholder="学号" value="%{#request.currentCreditActivity.number}"  cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
-        </div>
-        <font color="#FF0000" size="3">
-        	<s:property value="#request.passwordErro"/>
-        </font>
-        <div class="box center_div">
-         	 
-			<s:textarea name="prepairToChangeActivity.name" placeholder="姓名" value="%{#request.currentCreditActivity.name}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
-        </div>
-        <div class="box center_div">
-         	 
-			<s:textarea name="prepairToChangeActivity.categoryId" placeholder="分类号" value="%{#request.currentCreditActivity.categoryId}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
-        </div>
-        <div class="box center_div">
-			<s:textarea name="prepairToChangeActivity.detail" placeholder="事项详情" value="%{#request.currentCreditActivity.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
-        </div>
-        <div class="box center_div">
-         	 
-			<s:textarea name="prepairToChangeActivity.dates" placeholder="日期" value="%{#request.currentCreditActivity.dates}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
+			<s:password name="prepairToChangeStuBase.pwd" placeholder="密码" value="%{#request.currentLoginStu.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
         </div>
         
         <br/>  
         <s:submit value="修改" cssClass="center_div " cssStyle="height: 40px;width: 400px; margin:0 0 0 -10;background-color:#00a1d6;"/><br>
-        <s:if test="#request.currentUser.activityId == #session.activityId ">
+        <s:if test="#request.currentUser.name == #session.stuName ">
         	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页></a>
         </s:if>
 	</s:form>

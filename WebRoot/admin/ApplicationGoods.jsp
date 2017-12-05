@@ -66,14 +66,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }  
 	}
 	function formatOper2_1(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeClass2_1('+index+')">升为普通管理员</a>';   
+    	return '<a href="javascript:void(0)" onclick="chekToPass('+index+')">审核</a>';   
 	}
 	//点击  普通会员   的方法  
-	function changeClass2_1(index){
+	function chekToPass(index){
 		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>changeAuthority.action?authority=1&userId='+rows[0].username;
+            var url = '<%=basePath %>chekToPassGoods.action?checkId='+rows[0].id+'&checkName='+rows[0].applicationName+'&checkNumber='+rows[0].applicationNumber+'&checkWhat='+rows[0].applicationWhat+'&checkTime='+rows[0].applicationTime;
             window.location.href=url;
         }  
 	}
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th data-options="field:'applicationCategory',width:100,align:'center'">申请类别</th> 
                 <th data-options="field:'applicationWhat',width:100,align:'center'">申请内容</th> 
                 <th data-options="field:'applicationTime',width:100,align:'center'">申请时间</th> 
-                
+                <th data-options="field:'isPass',width:100,align:'center'">状态</th> 
                 <!-- <th data-options="field:'dates',width:100,align:'center'">时间</th> -->
                 <!-- <th data-options="field:'credit',width:80,align:'center'">信用分</th> -->
                 <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
