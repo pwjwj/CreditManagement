@@ -9,7 +9,8 @@ public interface ApplicationService {
 	public List<Application> getApplicationList(String page,String rows);
 	public int getApplicationTotal();
 	
-
+	
+	public void saveApplicationOrUpdate(Application application);
 	public List<Application> getApplicationSearchList(String hql, String page, String rows);
 	public int getApplicationSearchedTotal(String hql);
 	

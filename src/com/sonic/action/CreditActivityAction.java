@@ -257,6 +257,8 @@ public class CreditActivityAction extends ActionSupport {
 			
 			
 			try{
+				
+				System.out.println("prepairToChangeActivity.getDetail()   "+prepairToChangeActivity.getDetail());
 				creditactivityService.saveCreditactivityBaseOrUpdate(prepairToChangeActivity);
 				return SUCCESS;
 			}catch(Exception e){

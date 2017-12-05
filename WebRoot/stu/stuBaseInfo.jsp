@@ -66,28 +66,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             window.location.href=url;
         }  
 	}  --%>
-	 function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">修改信息(还没写函数)</a>';   
-	}  
-	function delete2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>deleteAdminById.action?adminId='+rows[0].id;
-             window.location.href=url;
-        }  
-	}
-	function formatOper2_1(val,row,index){ 
+	function formatOper2(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
 	function changeInfo2(index){
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].name;
+            var url = '<%=basePath %>getCurrentStuByNumber.action?currentStuNumber='+rows[0].number;
             window.location.href=url;
         }  
 	}
+	
 	
 	function changeUrl(){
 		alert("进来了");

@@ -60,4 +60,10 @@ public class ApplicationGoodsServiceImpl implements ApplicationGoodsService{
 		genericDao.delById(Application.class, applicationId);
 	}
 
+	@Override
+	public void saveApplicationOrUpdate(Application application) {
+		// TODO Auto-generated method stub
+		genericDao.saveOrUpdate(application);
+	}
+
 }

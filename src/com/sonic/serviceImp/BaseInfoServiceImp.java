@@ -84,5 +84,22 @@ public class BaseInfoServiceImp implements BaseInfoService {
 		genericDao.delById(StuBase.class, stuId);
 	}
 
+	@Override
+	public List<Admin> getAdminSelfBaseList(String name) {
+		// TODO Auto-generated method stub
+		return genericDao.query("from Admin where username ='" + name + "'");
+	}
+
+	@Override
+	public Admin getUserById(int adminId) {
+		// TODO Auto-generated method stub
+		return (Admin) genericDao.get("from Admin where id ='"+adminId+"'");
+	}
+
+	@Override
+	public void saveAdminOrUpdate(Admin admin) {
+		// TODO Auto-generated method stub
+		genericDao.saveOrUpdate(admin);
+	}
 	
 }

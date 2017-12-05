@@ -8,7 +8,8 @@ public interface ApplicationMoneyService {
 	public List<Application> getMoneyApplicationList(String page,String rows);
 	public int getMoneyApplicationTotal();
 	
-
+	
+	public void saveApplicationOrUpdate(Application application);
 	public List<Application> getMoneyApplicationSearchList(String hql, String page, String rows);
 	public int getMoneyApplicationSearchedTotal(String hql);
 	

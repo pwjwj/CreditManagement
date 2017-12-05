@@ -13,7 +13,7 @@ public interface BaseInfoService {
 	public List<StuBase> getStuBaseList(String page,String rows);
 	public int getUserTotal();
 	
-	
+	public List<Admin> getAdminSelfBaseList(String name);
 	
 	
 	/*//获取通知信息
@@ -35,7 +35,10 @@ public interface BaseInfoService {
 	public List<StuBase> getStuSearchList(String hql, String page, String rows);
 	public int getSearchedTotal(String hql);
 	
+	public Admin getUserById(int adminId);
 	public void saveStuBaseOrUpdate(StuBase stu);
 	
 	public void deleteStu(int newsId);
+	
+	public void saveAdminOrUpdate(Admin admin);
 }

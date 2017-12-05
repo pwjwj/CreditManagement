@@ -32,8 +32,22 @@ public class InfoAction extends ActionSupport {
 	private Integer infoId;
 	private List<Info> list;
 	private Integer keyword;
+	private Integer infoSelectedId;
+	private Info prepairToInfo;
 	
-    public Integer getKeyword() {
+    public Info getPrepairToInfo() {
+		return prepairToInfo;
+	}
+	public void setPrepairToInfo(Info prepairToInfo) {
+		this.prepairToInfo = prepairToInfo;
+	}
+	public Integer getInfoSelectedId() {
+		return infoSelectedId;
+	}
+	public void setInfoSelectedId(Integer infoSelectedId) {
+		this.infoSelectedId = infoSelectedId;
+	}
+	public Integer getKeyword() {
 		return keyword;
 	}
 	public void setKeyword(Integer keyword) {
@@ -162,8 +176,10 @@ public class InfoAction extends ActionSupport {
 		List<Info> list1 = list;
 		try {
 			System.out.println("keyword   " + keyword);
-			String hql = "from Creditcategory where id like '%" + keyword
-					+ "%'";
+			/*String hql = "from Info where id like '%" + keyword
+					+ "%'";*/
+			String hql = "from Info where infoTittle like '%" + keyword
+					+ "%'or infoContent like '%" + keyword + "%'";
 			list = infoService.getInfoSearchList(hql, page, rows);
 			System.out.println("result list size  " + list.size());
 			toBeJson(list, infoService.getInfoSearchedTotal(hql));
@@ -172,6 +188,29 @@ public class InfoAction extends ActionSupport {
 			System.out.print(e.getMessage());
 			list = list1;
 			return SUCCESS;
+		}
+	}
+    
+    public String getInfoById() {
+		
+		if (infoSelectedId == null || infoSelectedId.equals("")) {
+			infoSelectedId = (Integer) ServletActionContext.getRequest().getAttribute(
+					"infoSelectedId");
+		}
+		ServletActionContext.getRequest().setAttribute("currentInfoSelectedId",
+				infoService.getInfo(infoSelectedId));
+		return SUCCESS;
+	}
+    
+    public String modifyInfo(){
+		
+		
+		try{
+			infoService.saveInfoOrUpdate(prepairToInfo);
+			return SUCCESS;
+		}catch(Exception e){
+			System.out.print(e.getMessage());
+			return INPUT;
 		}
 	}
 }
