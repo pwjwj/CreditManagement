@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           margin-right: 280px;
         }
       </style>
-      班级显示的有问题
+      <!-- 班级显示的有问题 -->
     <s:form action="modifyLoginedStuInfo.action" theme="simple">
     	<div class="box center_div">
     		学号：<span style="font-size:24px"><s:text name="%{#request.currentLoginStu.number}" /></span>

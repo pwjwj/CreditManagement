@@ -78,12 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }  
 	}
 	function doSearch(value){
-		/* alert($('#keyword').val());
-		$('#commUserDatagrid').datagrid('load',{
-		number: $('#keyword').val()
-		}
-	); */
-	/* alert(value); */
 	$('#commUserDatagrid').datagrid({  
             title : '申请列表',  
             iconCls : 'icon-ok',  
@@ -115,12 +109,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
- <%--  字符编码
-  <s:form  action="applicationSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
-  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
-  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
-  		 <input type="submit" value="搜索" ">
-  </s:form> --%>
    <div id="tb" style="float: right;">  
              <input id="keyword" name="keyword" class="easyui-searchbox"  
                searcher="doSearch" prompt="请输入学号搜索"  
@@ -137,9 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th data-options="field:'applicationWhat',width:100,align:'center'">申请内容</th> 
                 <th data-options="field:'applicationTime',width:100,align:'center'">申请时间</th> 
                 <th data-options="field:'isPass',width:100,align:'center'">状态</th> 
-                
-                <!-- <th data-options="field:'dates',width:100,align:'center'">时间</th> -->
-                <!-- <th data-options="field:'credit',width:80,align:'center'">信用分</th> -->
+
                 <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
                 <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
             </tr>  

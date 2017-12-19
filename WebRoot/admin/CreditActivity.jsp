@@ -85,12 +85,6 @@
         }  
 	}
 	function doSearch(value){
-		/* alert($('#keyword').val());
-		$('#commUserDatagrid').datagrid('load',{
-		number: $('#keyword').val()
-		}
-	); */
-	/* alert(value); */
 	$('#commUserDatagrid').datagrid({  
             title : '信用活动列表',  
             iconCls : 'icon-ok',  
@@ -123,12 +117,6 @@
 
 <body>
 	<div style="margin: 10px 0px 0px 15px">
-		<%-- <s:form action="creditActivitySearch.action" method="post"
-			enctype="multipart/form-data" theme="simple" onclick="changeUrl()">
-			<span id="userPwdTip">&nbsp;输入关键字:</span>
-			<input type="text" name="keyword"> &nbsp;&nbsp;&nbsp;&nbsp;
-  		 	<input type="submit" value="搜索">
-		</s:form> --%>
 		 <div id="tb" style="float: right;">  
              <input id="keyword" name="keyword" class="easyui-searchbox"  
                searcher="doSearch" prompt="请输入学号搜索"  

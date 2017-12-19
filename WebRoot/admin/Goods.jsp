@@ -68,7 +68,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeClass2_1('+index+')">升为普通管理员</a>';   
 	}
-	//点击  普通会员   的方法  
 	function changeClass2_1(index){
 		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
@@ -78,12 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }  
 	}
 	function doSearch(value){
-		/* alert($('#keyword').val());
-		$('#commUserDatagrid').datagrid('load',{
-		number: $('#keyword').val()
-		}
-	); */
-	/* alert(value); */
+		
 	$('#commUserDatagrid').datagrid({  
             title : '物资列表',  
             iconCls : 'icon-ok',  
@@ -115,11 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
- <%--  <s:form  action="goodsSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
-  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
-  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
-  		 <input type="submit" value="搜索" ">
-  </s:form> --%>
+ 
   <div id="tb" style="float: right;">  
              <input id="keyword" name="keyword" class="easyui-searchbox"  
                searcher="doSearch" prompt="请输入物品名称或或外借人搜索"  
@@ -135,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th data-options="field:'goodsNumberBorrowed',width:100,align:'center'">外借数量</th> 
                 <th data-options="field:'goodsBorrower',width:100,align:'center'">外借人</th>
                 <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
-                <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
+              
             </tr>  
         </thead>  
     </table>

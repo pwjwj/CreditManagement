@@ -25,8 +25,6 @@ public class ApplicationMoneyAction extends ActionSupport {
     private StuBase user;
     private String userId;
     
-    
-	
 	private List<Application> list;
 	private Integer keyword;
 	
@@ -95,10 +93,6 @@ public class ApplicationMoneyAction extends ActionSupport {
 		this.jsonObj = jsonObj;
 	}
 
-	
-
-	
-
 	public ApplicationMoneyService getApplicationService() {
 		return applicationService;
 	}
@@ -147,10 +141,6 @@ public class ApplicationMoneyAction extends ActionSupport {
 		this.list = list;
 	}
 
-	
-
-	
-	
 	public Integer getKeyword() {
 		return keyword;
 	}
@@ -165,16 +155,16 @@ public class ApplicationMoneyAction extends ActionSupport {
     	jconfig.setIgnoreDefaultExcludes(false);
     	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
 
-         HttpServletResponse response = ServletActionContext.getResponse();  
+        HttpServletResponse response = ServletActionContext.getResponse();  
               
-         JSONObject jobj = new JSONObject();//new一个JSON  
-         jobj.accumulate("total",total );//total代表一共有多少数据  
-         jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
+        JSONObject jobj = new JSONObject();//new一个JSON  
+        jobj.accumulate("total",total );//total代表一共有多少数据  
+        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
   
-         response.setCharacterEncoding("utf-8");//指定为utf-8  
-         response.getWriter().write(jobj.toString());     
+        response.setCharacterEncoding("utf-8");//指定为utf-8  
+        response.getWriter().write(jobj.toString());     
     }  
-	//获取所有通知
+	//获取所有资金申请
     public String getAllMoneyApplication() { 
     	
         try {
@@ -186,46 +176,25 @@ public class ApplicationMoneyAction extends ActionSupport {
         		keyword=null;
         	}
 			toBeJson(applicationService.getMoneyApplicationList(hql,page, rows),applicationService.getMoneyApplicationTotal());
-			//authority = null;
-			
         } catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;  
     } 
     
-    public String applicationMoneySearch() {
-		List<Application> list1 = list;
-		try {
-			System.out.println("keyword   " + keyword);
-			String hql = "from Application where applicationCategory ='money' and applicationName like '%" + keyword
-					+ "%'or applicationWhat like '%" + keyword + "%'";
-			list = applicationService.getMoneyApplicationSearchList(hql, page, rows);
-			System.out.println("result list size  " + list.size());
-			toBeJson(list, applicationService.getMoneyApplicationSearchedTotal(hql));
-			return null;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			list = list1;
-			return SUCCESS;
-		}
-	}
-    
     public String deleteMoneyApplicationById() {
 		try {
-			
 			applicationService.deleteMoneyApplicationById(applicationId);
-			return "success";
+			//return "success";
+			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			return "input";
-
+			//return "input";
+			return INPUT;
 		}
 	}
     
     public String chekToPassMoney(){
-		
-		
 		try{
 			Application application=new Application();
 			application.setApplicationCategory("money");
@@ -235,9 +204,7 @@ public class ApplicationMoneyAction extends ActionSupport {
 			application.setApplicationTime(checkTime);
 			application.setApplicationWhat(checkWhat);
 			application.setId(checkId);
-			
 			application.setIsPass("true");
-			
 			applicationService.saveApplicationOrUpdate(application);
 			return SUCCESS;
 		}catch(Exception e){

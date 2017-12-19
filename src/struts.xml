@@ -30,10 +30,8 @@
  		<action name="logout" class="baseInfoAction" method="logout">
  			<result name="success">/login.jsp</result>
  		</action>
- 		<!-- 这里就得看一下这个该url -->
- 		<action name="stuSearch" class="baseInfoAction" method="stuSearch">
- 			<result  type="json"/> 
- 		</action>
+ 		
+ 		
  		<action name="addStuBase" class="baseInfoAction" method="addStuBase">
  			<result name="success">/admin/BaseInfo.jsp</result>
  		</action>
@@ -68,11 +66,7 @@
  			<result name="success">/admin/CreditActivity.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
-		<action name="creditActivitySearch" class="creditActivityAction" method="creditActivitySearch">
- 			<result  type="json"/>
- 		</action>
- 		
- 		
+		
  		<action name="creditActivitySearchTest" class="creditActivityAction" method="creditActivitySearchTest">
  			<result  type="json"/>
  		</action>
@@ -91,10 +85,6 @@
 			<result name="success">/admin/Creditcategory.jsp</result>
 		</action>
 		
-		<action name="creditCategorySearch" class="creditCategoryAction" method="creditCategorySearch">
- 			<result  type="json"/>
- 		</action>
- 		
  		<action name="modifyCreditCategory" class="creditCategoryAction" method="modifyCreditCategory">
  			<result name="success">/admin/Creditcategory.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
@@ -135,10 +125,6 @@
 			<result name="success">/admin/Goods.jsp</result>
 		</action>
 		
-		<action name="goodsSearch" class="goodsAction" method="goodsSearch">
- 			<result  type="json"/>
- 		</action>
- 		
 		<action name="deleteGoodsById"  class="goodsAction" method="deleteGoodsById">
  			<result name="success">/admin/Goods.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
@@ -148,9 +134,7 @@
  			<result type="json"/>
  		</action>
  		
- 		<action name="applicationSearch" class="applicationAction" method="applicationSearch">
- 			<result  type="json"/>
- 		</action>
+ 		
  		
  		<action name="chekToPass"  class="applicationAction" method="chekToPass">
  			<result name="success">/admin/Application.jsp</result>
@@ -185,9 +169,7 @@
  		<action name="getAllGoodsApplication" class="applicationGoodsAction" method="getAllGoodsApplication">
  			<result type="json"/>
  		</action>
- 		<action name="applicationGoodsSearch" class="applicationGoodsAction" method="applicationGoodsSearch">
- 			<result  type="json"/>
- 		</action>
+ 		
  		
  		<action name="chekToPassGoods"  class="applicationGoodsAction" method="chekToPassGoods">
  			<result name="success">/admin/ApplicationGoods.jsp</result>
@@ -248,11 +230,6 @@
  		<action name="getAllInfoStu" class="stuAction" method="getAllInfoStu">
  			<result type="json"/>
  		</action>
- 		
- 		<action name="infoSearchStuInfo" class="stuAction" method="infoSearchStuInfo">
- 			<result  type="json"/>
- 		</action>
- 		
  		<action name="getAllApplicationStu" class="stuAction" method="getAllApplicationStu">
  			<result type="json"/>
  		</action>

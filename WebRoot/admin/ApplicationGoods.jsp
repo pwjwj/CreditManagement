@@ -17,9 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
@@ -68,7 +65,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="chekToPass('+index+')">审核</a>';   
 	}
-	//点击  普通会员   的方法  
 	function chekToPass(index){
 		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
@@ -78,12 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }  
 	}
 	function doSearch(value){
-		/* alert($('#keyword').val());
-		$('#commUserDatagrid').datagrid('load',{
-		number: $('#keyword').val()
-		}
-	); */
-	/* alert(value); */
 	$('#commUserDatagrid').datagrid({  
             title : '物资申请列表',  
             iconCls : 'icon-ok',  
@@ -115,11 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <s:form  action="applicationGoodsSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
-  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
-  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
-  		 <input type="submit" value="搜索" ">
-  </s:form>
+ 
   <div id="tb" style="float: right;">  
              <input id="keyword" name="keyword" class="easyui-searchbox"  
                searcher="doSearch" prompt="请输入学号搜索"  
