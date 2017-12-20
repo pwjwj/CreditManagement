@@ -39,6 +39,7 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer stuId;
 	private String stuName;
 
+<<<<<<< HEAD
 	private String stuIds;
 	
 	public String getStuIds() {
@@ -49,6 +50,8 @@ public class BaseInfoAction extends ActionSupport {
 		this.stuIds = stuIds;
 	}
 
+=======
+>>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
 	public Admin getPrepairToChangeAdmin() {
 		return prepairToChangeAdmin;
 	}
@@ -377,6 +380,7 @@ public class BaseInfoAction extends ActionSupport {
 			System.out.print(e.getMessage());
 			//return "input";
 			return INPUT;
+<<<<<<< HEAD
 		}
 	}
 	public void deleteAct(int number){
@@ -405,6 +409,11 @@ public class BaseInfoAction extends ActionSupport {
 	}
 	
 	
+=======
+		}
+	}
+
+>>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
 	public String getAdminSelfInfo() {
 
 		try {

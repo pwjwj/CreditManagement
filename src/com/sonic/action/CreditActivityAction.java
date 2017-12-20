@@ -35,6 +35,7 @@ public class CreditActivityAction extends ActionSupport {
 
 	private Integer activityId;
 	private Creditactivity prepairToChangeActivity;
+<<<<<<< HEAD
 	private String creditActivityIds;
 	
 	public String getCreditActivityIds() {
@@ -44,6 +45,8 @@ public class CreditActivityAction extends ActionSupport {
 	public void setCreditActivityIds(String creditActivityIds) {
 		this.creditActivityIds = creditActivityIds;
 	}
+=======
+>>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
 
 	public Creditactivity getPrepairToChangeActivity() {
 		return prepairToChangeActivity;
@@ -253,6 +256,16 @@ public class CreditActivityAction extends ActionSupport {
 			System.out.print(e.getMessage());
 			//return "input";
 			return INPUT;
+<<<<<<< HEAD
+		}
+	}
+
+	public String deleteCreditActivityById() {
+		try {
+			System.out.println("stuId  " + creditActivityId);
+			creditactivityService.deleteCreditActivity(creditActivityId);
+			//return "success";
+=======
 		}
 	}
 
@@ -268,6 +281,30 @@ public class CreditActivityAction extends ActionSupport {
 			return INPUT;
 		}
 	}
+
+	public String creditActivitySearchTest() {
+		List<Creditactivity> list1 = list;
+		try {
+			System.out.println("number  " + number);
+			String hql = "from Creditactivity where number = " + number;
+			list = creditactivityService.getCreditActivitySearchList(hql, page,
+					rows);
+			System.out.println("result list size  " + list.size());
+			toBeJson(list,
+					creditactivityService.getCreditActivitySearchedTotal(hql));
+			return null;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			list = list1;
+>>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
+			return SUCCESS;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			//return "input";
+			return INPUT;
+		}
+	}
+<<<<<<< HEAD
 	
 	public void deleteAct(int number){
 		try {
@@ -317,6 +354,15 @@ public class CreditActivityAction extends ActionSupport {
 			activityId = (Integer) ServletActionContext.getRequest()
 					.getAttribute("activityId");
 		}
+=======
+
+	public String getCreditActivityById() {
+
+		if (activityId == null || activityId.equals("")) {
+			activityId = (Integer) ServletActionContext.getRequest()
+					.getAttribute("activityId");
+		}
+>>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
 		ServletActionContext.getRequest().setAttribute("currentCreditActivity",
 				creditactivityService.getCreditActivity(activityId));
 		return SUCCESS;

@@ -40,9 +40,13 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+<<<<<<< HEAD
  		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds">
  			
  		</action>
+=======
+ 		<!-- 链接出错 -->
+>>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
