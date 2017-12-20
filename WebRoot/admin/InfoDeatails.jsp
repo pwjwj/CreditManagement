@@ -17,9 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
@@ -76,10 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	 
 			<s:textarea name="prepairToInfo.infoContent" placeholder="通知内容" value="%{#request.currentInfoSelectedId.infoContent}"  cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
         </div>
-        
-        
-        
-        
         <br/>  
         <s:submit value="修改" cssClass="center_div " cssStyle="height: 40px;width: 400px; margin:0 0 0 -10;background-color:#00a1d6;"/><br>
         <s:if test="#request.currentUser.cCategoryId == #session.cCategoryId ">

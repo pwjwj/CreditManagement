@@ -221,7 +221,6 @@ public class StuAction extends ActionSupport {
 					.getSession().getAttribute("userName");
 			String actualName=(Name.split("/"))[0];
 			toBeJson(userService.getStuSelfBaseList(actualName), 1);
-			// authority = null;
 			System.out.println("查询完毕");
 
 		} catch (Exception e) {
@@ -231,7 +230,6 @@ public class StuAction extends ActionSupport {
 	}
 
 	public String getCurrentStu() {
-
 		String Name = (String) ServletActionContext.getRequest().getSession()
 				.getAttribute("userName");
 		String actualName=(Name.split("/"))[0];
@@ -243,47 +241,22 @@ public class StuAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String stuSearch() {
-		List<Creditactivity> list1 = list;
-		String Name = (String) ServletActionContext.getRequest().getSession()
-				.getAttribute("userName");
-		String actualName=(Name.split("/"))[0];
-		try {
-			System.out.println("keyword   " + keyword);
-			String hql = "from Creditactivity where name='" + actualName
-					+ "' and  detail like '%" + keyword + "%'";
-			list = userService.getStuCreditActivitySearchList(hql, page, rows);
-			System.out.println("result list size  " + list.size());
-			toBeJson(list, userService.getSearchedTotal(hql));
-			return null;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			list = list1;
-			return SUCCESS;
-		}
-	}
-
 	// 查询该学生所有的信用活动信息
 	public String getStuSelfCreditActivity() {
-
 		try {
 			String Name = (String) ServletActionContext.getRequest()
 					.getSession().getAttribute("userName");
 			String actualName=(Name.split("/"))[0];
 			String hql = "from Creditactivity where name='" + actualName
 					+ "' ";
-			//toBeJson(userService.getStuSelfCreditActivityList(actualName), 1);
 			toBeJson(userService.getStuSelfCreditActivityList(page, rows,actualName),
 					userService.getStuSelfCreditActivityTotal(hql));
-			// authority = null;
 			System.out.println("查询完毕");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 	
 	public String getCurrentStuByNumber() {
 		System.out.println("currentStuNumber"+currentStuNumber);
@@ -297,10 +270,7 @@ public class StuAction extends ActionSupport {
 	}
 	
 	public String modifyLoginedStuInfo(){
-		
-		
 		try{
-			
 			userService.saveStuBaseOrUpdate(prepairToChangeStuBase);
 			return SUCCESS;
 		}catch(Exception e){
@@ -310,35 +280,13 @@ public class StuAction extends ActionSupport {
 	}
 	
 	public String getAllInfoStu() { 
-    	
         try {
 			toBeJson(userService.getAllInfoList(page, rows),userService.getInfoTotal());
-			//authority = null;
-			 
         } catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;  
     }  
-	
-	public String infoSearchStuInfo() {
-		System.out.println("jinlaile infoSearchStuInfo");
-		List<Info> list1 = infoList;
-		try {
-			System.out.println("keyword   " + keyword);
-			String hql = "from Info where infoTittle like '%" + keyword
-					+ "%'or infoContent like '%" + keyword + "%'";
-			infoList = userService.getInfoSearchList(hql, page, rows);
-			System.out.println("result list size  " + infoList.size());
-			toBeJson(infoList, userService.getInfoSearchedTotal(hql));
-			
-			return null;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			infoList = list1;
-			return SUCCESS;
-		}
-	}
 	
 	public String getAllApplicationStu() { 
     	
@@ -348,8 +296,6 @@ public class StuAction extends ActionSupport {
         	String actualName=(Name.split("/"))[0];
         	int actualNumber=Integer.parseInt((Name.split("/"))[1]);
 			toBeJson(userService.getAllApplicationsList(page, rows,actualName,actualNumber),userService.getApplicationsTotal(actualName,actualNumber));
-			//authority = null;
-			
         } catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -372,10 +318,12 @@ public class StuAction extends ActionSupport {
 		System.out.println("addApplicationStuSelf access");
 		try {
 			userService.saveApplocationSelfOrUpdate(application);
-			return "success";
+			//return "success";
+			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			return "input";
+			//return "input";
+			return INPUT;
 		}
 	}
 }

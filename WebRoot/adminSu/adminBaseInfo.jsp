@@ -17,9 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
@@ -54,18 +51,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });   
           
     });  
-    
-    <%-- function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
-	}  
-	function changeInfo2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>getUserByUserId.action?userId='+rows[0].username;
-            window.location.href=url;
-        }  
-	}  --%>
 	 function formatOper2(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
 	}  
@@ -99,10 +84,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#commUserDatagrid").datagrid('load');
 		
 		
-		/* $('#commUserDatagrid').datagrid({  
-    		url:'stuSearch.action?keyword='+form1.value;  
-   			
-		});   */
 	}
 </script>  
   </head>

@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<div style="margin: e10px 0px 0px 15px">
-  	这里还有字符串格式的问题
+  	<!-- 这里还有字符串格式的问题 -->
     <s:form action = "addStuApplication.action" theme="simple">
     	<s:textarea name = "applicationCategory" placeholder="申请类比"  cssStyle="height:28px;width:500px"/><br/>
     	<s:textarea name = "applicationWhat" placeholder="申请详情"  cssStyle="height:28px;width:500px"/><br/>

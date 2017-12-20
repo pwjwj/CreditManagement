@@ -68,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="chekToPass('+index+')">审核</a>';   
 	}
-	//点击  普通会员   的方法  
+	
 	function chekToPass(index){
 		$('#adminDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
@@ -78,12 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }  
 	}
 	function doSearch(value){
-		/* alert($('#keyword').val());
-		$('#commUserDatagrid').datagrid('load',{
-		number: $('#keyword').val()
-		}
-	); */
-	/* alert(value); */
+		
 	$('#commUserDatagrid').datagrid({  
             title : '资金申请列表',  
             iconCls : 'icon-ok',  

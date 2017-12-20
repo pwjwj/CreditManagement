@@ -17,9 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
   </head>
   
   <body>
@@ -30,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<s:textarea name = "pwd" placeholder="密码"  cssStyle="height:28px;width:500px"/><br/>
     	<s:textarea name = "tel" placeholder="联系方式"  cssStyle="height:28px;width:500px"/><br/>
     	<s:textarea name = "other"  placeholder="备注信息"  cssStyle="height:28px;width:500px"/><br/>
-    	
     	<s:submit value = "新增" cssStyle="height:28px;width:60px"/>
     </s:form>
     

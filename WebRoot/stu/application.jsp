@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">  
     $(function() {  
         $('#commUserDatagrid').datagrid({  
-            title : '普通用户列表',  
+            title : '申请列表',  
             iconCls : 'icon-ok',  
             width : 1080,  
             pageSize : 5,//默认选择的分页是每页5行数据  
@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
-  这里的isPass  看看是不是可以进行判断  输出是与否
+  <!-- 这里的isPass  看看是不是可以进行判断  输出是与否 -->
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  

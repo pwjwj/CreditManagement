@@ -77,20 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	 
 			<s:textarea name="prepairToChangeAdmin.other" placeholder="备注" value="%{#request.currentAdmin.other}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
         </div>
-        <%-- <div class="box center_div">
-            <span id="userIdSpt">邮箱</span>
-			<s:textfield name="user.email" placeholder="邮箱" value="%{#request.currentUser.email}" cssStyle="margin-bottom: 0;height: 40px;width: 300px;" cssClass="email ui-autocomplete-input jv-box-default user_id_password"/>    	
-        </div>
-        <font color="#FF0000" size="3">
-        	<s:property value="#request.emailErro"/>
-        </font>
-        <div class="box center_div">
-            <span id="userIdSpt">联系电话</span>
-			<s:textfield name="user.mobile" placeholder="联系电话" value="%{#request.currentUser.mobile}" cssStyle="margin-bottom: 0;height: 40px;width: 300px;" cssClass="email ui-autocomplete-input jv-box-default user_id_password"/>    	
-        </div>
-         <font color="#FF0000" size="3">
-        	<s:property value="#request.mobileErro"/>
-        </font>   --%>
+        
         <br/>  
         <s:submit value="修改" cssClass="center_div " cssStyle="height: 40px;width: 400px; margin:0 0 0 -10;background-color:#00a1d6;"/><br>
         <s:if test="#request.currentUser.name == #session.stuName ">
