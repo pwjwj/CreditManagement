@@ -17,24 +17,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
+	<link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
   </head>
   
   <body>
-  	<div style="margin: e10px 0px 0px 15px">
-  	这里还有字符串格式的问题
+  
+  <div class="header">
+  <div class="center_title">新增通知</div>
+  </div>
+  	<div class="center_body">
     <s:form action = "addInfo.action" theme="simple">
-    	<s:textarea name = "infoTittle" placeholder="通知标题"  cssStyle="height:28px;width:500px"/><br/>
-    	<s:textarea name = "infoContent" placeholder="通知内容"  cssStyle="height:28px;width:500px"/><br/>
-    	<%-- <s:textarea name = "infoTime" placeholder="日期 yyyy-MM-dd HH:mm"  cssStyle="height:28px;width:500px"/><br/>
-    	<s:textarea name = "dates"  placeholder="日期 YYYY-MM-DD"  cssStyle="height:28px;width:500px"/><br/> --%>
+    	<div class="info_center"><div class="title-left">通知标题：</div><s:textarea name = "infoTittle" placeholder="通知标题"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">通知内容：</div><s:textarea name = "infoContent" placeholder="通知内容"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/></div>
     	
-    	<s:submit value = "新增" cssStyle="height:28px;width:60px"/>
+    	<div class="info_center"></div>
+    	<div class="info_center"></div>
+    	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
     </s:form>
-    
     </div>
-
   </body>
 </html>

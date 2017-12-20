@@ -40,6 +40,7 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+ 		<!-- 链接出错 -->
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
