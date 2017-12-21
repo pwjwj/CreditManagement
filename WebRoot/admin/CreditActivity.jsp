@@ -129,9 +129,9 @@ function deletedata() {
             //批量获取选中行的ID  
             for (i = 0; i < selRow.length;i++) {  
                 if (temID =="") {  
-                    temID = selRow[i].number;  
+                    temID = selRow[i].id;  
                 } else {  
-                    temID = selRow[i].number + "," + temID;  
+                    temID = selRow[i].id + "," + id;  
                 }                 
             }  
                         
