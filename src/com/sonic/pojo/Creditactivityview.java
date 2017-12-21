@@ -16,6 +16,7 @@ public class Creditactivityview implements java.io.Serializable {
 	private String detail;
 	private String dates;
 
+	// T-private String credit;
 	// Constructors
 
 	/** default constructor */
