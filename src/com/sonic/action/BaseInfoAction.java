@@ -375,7 +375,23 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 
+<<<<<<< HEAD
 	
+=======
+	public String deleteStuById() {
+		try {
+			System.out.println("stuId  " + stuId);
+			userService.deleteStu(stuId);
+			//return "success";
+			return SUCCESS;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			//return "input";
+			return INPUT;
+
+		}
+	}
+>>>>>>> acbe854379003ab66a72d9a8a291e72c1d6ac7f2
 	public void deleteAct(int number){
 		try {
 			userService.deleteStu(number);
