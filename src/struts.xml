@@ -16,6 +16,10 @@
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
  		</action>
  		
+ 		<action name="addStuFromExcel"  class="baseInfoAction" method="addStuFromExcel">
+ 			<result name="success">/admin/BaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
  		<action name="getAdminSelfInfo" class="baseInfoAction" method="getAdminSelfInfo">
  			<result type="json"/>
  		</action>
@@ -40,13 +44,9 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
-<<<<<<< HEAD
  		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds">
  			
  		</action>
-=======
- 		<!-- 链接出错 -->
->>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
@@ -104,6 +104,10 @@
  			<result name="success">/admin/Creditcategory.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
+ 		
+ 		<action name="deleteCategoryByIds"  class="creditCategoryAction" method="deleteCategoryByIds">
+ 			
+ 		</action>
  		<action name="getAllInfo" class="infoAction" method="getAllInfo">
  			<result type="json"/>
  		</action>
@@ -117,6 +121,8 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
 		
+		<action name="deleteInfoByIds"  class="infoAction" method="deleteInfoByIds">
+ 		</action>
 		<action name="getInfoById"  class="infoAction" method="getInfoById">
  			<result name="success">/admin/InfoDeatails.jsp</result>
  		</action>
@@ -141,6 +147,8 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+ 		<action name="deleteGoodsByIds"  class="goodsAction" method="deleteGoodsByIds">
+ 		</action>
  		<action name="getAllApplication" class="applicationAction" method="getAllApplication">
  			<result type="json"/>
  		</action>
@@ -156,6 +164,8 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+ 		<action name="deleteApplicationByIds"  class="applicationAction" method="deleteApplicationByIds">
+ 		</action>
  		<action name="getAllMoneyApplication" class="applicationMoneyAction" method="getAllMoneyApplication">
  			<result type="json"/>
  		</action>
@@ -171,7 +181,8 @@
  			<result name="success">/admin/ApplicationMoney.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
- 		
+ 		<action name="deleteMoneyApplicationByIds"  class="applicationMoneyAction" method="deleteMoneyApplicationByIds">
+ 		</action>
  		
  		
  		
@@ -191,7 +202,8 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
- 		
+ 		<action name="deleteGoodsApplicationByIds"  class="applicationGoodsAction" method="deleteGoodsApplicationByIds">
+ 		</action>
  		<action name="getAllAdminBaseInfo" class="adminSuAction" method="getAllAdminBaseInfo">
  			<result type="json"/>
  		</action>

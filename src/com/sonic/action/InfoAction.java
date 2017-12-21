@@ -35,7 +35,15 @@ public class InfoAction extends ActionSupport {
 	private Integer infoSelectedId;
 	private Info prepairToInfo;
 	
-    public Info getPrepairToInfo() {
+	private String infoIds;
+	
+    public String getInfoIds() {
+		return infoIds;
+	}
+	public void setInfoIds(String infoIds) {
+		this.infoIds = infoIds;
+	}
+	public Info getPrepairToInfo() {
 		return prepairToInfo;
 	}
 	public void setPrepairToInfo(Info prepairToInfo) {
@@ -165,16 +173,29 @@ public class InfoAction extends ActionSupport {
 		}
 	}
     
-    public String deleteInfoById() {
-		try {
-			infoService.deleteInfoById(infoId);
-			return "success";
+    
+    
+    public void deleteAct(int number){
+    	try {
+			infoService.deleteInfoById(number);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			return "input";
 		}
 	}
-   
+	public void deleteInfoByIds() {
+		
+		System.out.println("infoIds   "+infoIds);
+		if(infoIds.contains(",")){
+			String[] strings = infoIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(infoIds));
+		}
+	}
     public String getInfoById() {
 		
 		if (infoSelectedId == null || infoSelectedId.equals("")) {

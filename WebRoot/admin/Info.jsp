@@ -36,7 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个  
             url:'getAllInfo.action',//url调用Action方法  
             loadMsg : '数据装载中......',  
-            singleSelect:true,//为true时只能选择单行 
+            singleSelect: false, //允许选择多行  
+            selectOnCheck: true,//true勾选会选择行，false勾选不选择行, 1.3以后有此选项。重点在这里  
+            checkOnSelect: true, //true选择行勾选，false选择行不勾选, 1.3以后有此选项  
             nowrap:false,  
             fitColumns:true,//允许表格自动缩放，以适应父容器   
             fit:false,//允许表格自动缩放，以适应父容器  
@@ -53,16 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
     });  
     function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
+    	return '<a href="javascript:void(0)" onclick="deletedata()">删除</a>';   
 	}  
-	function delete2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>deleteInfoById.action?infoId='+rows[0].id;
-             window.location.href=url;
-        }  
-	}
+	
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
@@ -88,7 +83,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个  
             url:'getAllInfo.action?keyword='+value,//url调用Action方法  
             loadMsg : '数据装载中......',  
-            singleSelect:true,//为true时只能选择单行 
+            singleSelect: false, //允许选择多行  
+            selectOnCheck: true,//true勾选会选择行，false勾选不选择行, 1.3以后有此选项。重点在这里  
+            checkOnSelect: true, //true选择行勾选，false选择行不勾选, 1.3以后有此选项  
             nowrap:false,  
             fitColumns:true,//允许表格自动缩放，以适应父容器   
             fit:false,//允许表格自动缩放，以适应父容器  
@@ -103,6 +100,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             rownumbers : true//行数  
         });   
 }
+function deletedata() {  
+        //返回选中多行  
+        var selRow = $('#commUserDatagrid').datagrid('getSelections')  
+        //判断是否选中行  
+        if (selRow.length==0) {  
+            $.messager.alert("提示", "请选择要删除的行！", "info");  
+            return;  
+        }else{      
+            var temID="";  
+            //批量获取选中行的ID  
+            for (i = 0; i < selRow.length;i++) {  
+                if (temID =="") {  
+                    temID = selRow[i].id;  
+                } else {  
+                    temID = selRow[i].id + "," + temID;  
+                }                 
+            }  
+                        
+            $.messager.confirm('提示', '是否删除选中数据?', function (r) {  
+  
+                if (!r) {  
+                    return;  
+                }  
+                alert(temID);
+                //提交  
+                $.ajax({  
+                    type: "POST",  
+                    async: false,  
+                    url: "deleteInfoByIds.action?infoIds=" + temID,  
+                    data: temID,  
+                    success: function (result) {  
+                    	alert(result);
+                        if (result.indexOf("t") <= 0) {  
+                            $('#commUserDatagrid').datagrid('clearSelections');  
+                            $.messager.alert("提示", "恭喜您，信息删除成功！", "info");  
+                            $('#commUserDatagrid').datagrid('reload');  
+                        } else {  
+                            $.messager.alert("提示", "删除失败，请重新操作！", "info");  
+                            return;  
+                        }  
+                    }  
+                });  
+            });  
+  
+        }  
+    };  
 </script>  
   </head>
   
@@ -112,6 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <input id="keyword" name="keyword" class="easyui-searchbox"  
                searcher="doSearch" prompt="请输入通知内容或标题搜索"  
                style="width: 130px; vertical-align: middle;"></input>   
+         	<button id="delete_button" class="easyui-button" onclick="deletedata()">批量删除</button>  
          </div> 
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  

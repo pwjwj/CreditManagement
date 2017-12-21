@@ -1,10 +1,14 @@
 package com.sonic.action;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+
+import jxl.Cell;
+import jxl.Workbook;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -39,7 +43,7 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer stuId;
 	private String stuName;
 
-<<<<<<< HEAD
+
 	private String stuIds;
 	
 	public String getStuIds() {
@@ -50,8 +54,7 @@ public class BaseInfoAction extends ActionSupport {
 		this.stuIds = stuIds;
 	}
 
-=======
->>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
+
 	public Admin getPrepairToChangeAdmin() {
 		return prepairToChangeAdmin;
 	}
@@ -207,7 +210,7 @@ public class BaseInfoAction extends ActionSupport {
 		jconfig.setIgnoreDefaultExcludes(false);
 		jconfig.registerJsonValueProcessor(java.util.Date.class,
 				new DateJsonValueProcessor("yyyy-MM-dd"));
-
+		 
 		HttpServletResponse response = ServletActionContext.getResponse();
 
 		JSONObject jobj = new JSONObject();// new一个JSON
@@ -335,6 +338,8 @@ public class BaseInfoAction extends ActionSupport {
         		System.out.println("after add number  "+hql);
         		keyword=null;
         	}
+			System.out.println("page   "+page);
+			System.out.println("rows   "+rows);
 			toBeJson(userService.getStuBaseList(hql,page, rows),
 					userService.getUserTotal());
 			System.out.println("查询完毕");
@@ -370,19 +375,7 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 
-	public String deleteStuById() {
-		try {
-			System.out.println("stuId  " + stuId);
-			userService.deleteStu(stuId);
-			//return "success";
-			return SUCCESS;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
-<<<<<<< HEAD
-		}
-	}
+	
 	public void deleteAct(int number){
 		try {
 			userService.deleteStu(number);
@@ -408,12 +401,7 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 	
-	
-=======
-		}
-	}
 
->>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
 	public String getAdminSelfInfo() {
 
 		try {
@@ -447,5 +435,34 @@ public class BaseInfoAction extends ActionSupport {
 			System.out.print(e.getMessage());
 			return INPUT;
 		}
+	}
+	
+	public String addStuFromExcel(){
+		 try{ 
+			 
+		      Workbook wb = Workbook.getWorkbook( 
+		 
+		      new File(ServletActionContext.getServletContext().getRealPath ("/")+"WEB-INF/moban.xls")); 
+		 
+		      System.out.println("2222222"); 
+		      for(int i=1;i<wb.getSheet(0).getRows();i++){ 
+		 
+		        Cell[] cell = wb.getSheet(0).getRow(i); 
+		        userService.saveStuBaseOrUpdate(new StuBase(Integer.parseInt(cell[0].getContents()),cell[1].getContents(),cell[2].getContents(),cell[3].getContents(),cell[4].getContents(),Integer.parseInt(cell[5].getContents())));
+		       
+		        System.out.println(cell[1].getContents());           
+		 
+		      } 
+		      
+		      wb.close(); 
+		      //在这里应该还有一个删除的操作
+		      return SUCCESS;
+		 
+		    }catch(Exception e){ 
+		 
+		      e.printStackTrace(); 
+		      return INPUT;
+		    } 
+
 	}
 }

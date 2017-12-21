@@ -41,6 +41,16 @@ public class CreditCategoryAction extends ActionSupport {
 	private Integer idss;
 	private Creditcategory prepairToChangeCategory;
 
+	private String creditCategoryIds;
+	
+	public String getCreditCategoryIds() {
+		return creditCategoryIds;
+	}
+
+	public void setCreditCategoryIds(String creditCategoryIds) {
+		this.creditCategoryIds = creditCategoryIds;
+	}
+
 	public Creditcategory getPrepairToChangeCategory() {
 		return prepairToChangeCategory;
 	}
@@ -216,19 +226,32 @@ public class CreditCategoryAction extends ActionSupport {
 		}
 	}
 
-	public String deleteCategoryById() {
+	
+	
+	public void deleteAct(int number){
 		try {
 
-			creditcategoryService.deleteCreditCategoryById(creditCategoryId);
-			//return "success";
-			return SUCCESS;
+			creditcategoryService.deleteCreditCategoryById(number);
+			
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
+			
 		}
 	}
-
+	public void deleteCategoryByIds() {
+		
+		System.out.println("creditCategoryIds   "+creditCategoryIds);
+		if(creditCategoryIds.contains(",")){
+			String[] strings = creditCategoryIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(creditCategoryIds));
+		}
+	}
 	public String getCreditCategoryById() {
 		if (idss == null || idss.equals("")) {
 			idss = (Integer) ServletActionContext.getRequest().getAttribute(

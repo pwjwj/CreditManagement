@@ -56,16 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     });  
     
 	 function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
+    	return '<a href="javascript:void(0)" onclick="deletedata()">删除</a>';   
 	}  
-	function delete2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>deleteStuById.action?stuId='+rows[0].number;
-             window.location.href=url;
-        }  
-	}
+	
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
@@ -157,7 +150,11 @@ function deletedata() {
   
         }  
     };  
-
+    //这里到时候把得到的路径拿到  或者把整个文件读进来
+function adddata(index){
+		var url = '<%=basePath %>addStuFromExcel.action';
+        window.location.href=url;
+	}
 </script>  
   </head>
   
@@ -167,7 +164,8 @@ function deletedata() {
              <input id="keyword" name="keyword" class="easyui-searchbox"  
                searcher="doSearch" prompt="请输入学号搜索"  
                style="width: 130px; vertical-align: middle;"></input> 
-             <button id="delete_button" class="easyui-button" onclick="deletedata()">批量删除</button>
+             <button id="delete_button" class="easyui-submit" onclick="deletedata()" >批量删除</button>
+             <button id="add_button" class="easyui-button" onclick="adddata()" >批量添加</button>
          </div>  
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  

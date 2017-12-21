@@ -35,7 +35,14 @@ public class ApplicationGoodsAction extends ActionSupport {
 	private String checkWhat;
 	
 	private String checkTime;
+	private String applicationIds;
 	
+	public String getApplicationIds() {
+		return applicationIds;
+	}
+	public void setApplicationIds(String applicationIds) {
+		this.applicationIds = applicationIds;
+	}
 	public Integer getCheckId() {
 		return checkId;
 	}
@@ -154,18 +161,28 @@ public class ApplicationGoodsAction extends ActionSupport {
         return null;  
     } 
     
-    public String deleteGoodsApplicationById() {
-		try {
-			applicationService.deleteGoodsApplicationById(applicationId);
-			//return "success";
-			return SUCCESS;
+    
+    public void deleteAct(int number){
+    	try {
+			applicationService.deleteGoodsApplicationById(number);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
 		}
 	}
-    
+	public void deleteGoodsApplicationByIds() {
+		
+		System.out.println("applicationIds   "+applicationIds);
+		if(applicationIds.contains(",")){
+			String[] strings = applicationIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(applicationIds));
+		}
+	}
     public String chekToPassGoods(){
 		
 		try{

@@ -66,16 +66,9 @@
           
     });  
     function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
+    	return '<a href="javascript:void(0)" onclick="deletedata()">删除</a>';   
 	}  
-	function delete2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath%>deleteCreditActivityById.action?creditActivityId='+rows[0].id;
-             window.location.href=url;
-        }  
-	}
+	
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
@@ -129,9 +122,9 @@ function deletedata() {
             //批量获取选中行的ID  
             for (i = 0; i < selRow.length;i++) {  
                 if (temID =="") {  
-                    temID = selRow[i].number;  
+                    temID = selRow[i].id;  
                 } else {  
-                    temID = selRow[i].number + "," + temID;  
+                    temID = selRow[i].id + "," + temID;  
                 }                 
             }  
                         

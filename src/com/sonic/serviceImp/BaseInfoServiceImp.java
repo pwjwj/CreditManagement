@@ -2,6 +2,8 @@ package com.sonic.serviceImp;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+
 import com.sonic.dao.GenericDao;
 import com.sonic.pojo.Admin;
 import com.sonic.pojo.AdminSu;
@@ -10,6 +12,7 @@ import com.sonic.service.BaseInfoService;
 
 public class BaseInfoServiceImp implements BaseInfoService {
 	private GenericDao genericDao;
+	private SessionFactory sessionFactory;
 	public GenericDao getGenericDao() {
 		return genericDao;
 	}
@@ -17,7 +20,15 @@ public class BaseInfoServiceImp implements BaseInfoService {
 	public void setGenericDao(GenericDao genericDaoImp) {
 		this.genericDao = genericDaoImp;
 	}
+	
 
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Override
 	public List<StuBase> getStuBaseList(String hql,String page, String rows) {
@@ -27,7 +38,9 @@ public class BaseInfoServiceImp implements BaseInfoService {
 		int pagesize = Integer.parseInt((rows == null || rows == "0") ? "10"
 				: rows);// 每页多少行
 
+		System.out.println("currentpage   "+currentpage);
 		return genericDao.query(hql, currentpage, pagesize);
+		
 	}
 
 	@Override

@@ -35,7 +35,18 @@ public class GoodsAction extends ActionSupport {
 	
 	private Integer GoodsId;
 	
-    public Integer getGoodsId() {
+	private String GoodsIds;
+	
+	
+    public String getGoodsIds() {
+		return GoodsIds;
+	}
+
+	public void setGoodsIds(String goodsIds) {
+		GoodsIds = goodsIds;
+	}
+
+	public Integer getGoodsId() {
 		return GoodsId;
 	}
 
@@ -174,16 +185,27 @@ public class GoodsAction extends ActionSupport {
 		}
 	}
    
-    public String deleteGoodsById() {
-		try {
-			
-			goodsService.deleteGoodsById(GoodsId);
-			//return "success";
-			return SUCCESS;
+   
+    
+    public void deleteAct(int number){
+    	try {
+			goodsService.deleteGoodsById(number);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
+		}
+	}
+	public void deleteGoodsByIds() {
+		
+		System.out.println("GoodsIds   "+GoodsIds);
+		if(GoodsIds.contains(",")){
+			String[] strings = GoodsIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(GoodsIds));
 		}
 	}
 }

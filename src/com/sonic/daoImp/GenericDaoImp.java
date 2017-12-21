@@ -66,7 +66,7 @@ public class GenericDaoImp extends HibernateDaoSupport implements GenericDao {
 		return this.getHibernateTemplate().find(hql);
 	}
 
-	@Override
+	/*@Override
 	public List query(final String hql,final int pageNo,final int pageSize) {
 		 List list = getHibernateTemplate().executeFind(new HibernateCallback() {
 
@@ -80,8 +80,22 @@ public class GenericDaoImp extends HibernateDaoSupport implements GenericDao {
 			}
 			  });
 		return list;
+	}*/
+	@Override
+	public List query(final String hql,final int pageNo,final int pageSize) {
+		 List list = getHibernateTemplate().executeFind(new HibernateCallback() {
+
+			@Override
+			public Object doInHibernate(Session arg0)
+					throws HibernateException, SQLException {
+				List result = arg0.createQuery(hql).setFirstResult((pageNo - 1) * pageSize)
+				        .setMaxResults(pageSize)
+				        .list();
+				    return result;
+			}
+			  });
+		return list;
 	}
-	
 	@Override
 	public List query(final String hql,final Date date) {
 		 List list = getHibernateTemplate().executeFind(new HibernateCallback() {

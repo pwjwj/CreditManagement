@@ -38,8 +38,17 @@ public class ApplicationAction extends ActionSupport {
 	private String checkCategory;
 	private String checkTime;
 	
+	private String applicationIds;
 	
 	
+	public String getApplicationIds() {
+		return applicationIds;
+	}
+
+	public void setApplicationIds(String applicationIds) {
+		this.applicationIds = applicationIds;
+	}
+
 	public Integer getCheckId() {
 		return checkId;
 	}
@@ -192,21 +201,29 @@ public class ApplicationAction extends ActionSupport {
 		}
         return null;  
     } 
-    //删除应用  
-    //这里可以考虑使用批量  传过来多个
-    public String deleteApplicationById() {
-		try {
-			
-			applicationService.deleteApplicationById(applicationId);
-			//return "success";
-			return SUCCESS;
+   
+    
+    public void deleteAct(int number){
+    	try {
+			applicationService.deleteApplicationById(number);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
 		}
 	}
-    
+	public void deleteApplicationByIds() {
+		
+		System.out.println("applicationIds   "+applicationIds);
+		if(applicationIds.contains(",")){
+			String[] strings = applicationIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(applicationIds));
+		}
+	}
     public String chekToPass(){
 		try{
 			Application application=new Application();

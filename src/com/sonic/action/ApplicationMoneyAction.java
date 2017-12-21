@@ -37,6 +37,16 @@ public class ApplicationMoneyAction extends ActionSupport {
 	
 	private String checkTime;
 
+	private String applicationIds;
+	
+	public String getApplicationIds() {
+		return applicationIds;
+	}
+
+	public void setApplicationIds(String applicationIds) {
+		this.applicationIds = applicationIds;
+	}
+
 	public Integer getCheckId() {
 		return checkId;
 	}
@@ -182,18 +192,28 @@ public class ApplicationMoneyAction extends ActionSupport {
         return null;  
     } 
     
-    public String deleteMoneyApplicationById() {
-		try {
-			applicationService.deleteMoneyApplicationById(applicationId);
-			//return "success";
-			return SUCCESS;
+   
+    public void deleteAct(int number){
+    	try {
+			applicationService.deleteMoneyApplicationById(number);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
 		}
 	}
-    
+	public void deleteMoneyApplicationByIds() {
+		
+		System.out.println("applicationIds   "+applicationIds);
+		if(applicationIds.contains(",")){
+			String[] strings = applicationIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(applicationIds));
+		}
+	}
     public String chekToPassMoney(){
 		try{
 			Application application=new Application();
