@@ -44,37 +44,22 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
-	
-	private String AdminName;
-<<<<<<< HEAD
-=======
 
-
-	public String getAdminName() {
-		return AdminName;
-	}
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-
-	public void setAdminName(String adminName) {
-		AdminName = adminName;
-	}
-
-	public String getAdminName() {
-		return AdminName;
-	}
-
-<<<<<<< HEAD
-=======
-	public void setAdminName(String adminName) {
-		AdminName = adminName;
-	}
-
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 	private String stuIds;
 	private File source;
 	
 	private boolean isWriteSuccess=false;
 	
+	private String AdminName;
+
+
+	public String getAdminName() {
+		return AdminName;
+	}
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
 
 	public File getSource() {
 		return source;
@@ -342,7 +327,6 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUser(stuName));
 		return SUCCESS;
 	}
-	
 	public String getAdminByUserName()
 	{
 		if(AdminName == null || AdminName.equals(""))
@@ -351,7 +335,6 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getTUser(AdminName));
 		return SUCCESS;
 	}
-
 	public boolean check(StuBase u) {
 		boolean flag = true;
 		System.out.println("½øÀ´ÁË");
@@ -436,28 +419,7 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void deleteAct(int number) {
-=======
-=======
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-
-	public String deleteStuById() {
-		try {
-			System.out.println("stuId  " + stuId);
-			userService.deleteStu(stuId);
-			//return "success";
-			return SUCCESS;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
-
-		}
-	}
-	public void deleteAct(int number){
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 		try {
 			userService.deleteStu(number);
 

@@ -12,7 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'user1.jsp' starting page</title>
     
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -73,15 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-<<<<<<< HEAD
-<<<<<<< HEAD
             var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
-=======
-            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-=======
-            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
             window.location.href=url;
         }  
 	}
@@ -127,8 +118,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%-- <s:form  action="adminSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
   		 <span id="userPwdTip">&nbsp;输入关键字:</span>
   		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
-<<<<<<< HEAD
-<<<<<<< HEAD
   		 <input type="submit" value="搜索" ">
   </s:form> --%>
   <div id="tb" >
@@ -138,12 +127,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<button id="delete_button" class="easyui-submit"
 			onclick="deletedata()">批量删除</button>
 	</div>
-=======
-=======
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-  		 <input type="submit" value="搜索" >
-  </s:form>
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  
