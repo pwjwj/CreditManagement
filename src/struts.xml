@@ -24,12 +24,17 @@
  		</action>
  		
 <<<<<<< HEAD
+<<<<<<< HEAD
  		<action name="upload" class="baseInfoAction" method="upload">
  			<result name="success">/admin/BaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		<action name="modifyAdminInfo" class="baseInfoAction" method="modifyAdminInfo">
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
+=======
+ 		<action name="modifyAdminInfos" class="baseInfoAction" method="modifyAdminInfo">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 =======
  		<action name="modifyAdminInfos" class="baseInfoAction" method="modifyAdminInfo">
  			<result name="success">/adminSu/adminBaseInfo.jsp</result>

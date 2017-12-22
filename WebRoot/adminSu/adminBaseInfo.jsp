@@ -74,7 +74,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
 <<<<<<< HEAD
+<<<<<<< HEAD
             var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
+=======
+            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 =======
             var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
 >>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
@@ -124,6 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		 <span id="userPwdTip">&nbsp;输入关键字:</span>
   		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
 <<<<<<< HEAD
+<<<<<<< HEAD
   		 <input type="submit" value="搜索" ">
   </s:form> --%>
   <div id="tb" >
@@ -134,6 +139,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			onclick="deletedata()">批量删除</button>
 	</div>
 =======
+=======
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
   		 <input type="submit" value="搜索" >
   </s:form>
 >>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098

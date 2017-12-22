@@ -130,7 +130,10 @@ function deletedata() {
 
                     temID = selRow[i].id + "," + id;  
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 =======
 >>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
                 }                 

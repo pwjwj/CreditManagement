@@ -46,7 +46,18 @@ public class BaseInfoAction extends ActionSupport {
 	private String stuName;
 	
 	private String AdminName;
+<<<<<<< HEAD
+=======
 
+
+	public String getAdminName() {
+		return AdminName;
+	}
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
 
 	public String getAdminName() {
 		return AdminName;
@@ -426,8 +437,11 @@ public class BaseInfoAction extends ActionSupport {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public void deleteAct(int number) {
 =======
+=======
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 
 	public String deleteStuById() {
 		try {
