@@ -24,8 +24,8 @@
  			<result type="json"/>
  		</action>
  		
- 		<action name="modifyAdminInfo" class="baseInfoAction" method="modifyAdminInfo">
- 			<result name="success">/admin/CurrentAdminInfo.jsp</result>
+ 		<action name="modifyAdminInfos" class="baseInfoAction" method="modifyAdminInfo">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		<action name="getAdminById"  class="baseInfoAction" method="getAdminById">
@@ -49,6 +49,9 @@
  		</action>
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
+ 		</action>
+ 		<action name="getAdminByUserName"  class="baseInfoAction" method="getAdminByUserName">
+ 			<result name="success">/adminSu/adminInfochange.jsp</result>
  		</action>
  		
  		<action name="modify" class="baseInfoAction" method="modify">

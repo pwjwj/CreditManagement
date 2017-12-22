@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'manager.jsp' starting page</title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -87,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="right">
 		<iframe id="rightFrame" name="rightFrame" width="100%" height="100%"
 			scrolling="auto" marginheight="0" marginwidth="0" align="center"
-			style="border: 0px solid #CCC; margin: 0; padding: 0;"></iframe>
+			style="border-style: none; margin: 0; padding: 0;"></iframe>
 	</div>
 	</div>
 	</div>

@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'user1.jsp' starting page</title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -69,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-            var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].name;
+            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
             window.location.href=url;
         }  
 	}
@@ -93,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <s:form  action="adminSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
   		 <span id="userPwdTip">&nbsp;输入关键字:</span>
   		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
-  		 <input type="submit" value="搜索" ">
+  		 <input type="submit" value="搜索" >
   </s:form>
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  

@@ -12,10 +12,10 @@
 <head>
 <base href="<%=basePath%>">
 
-<title></title>
+<title>admininfochange</title>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -47,22 +47,25 @@
 	charset="utf-8"></script>
 
 <link rel="stylesheet" href="<%=basePath%>/css/admin_stuinfo.css">
+
 </head>
 
 <body>
 	<div class="header">
-		<div class="center_title">增加学生信息</div>
+		<div class="center_title">管理員信息變更</div>
 	</div>
 	<div class="center_body">
-		<s:form action="modifyAdminInfo.action" theme="simple">
+		<s:form action="modifyAdminInfos.action" theme="simple">
 			<div class="info_center">
 				<div class="title-left">姓名：</div>
-				<span id="userPwdTip" style="color:gray; font-size:1.2em;"><s:text
-						name="%{#request.currentAdmin.username}" /></span>
+				<s:textarea name="prepairToChangeAdmin.username" placeholder="姓名"
+					value="%{#request.currentAdmin.username}"
+					cssClass="password user_id_password"
+					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
 				<s:hidden name="prepairToChangeAdmin.id"
 					value="%{#request.currentAdmin.id}" />
-				<s:hidden name="prepairToChangeAdmin.username"
-					value="%{#request.currentAdmin.username}" />
+				<%-- <s:hidden name="prepairToChangeAdmin.username"
+					value="%{#request.currentAdmin.username}" /> --%>
 
 			</div>
 
@@ -89,6 +92,8 @@
 					cssClass="password user_id_password"
 					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
 			</div>
+			<div class="info_center"></div>
+			<div class="info_center"></div>
 			<div class="info_center">
 				<s:submit value="修改" cssClass="center_div "
 					cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" />

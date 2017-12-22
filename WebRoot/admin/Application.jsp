@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'user1.jsp' starting page</title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -106,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 }
 function deletedata() {  
         //返回选中多行  
-        var selRow = $('#commUserDatagrid').datagrid('getSelections')  
+        var selRow = $('#commUserDatagrid').datagrid('getSelections');  
         //判断是否选中行  
         if (selRow.length==0) {  
             $.messager.alert("提示", "请选择要删除的行！", "info");  
@@ -114,7 +115,7 @@ function deletedata() {
         }else{      
             var temID="";  
             //批量获取选中行的ID  
-            for (i = 0; i < selRow.length;i++) {  
+            for (var i = 0; i < selRow.length;i++) {  
                 if (temID =="") {  
                     temID = selRow[i].id;  
                 } else {  

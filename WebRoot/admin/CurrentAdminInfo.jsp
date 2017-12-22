@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'user1.jsp' starting page</title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -84,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
-	这里可以试一下能不能让第一个id不显示
+	<!-- 这里可以试一下能不能让第一个id不显示 -->
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  

@@ -42,7 +42,17 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
+	
+	private String AdminName;
 
+
+	public String getAdminName() {
+		return AdminName;
+	}
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
 
 	private String stuIds;
 	
@@ -292,6 +302,15 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUser(stuName));
 		return SUCCESS;
 	}
+	
+	public String getAdminByUserName()
+	{
+		if(AdminName == null || AdminName.equals(""))
+			AdminName = (String) ServletActionContext.getRequest().getAttribute("AdminName");
+		ServletActionContext.getRequest().setAttribute("currentAdmin",
+				userService.getTUser(AdminName));
+		return SUCCESS;
+	}
 
 	public boolean check(StuBase u) {
 		boolean flag = true;
@@ -375,9 +394,7 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 
-<<<<<<< HEAD
-	
-=======
+
 	public String deleteStuById() {
 		try {
 			System.out.println("stuId  " + stuId);
@@ -391,7 +408,6 @@ public class BaseInfoAction extends ActionSupport {
 
 		}
 	}
->>>>>>> acbe854379003ab66a72d9a8a291e72c1d6ac7f2
 	public void deleteAct(int number){
 		try {
 			userService.deleteStu(number);

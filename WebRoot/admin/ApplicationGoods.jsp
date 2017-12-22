@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'user1.jsp' starting page</title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -110,7 +111,7 @@ function deletedata() {
         }else{      
             var temID="";  
             //批量获取选中行的ID  
-            for (i = 0; i < selRow.length;i++) {  
+            for (var i = 0; i < selRow.length;i++) {  
                 if (temID =="") {  
                     temID = selRow[i].id;  
                 } else {  
@@ -168,8 +169,6 @@ function deletedata() {
                 <th data-options="field:'applicationWhat',width:100,align:'center'">申请内容</th> 
                 <th data-options="field:'applicationTime',width:100,align:'center'">申请时间</th> 
                 <th data-options="field:'isPass',width:100,align:'center'">状态</th> 
-                <!-- <th data-options="field:'dates',width:100,align:'center'">时间</th> -->
-                <!-- <th data-options="field:'credit',width:80,align:'center'">信用分</th> -->
                 <th data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
                 <th data-options="field:'_operate2_1',width:80,align:'center',formatter:formatOper2_1"></th> 
             </tr>  

@@ -3,7 +3,7 @@ body {
 	margin:0;
 }
 * {
-	font-size:14px;
+	font-size:1em;
 	font-family:'microsoft yahei';
 }
 a {
@@ -37,10 +37,11 @@ ul,li {
 }
 .center_title {
 	text-align: center;
-	font-size: 32px;
+	font-size: 1.5em;
 	color: #FFFFFF;
 	
 	font-family: ¡• È;
+	font-weight: bold;
 	width: 50%;
 	height: 100%;
 	position:absolute;
@@ -59,7 +60,7 @@ ul,li {
 	
 }
 .info_center {
-	font-size: 24px;
+	font-size:1.2em;;
 	position: relative;
 	width: 70%;
 	height: 8%;
@@ -70,11 +71,12 @@ ul,li {
 }
 .title-left {
 	text:align: center;
-	font-size: 24px;
+	font-size: 1.1em;
+	font-weight: bold;
 	float:left;
-	width: 20%;
+	width: 18%;
 	height: 80%;
 	color: white;
 	opacity:1.0;
-	top: 10%;
+	top: 20%;
 }

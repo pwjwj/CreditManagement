@@ -17,9 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 	
 	<script type="text/javascript" src="<%=basePath %>/js/jquery1.js"></script>
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
@@ -111,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="right">
 		<iframe id="rightFrame" name="rightFrame" width="100%" height="100%"
 			scrolling="auto" marginheight="0" marginwidth="0" align="center"
-			style="border: 0px solid #CCC; margin: 0; padding: 0;"></iframe>
+			style="border-style: none; margin: 0; padding: 0;"></iframe>
 	</div>
 	</div>
 	</div>

@@ -14,6 +14,7 @@
 
 <title>My JSP 'user1.jsp' starting page</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -120,15 +121,14 @@ function deletedata() {
         }else{      
             var temID="";  
             //批量获取选中行的ID  
-            for (i = 0; i < selRow.length;i++) {  
+            for (var i = 0; i < selRow.length;i++) {  
                 if (temID =="") {  
                     temID = selRow[i].id;  
                 } else {  
-<<<<<<< HEAD
+
                     temID = selRow[i].id + "," + temID;  
-=======
+
                     temID = selRow[i].id + "," + id;  
->>>>>>> acbe854379003ab66a72d9a8a291e72c1d6ac7f2
                 }                 
             }  
                         
