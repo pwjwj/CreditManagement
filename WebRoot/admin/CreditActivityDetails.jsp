@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title></title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -42,28 +43,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:form action="modifyCreditActivity.action" theme="simple">
     <div class="info_center"> 
     <div class="title-left">学号：</div>
-    <s:textarea name="prepairToChangeActivity.number" placeholder="学号" value="%{#request.currentCreditActivity.number}"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+    <s:textarea name="prepairToChangeActivity.number" placeholder="学号" value="%{#request.currentCreditActivity.number}"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
 	<s:hidden name="prepairToChangeUser.id" value="%{#request.currentCreditActivity.id}"/>
 	</div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>
         </font>
         <div class="info_center">
-			<div class="title-left">学号：</div><s:textarea name="prepairToChangeActivity.name" placeholder="姓名" value="%{#request.currentCreditActivity.name}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<div class="title-left">姓名：</div><s:textarea name="prepairToChangeActivity.name" placeholder="姓名" value="%{#request.currentCreditActivity.name}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
         <div class="info_center">
-			<div class="title-left">分类号：</div><s:textarea name="prepairToChangeActivity.categoryId" placeholder="分类号" value="%{#request.currentCreditActivity.categoryId}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<div class="title-left">分类号：</div><s:textarea name="prepairToChangeActivity.categoryId" placeholder="分类号" value="%{#request.currentCreditActivity.categoryId}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
         <div class="info_center">
-			<div class="title-left">事项详情：</div><s:textarea name="prepairToChangeActivity.detail" placeholder="事项详情" value="%{#request.currentCreditActivity.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<div class="title-left">事项详情：</div><s:textarea name="prepairToChangeActivity.detail" placeholder="事项详情" value="%{#request.currentCreditActivity.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
         <div class="info_center">
-			<div class="title-left">日期：</div><s:textarea name="prepairToChangeActivity.dates" placeholder="日期" value="%{#request.currentCreditActivity.dates}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<div class="title-left">日期：</div><s:textarea name="prepairToChangeActivity.dates" placeholder="日期" value="%{#request.currentCreditActivity.dates}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
         <div class="info_center"></div>
     	<div class="info_center"></div>
     	<div class="info_center">
-        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/>
+        <s:submit value="修改" cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/>
         <s:if test="#request.currentUser.activityId == #session.activityId ">
         	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页</a>
         </s:if>

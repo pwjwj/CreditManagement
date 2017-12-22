@@ -1,6 +1,7 @@
 package com.sonic.action;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -33,7 +35,7 @@ public class BaseInfoAction extends ActionSupport {
 	private StuBase user;
 	private StuBase prepairToChangeUser;
 	private Admin prepairToChangeAdmin;
-	
+
 	private String userId;
 	private Integer keyword;
 	private String name;
@@ -42,10 +44,35 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
-
-
-	private String stuIds;
 	
+	private String AdminName;
+
+
+	public String getAdminName() {
+		return AdminName;
+	}
+
+<<<<<<< HEAD
+=======
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
+
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
+	private String stuIds;
+	private File source;
+	
+	private boolean isWriteSuccess=false;
+	
+
+	public File getSource() {
+		return source;
+	}
+
+	public void setSource(File source) {
+		this.source = source;
+	}
+
 	public String getStuIds() {
 		return stuIds;
 	}
@@ -53,7 +80,6 @@ public class BaseInfoAction extends ActionSupport {
 	public void setStuIds(String stuIds) {
 		this.stuIds = stuIds;
 	}
-
 
 	public Admin getPrepairToChangeAdmin() {
 		return prepairToChangeAdmin;
@@ -64,8 +90,7 @@ public class BaseInfoAction extends ActionSupport {
 	}
 
 	private Integer adminId;
-	
-	
+
 	public Integer getAdminId() {
 		return adminId;
 	}
@@ -81,7 +106,7 @@ public class BaseInfoAction extends ActionSupport {
 	public void setPrepairToChangeUser(StuBase prepairToChangeUser) {
 		this.prepairToChangeUser = prepairToChangeUser;
 	}
-	
+
 	public String getStuName() {
 		return stuName;
 	}
@@ -195,7 +220,7 @@ public class BaseInfoAction extends ActionSupport {
 	public void setList(List<StuBase> list) {
 		this.list = list;
 	}
-	
+
 	public BaseInfoService getPrepairUserService() {
 		return prepairUserService;
 	}
@@ -210,7 +235,7 @@ public class BaseInfoAction extends ActionSupport {
 		jconfig.setIgnoreDefaultExcludes(false);
 		jconfig.registerJsonValueProcessor(java.util.Date.class,
 				new DateJsonValueProcessor("yyyy-MM-dd"));
-		 
+
 		HttpServletResponse response = ServletActionContext.getResponse();
 
 		JSONObject jobj = new JSONObject();// new一个JSON
@@ -230,7 +255,11 @@ public class BaseInfoAction extends ActionSupport {
 			if (users != null) {
 				if (((Admin) users).getPwd().equals(user.getPwd())) {
 					result = "commAdmin";
-					ServletActionContext.getRequest().getSession().setAttribute("userName", ((Admin)users).getUsername());
+					ServletActionContext
+							.getRequest()
+							.getSession()
+							.setAttribute("userName",
+									((Admin) users).getUsername());
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
 							"密码或账号错误");
@@ -246,7 +275,11 @@ public class BaseInfoAction extends ActionSupport {
 				if (((AdminSu) users).getPwd().equals(user.getPwd())) {
 					System.out.println("a user");
 					result = "superAdmin";
-					ServletActionContext.getRequest().getSession().setAttribute("userName", ((AdminSu)users).getUsername());
+					ServletActionContext
+							.getRequest()
+							.getSession()
+							.setAttribute("userName",
+									((AdminSu) users).getUsername());
 					System.out.println("superAdmin send completeed");
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
@@ -259,7 +292,13 @@ public class BaseInfoAction extends ActionSupport {
 			if (users != null) {
 				if (((StuBase) users).getPwd().equals(user.getPwd())) {
 					result = "stu";
-					ServletActionContext.getRequest().getSession().setAttribute("userName", ((StuBase)users).getName()+"/"+((StuBase)users).getNumber());
+					ServletActionContext
+							.getRequest()
+							.getSession()
+							.setAttribute(
+									"userName",
+									((StuBase) users).getName() + "/"
+											+ ((StuBase) users).getNumber());
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
 							"密码或账号错误");
@@ -273,15 +312,15 @@ public class BaseInfoAction extends ActionSupport {
 	public String getCurrentAdmin() {
 		String Name = (String) ServletActionContext.getRequest().getSession()
 				.getAttribute("userName");
-		System.out.println("Name  "+Name);
+		System.out.println("Name  " + Name);
 		if (Name == null)
-			//return "login";
+			// return "login";
 			return LOGIN;
 		ServletActionContext.getRequest().setAttribute("currentUser",
 				userService.getUser(Name));
 		return SUCCESS;
 	}
-	
+
 	public String getUserByUserName() {
 		System.out.println("stuName");
 		if (stuName == null || stuName.equals("")) {
@@ -290,6 +329,15 @@ public class BaseInfoAction extends ActionSupport {
 		}
 		ServletActionContext.getRequest().setAttribute("currentUser",
 				userService.getUser(stuName));
+		return SUCCESS;
+	}
+	
+	public String getAdminByUserName()
+	{
+		if(AdminName == null || AdminName.equals(""))
+			AdminName = (String) ServletActionContext.getRequest().getAttribute("AdminName");
+		ServletActionContext.getRequest().setAttribute("currentAdmin",
+				userService.getTUser(AdminName));
 		return SUCCESS;
 	}
 
@@ -306,17 +354,18 @@ public class BaseInfoAction extends ActionSupport {
 					"你的密码长度太小");
 			flag = false;
 		}
-		
-		System.out.println("flag  "+flag);
+
+		System.out.println("flag  " + flag);
 		return flag;
 	}
 
-	public String modify(){
-		System.out.println("prepairToChangeUser.getPwd()  "+prepairToChangeUser.getPwd());
-		try{
+	public String modify() {
+		System.out.println("prepairToChangeUser.getPwd()  "
+				+ prepairToChangeUser.getPwd());
+		try {
 			userService.saveStuBaseOrUpdate(prepairToChangeUser);
 			return SUCCESS;
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.print(e.getMessage());
 			return INPUT;
 		}
@@ -327,25 +376,26 @@ public class BaseInfoAction extends ActionSupport {
 				.removeAttribute("userId");
 		return SUCCESS;
 	}
+
 	// 查询出所有学生信息
 	public String getAllStudentBaseInfo() {
 
 		try {
-			String hql="from StuBase";
-			if(keyword != null){
-				System.out.println("keyword  "+keyword);
-        		hql+=" where number ="+keyword;
-        		System.out.println("after add number  "+hql);
-        		keyword=null;
-        	}
-			System.out.println("page   "+page);
-			System.out.println("rows   "+rows);
-			toBeJson(userService.getStuBaseList(hql,page, rows),
+			String hql = "from StuBase";
+			if (keyword != null) {
+				System.out.println("keyword  " + keyword);
+				hql += " where number =" + keyword;
+				System.out.println("after add number  " + hql);
+				keyword = null;
+			}
+			System.out.println("page   " + page);
+			System.out.println("rows   " + rows);
+			toBeJson(userService.getStuBaseList(hql, page, rows),
 					userService.getUserTotal());
 			System.out.println("查询完毕");
 			System.out.println(userService.getUserTotal());
-			System.out.println(userService.getStuBaseList(hql,page, rows).get(0)
-					.getName());
+			System.out.println(userService.getStuBaseList(hql, page, rows)
+					.get(0).getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -366,18 +416,19 @@ public class BaseInfoAction extends ActionSupport {
 		System.out.println("addStuBase access");
 		try {
 			userService.saveStuBaseOrUpdate(stu);
-			//return "success";
+			// return "success";
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
+			// return "input";
 			return INPUT;
 		}
 	}
 
 <<<<<<< HEAD
-	
+	public void deleteAct(int number) {
 =======
+
 	public String deleteStuById() {
 		try {
 			System.out.println("stuId  " + stuId);
@@ -391,32 +442,32 @@ public class BaseInfoAction extends ActionSupport {
 
 		}
 	}
->>>>>>> acbe854379003ab66a72d9a8a291e72c1d6ac7f2
 	public void deleteAct(int number){
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 		try {
 			userService.deleteStu(number);
-			
-			//return "true";
+
+			// return "true";
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return INPUT;
+			// return INPUT;
 		}
 	}
+
 	public void deleteStuByIds() {
-		
-		System.out.println("stuIds   "+stuIds);
-		if(stuIds.contains(",")){
+
+		System.out.println("stuIds   " + stuIds);
+		if (stuIds.contains(",")) {
 			String[] strings = stuIds.split(",");
-			for(int i=0;i<strings.length;i++){
+			for (int i = 0; i < strings.length; i++) {
 				deleteAct(Integer.parseInt(strings[i]));
 			}
 			ServletActionContext.getRequest().setAttribute("passwordErro",
 					"true");
-		}else {
+		} else {
 			deleteAct(Integer.parseInt(stuIds));
 		}
 	}
-	
 
 	public String getAdminSelfInfo() {
 
@@ -430,7 +481,7 @@ public class BaseInfoAction extends ActionSupport {
 		}
 		return null;
 	}
-	
+
 	public String getAdminById() {
 		System.out.println("adminId");
 		if (adminId == null || adminId.equals("")) {
@@ -441,44 +492,67 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUserById(adminId));
 		return SUCCESS;
 	}
-	
-	public String modifyAdminInfo(){
-		
-		try{
+
+	public String modifyAdminInfo() {
+
+		try {
 			userService.saveAdminOrUpdate(prepairToChangeAdmin);
 			return SUCCESS;
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.print(e.getMessage());
 			return INPUT;
 		}
 	}
-	
-	public String addStuFromExcel(){
-		 try{ 
-			 
-		      Workbook wb = Workbook.getWorkbook( 
-		 
-		      new File(ServletActionContext.getServletContext().getRealPath ("/")+"WEB-INF/moban.xls")); 
-		 
-		      System.out.println("2222222"); 
-		      for(int i=1;i<wb.getSheet(0).getRows();i++){ 
-		 
-		        Cell[] cell = wb.getSheet(0).getRow(i); 
-		        userService.saveStuBaseOrUpdate(new StuBase(Integer.parseInt(cell[0].getContents()),cell[1].getContents(),cell[2].getContents(),cell[3].getContents(),cell[4].getContents(),Integer.parseInt(cell[5].getContents())));
-		       
-		        System.out.println(cell[1].getContents());           
-		 
-		      } 
-		      
-		      wb.close(); 
-		      //在这里应该还有一个删除的操作
-		      return SUCCESS;
-		 
-		    }catch(Exception e){ 
-		 
-		      e.printStackTrace(); 
-		      return INPUT;
-		    } 
+
+	public void addStuFromExcel(String fileName) {
+		try {
+			isWriteSuccess=false;
+			File file=new File(ServletActionContext.getServletContext().getRealPath("/")
+					+fileName);
+			Workbook wb = Workbook.getWorkbook(file);
+			//System.out.println("wb.getSheet(0).getRows()  "+wb.getSheet(0).getRows());
+			for (int i = 1; i < wb.getSheet(0).getRows()-1; i++) {
+				Cell[] cell = wb.getSheet(0).getRow(i);
+				userService.saveStuBaseOrUpdate(new StuBase(Integer
+						.parseInt(cell[0].getContents()),
+						cell[1].getContents(), cell[2].getContents(), cell[3]
+								.getContents(), cell[4].getContents(), Integer
+								.parseInt(cell[5].getContents())));
+				System.out.println(cell[1].getContents());
+			}
+			isWriteSuccess=true;
+			wb.close();
+			// 在这里应该还有一个删除的操作
+			file.delete();
+			//return SUCCESS;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			//return INPUT;
+		}
+
+	}
+
+	public String upload() throws IOException {
+		if (source != null && source.isFile()) {
+			String uploadPath = ServletActionContext.getServletContext()
+					.getRealPath("/") ;
+			File dir = new File(uploadPath);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			File destFile = new File(uploadPath, "templeate.xls");
+			FileUtils.copyFile(source, destFile);
+			System.out.println("upload ok");
+			addStuFromExcel("templeate.xls");
+			if(isWriteSuccess){
+				return SUCCESS;
+			}else {
+				return INPUT;
+			}
+		}
+		return null;
 
 	}
 }

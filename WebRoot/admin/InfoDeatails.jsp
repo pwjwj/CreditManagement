@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title></title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -40,28 +41,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="header">
   <div class="center_title">通知修改</div>
   </div>
-        如果什么也没修改  需要使用js来拦截一下
-        字符编码也不太对
+        <!--  如果什么也没修改  需要使用js来拦截一下,字符编码也不太对-->
   <div class="center_body">
     <s:form action="modifyInfo.action" theme="simple">
     	
         <div class="info_center"><div class="title-left">标题名称：</div>
-        <s:textarea name="prepairToInfo.infoTittle" placeholder="通知标题" value="%{#request.currentInfoSelectedId.infoTittle}"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+        <s:textarea name="prepairToInfo.infoTittle" placeholder="通知标题" value="%{#request.currentInfoSelectedId.infoTittle}" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
             <s:hidden name="prepairToInfo.id" value="%{#request.currentInfoSelectedId.id}"/>
     		<s:hidden name="prepairToInfo.infoTime" value="%{#request.currentInfoSelectedId.infoTime}"/>
         </div>
-<<<<<<< HEAD
-        <br/>  
-        <s:submit value="修改" cssClass="center_div " cssStyle="height: 40px;width: 400px; margin:0 0 0 -10;background-color:#00a1d6;"/><br>
-=======
-        
+
          <div class="info_center"><div class="title-left">通知内容：</div>
-			<s:textarea name="prepairToInfo.infoContent" placeholder="通知内容" value="%{#request.currentInfoSelectedId.infoContent}"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<s:textarea name="prepairToInfo.infoContent" placeholder="通知内容" value="%{#request.currentInfoSelectedId.infoContent}"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div> 
         <div class="info_center"></div>
         <div class="info_center"></div>
-        <div class="info_center"><s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/><br>
->>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
+        <div class="info_center"><s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/><br>
         <s:if test="#request.currentUser.cCategoryId == #session.cCategoryId ">
         	 <a class="center_div" href="/admin/Creditcategory.jsp">返回主页</a>
         </s:if>

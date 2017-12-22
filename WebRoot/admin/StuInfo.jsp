@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title></title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -41,26 +42,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div class="center_body">
     <s:form action="modify.action" theme="simple">
-    <div class="info_center"><div class="title-left">账号：</div><span id="userPwdTip" style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.name}"/></span>
+    <div class="info_center"><div class="title-left">账号：</div><span id="userPwdTip" style="color:gray;font-size:1。2em;"><s:text name="%{#request.currentUser.name}"/></span>
     	<s:hidden name="prepairToChangeUser.name" value="%{#request.currentUser.name}"/>
     		<s:hidden name="prepairToChangeUser.number" value="%{#request.currentUser.number}"/>
     		<s:hidden name="prepairToChangeUser.college" value="%{#request.currentUser.college}"/>
     		<s:hidden name="prepairToChangeUser.class_" value="%{#request.currentUser.class_}"/>
     		<s:hidden name="prepairToChangeUser.credit" value="%{#request.currentUser.credit}"/></div>
-    	<div class="info_center"><div class="title-left">学号：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.number}"/></span></div>
+    	<div class="info_center"><div class="title-left">学号：</div><span  style="color:gray;font-size:1.2em;"><s:text name="%{#request.currentUser.number}"/></span></div>
     	
-    		<div class="info_center"><div class="title-left">院系：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.college}"/></span></div>
-    		<div class="info_center"><div class="title-left">班级：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.class_}"/></span></div>
-    		<div class="info_center"><div class="title-left">信用：</div><span  style="color:gray;font-size:24px;"><s:text name="%{#request.currentUser.credit}"/></span></div>
-        <div class="info_center"><div class="title-left">密码:</div>
-			<s:password name="prepairToChangeUser.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
+    		<div class="info_center"><div class="title-left">院系：</div><span  style="color:gray;font-size:1.2em;"><s:text name="%{#request.currentUser.college}"/></span></div>
+    		<div class="info_center"><div class="title-left">班级：</div><span  style="color:gray;font-size:1.2em;"><s:text name="%{#request.currentUser.class_}"/></span></div>
+    		<div class="info_center"><div class="title-left">信用：</div><span  style="color:gray;font-size:1.2em;"><s:text name="%{#request.currentUser.credit}"/></span></div>
+        <div class="info_center"><div class="title-left">密码：</div>
+			<s:password name="prepairToChangeUser.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%;"/>
         </div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>
         </font>
         <div class="info_center"></div>
         <div class="info_center" >
-        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/>
+        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/>
         <s:if test="#request.currentUser.name == #session.stuName ">
         	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页</a>
         </s:if>

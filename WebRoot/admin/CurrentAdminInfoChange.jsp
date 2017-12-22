@@ -1,118 +1,103 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title></title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
+<head>
+<base href="<%=basePath%>">
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
-	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js" charset="utf-8"></script>
-	<script type="text/javascript">
-		var msg="${requestScope.tipMessage}";
-		if(msg!=""){
-			alert(msg);
-		}
-	</script>
-	<script type="text/javascript" src="<%=basePath %>/bilibili/nav.js" charset="utf-8"></script>
-	<script type="text/javascript" src="<%=basePath %>/bilibili/loc" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 
-<link charset="utf-8" rel="stylesheet" href="<%=basePath %>/bilibili/jquery-ui.css">
-<link charset="utf-8" rel="stylesheet" href="<%=basePath %>/bilibili/white.css">
-<link id="css" rel="stylesheet" type="text/css" href="<%=basePath %>/bilibili/zclc2.1460959081.css">
-<link rel="stylesheet" href="<%=basePath %>/bilibili/base.css">
-  </head>
-  
-  <body>
-   <div class="" style="left: 0px; top: 0px; position: fixed; visibility: hidden;">
-	<div class="d-outer"><table class="d-border"><tbody><tr><td class="d-nw"></td><td class="d-n"></td><td class="d-ne"></td></tr><tr><td class="d-w"></td><td class="d-c"><div class="d-inner"><table class="d-dialog"><tbody><tr><td class="d-header"><div class="d-titleBar"><div class="d-title" style="display: block;"></div><a class="d-close" href="javascript:/*artDialog*/;" style="display: none;">×</a></div></td></tr><tr><td class="d-main" style="width: auto; height: auto;"><div class="d-content" style="padding: 20px 25px;"></div></td></tr><tr><td class="d-footer"><div class="d-buttons"></div></td></tr></tbody></table></div></td><td class="d-e"></td></tr><tr><td class="d-sw"></td><td class="d-s"></td><td class="d-se"></td></tr></tbody></table></div></div>
-    		<div class="z_top_container">
-			
-		</div>
-	<div class="top_bg">
-		<div class="top"></div>
+<script type="text/javascript"
+	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript">
+	var msg = "${requestScope.tipMessage}";
+	if (msg != "") {
+		alert(msg);
+	}
+</script>
+<script type="text/javascript" src="<%=basePath%>/bilibili/nav.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="<%=basePath%>/bilibili/loc"
+	charset="utf-8"></script>
+
+<link rel="stylesheet" href="<%=basePath%>/css/admin_stuinfo.css">
+</head>
+
+<body>
+	<div class="header">
+		<div class="center_title">增加学生信息</div>
 	</div>
-<div class="head_foot_content">
-  <div class=" ">
-    <div class="line"></div>
-   <div class="reg-title title1" style="background-image:url('./bilibili/t3.png')"></div>
-    <div class="center_title">
-      <style>
-        .blue{
-          margin-right: 280px;
-        }
-      </style>
-    <s:form action="modifyAdminInfo.action" theme="simple">
-    	<div class="box center_div">
-    		姓名：<span id="userPwdTip" style="font-size:24px"><s:text name="%{#request.currentAdmin.username}" /></span>
-    		<s:hidden name="prepairToChangeAdmin.id" value="%{#request.currentAdmin.id}"/>
-    		<s:hidden name="prepairToChangeAdmin.username" value="%{#request.currentAdmin.username}"/>
-    		
-        </div>
-        <div class="box center_div">
-         	 
-			<s:password name="prepairToChangeAdmin.pwd" placeholder="密码" value="%{#request.currentAdmin.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
-        </div>
-        <div class="box center_div">
-         	
-			<s:textarea name="prepairToChangeAdmin.tel" placeholder="联系方式" value="%{#request.currentAdmin.tel}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
-        </div>
-        <div class="box center_div">
-         	 
-			<s:textarea name="prepairToChangeAdmin.other" placeholder="备注" value="%{#request.currentAdmin.other}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px;"/>
-        </div>
-        
-        <br/>  
-        <s:submit value="修改" cssClass="center_div " cssStyle="height: 40px;width: 400px; margin:0 0 0 -10;background-color:#00a1d6;"/><br>
-        <s:if test="#request.currentUser.name == #session.stuName ">
-        	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页></a>
-        </s:if>
-	</s:form>
-    </div>
-  </div>
-</div>
+	<div class="center_body">
+		<s:form action="modifyAdminInfo.action" theme="simple">
+			<div class="info_center">
+				<div class="title-left">姓名：</div>
+				<span id="userPwdTip" style="color:gray; font-size:1.2em;"><s:text
+						name="%{#request.currentAdmin.username}" /></span>
+				<s:hidden name="prepairToChangeAdmin.id"
+					value="%{#request.currentAdmin.id}" />
+				<s:hidden name="prepairToChangeAdmin.username"
+					value="%{#request.currentAdmin.username}" />
 
-	<div class="footer">
-	<div class="footer-wrp">
-		<div class="footer-cnt clearfix">
-			<div class="partner">
-				<div class="block left">
-					<div class="partner-banner"></div>
-				</div>
-				<div class="block left" style="margin: 0 0 0 20px;">
-					<p>广播电视节目制作经营许可证：<span>（沪）字第1248号 </span></p>
-					<p>网络文化经营许可证：<span>沪网文[2013]0480-056号</span></p>
-					<p>信息网络传播视听节目许可证：<span>0910417</span></p>
-				</div>
-				<div class="block left" style="margin: 0 0 0 20px;">
-					<p>互联网ICP备案：<span>沪ICP备13002172号-3</span></p>
-					<p>沪ICP证：<span>沪B2-20100043</span></p>
-				</div>
-				<div class="block right" style="width: 274px;">
-					<p>违法不良信息举报邮箱：<span>help@hotelDemo</span></p>
-					<p>违法不良信息举报电话：<span>4000233233 转 3</span></p>
-					<p><a href="http://www.shjbzx.cn/" target="_blank"><i class="icons-footer icons-footer-report"></i><span>上海互联网举报中心</span></a></p>
-				</div>
 			</div>
-		</div>
+
+			<div class="info_center">
+				<div class="title-left">联系方式：</div>
+
+				<s:textarea name="prepairToChangeAdmin.tel" placeholder="联系方式"
+					value="%{#request.currentAdmin.tel}"
+					cssClass="password user_id_password"
+					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
+			</div>
+			<div class="info_center">
+				<div class="title-left">备注：</div>
+
+				<s:textarea name="prepairToChangeAdmin.other" placeholder="备注"
+					value="%{#request.currentAdmin.other}"
+					cssClass="password user_id_password"
+					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
+			</div>
+			<div class="info_center">
+				<div class="title-left">密碼：</div>
+				<s:password name="prepairToChangeAdmin.pwd" placeholder="密码"
+					value="%{#request.currentAdmin.pwd}"
+					cssClass="password user_id_password"
+					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
+			</div>
+			<div class="info_center">
+				<s:submit value="修改" cssClass="center_div "
+					cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" />
+				<br>
+				<s:if test="#request.currentUser.name == #session.stuName ">
+					<a class="center_div" href="/admin/BaseInfo.jsp">返回主页</a>
+				</s:if>
+			</div>
+		</s:form>
 	</div>
-</div>		
-	
-  </body>
+</body>
 </html>

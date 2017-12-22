@@ -31,12 +31,12 @@ public class CreditActivityAction extends ActionSupport {
 	private String detail;
 	private String dates;
 	private String name;
-	private Integer credit;// T-µ¥Ìõ¼ÇÂ¼
+	private Integer credit;
 
 	private Integer activityId;
 	private Creditactivity prepairToChangeActivity;
 	private String creditActivityIds;
-
+	
 	public String getCreditActivityIds() {
 		return creditActivityIds;
 	}
@@ -247,64 +247,41 @@ public class CreditActivityAction extends ActionSupport {
 		System.out.println("addCreditActivity access");
 		try {
 			creditactivityService.saveCreditActivityOrUpdate(ca);
-			// return "success";
+			//return "success";
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			// return "input";
+			//return "input";
 			return INPUT;
 		}
 	}
 
-<<<<<<< HEAD
 	
 	public void deleteAct(int number){
-=======
-	public String deleteCreditActivityById() {
 		try {
-			System.out.println("stuId  " + creditActivityId);
-			creditactivityService.deleteCreditActivity(creditActivityId);
-			// return "success";
-			return SUCCESS;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			// return "input";
-			return INPUT;
-		}
-	}
-
-	public void deleteAct(int number) {
->>>>>>> acbe854379003ab66a72d9a8a291e72c1d6ac7f2
-		try {
-
+			
 			creditactivityService.deleteCreditActivity(number);
 			System.out.println("inin");
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-
+			
 		}
 	}
-
 	public void deleteCreditActivityByIds() {
-
-		System.out.println("stuIds   " + creditActivityIds);
-		if (creditActivityIds.contains(",")) {
+		
+		System.out.println("stuIds   "+creditActivityIds);
+		if(creditActivityIds.contains(",")){
 			String[] strings = creditActivityIds.split(",");
-<<<<<<< HEAD
 			for(int i=0;i<strings.length;i++){
-=======
-			for (int i = 0; i < strings.length; i++) {
->>>>>>> acbe854379003ab66a72d9a8a291e72c1d6ac7f2
 				System.out.println(Integer.parseInt(strings[i]));
 				deleteAct(Integer.parseInt(strings[i]));
 			}
 			ServletActionContext.getRequest().setAttribute("passwordErro",
 					"true");
-		} else {
+		}else {
 			deleteAct(Integer.parseInt(creditActivityIds));
 		}
 	}
-
 	public String creditActivitySearchTest() {
 		List<Creditactivity> list1 = list;
 		try {

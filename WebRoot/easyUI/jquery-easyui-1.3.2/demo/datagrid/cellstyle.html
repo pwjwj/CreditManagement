@@ -6,21 +6,19 @@
 	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="../demo.css">
-	<script type="text/javascript" src="../../jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="../../jquery.min.js"></script>
 	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
 </head>
 <body>
 	<h2>DataGrid Cell Style</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>The cells which listprice value is less than 30 are highlighted.</div>
-	</div>
-	<div style="margin:10px 0;"></div>
+	<p>The cells which listprice value is less than 30 are highlighted.</p>
+	<div style="margin:20px 0;"></div>
 	<table class="easyui-datagrid" title="DataGrid Cell Style" style="width:700px;height:250px"
 			data-options="
 				singleSelect: true,
 				iconCls: 'icon-save',
-				url: '../datagrid/datagrid_data1.json'
+				url: 'datagrid_data1.json',
+				method: 'get'
 			">
 		<thead>
 			<tr>

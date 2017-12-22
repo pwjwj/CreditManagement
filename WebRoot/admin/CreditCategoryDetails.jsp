@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title></title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -35,32 +36,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
   
   <body>
-        如果什么也没修改  需要使用js来拦截一下
+       <!--   如果什么也没修改  需要使用js来拦截一下-->
    <div class="header">
   <div class="center_title">奖惩事项规则修改</div>
   </div>
   <div class="center_body">
     <s:form action="modifyCreditCategory.action" theme="simple">
          <div class="info_center"><div class="title-left">分类号：</div>
-			<s:textarea name="prepairToChangeCategory.categoryId" placeholder="分类号" value="%{#request.currentCreditCategory.categoryId}"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<s:textarea name="prepairToChangeCategory.categoryId" placeholder="分类号" value="%{#request.currentCreditCategory.categoryId}" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
 			<s:hidden name="prepairToChangeCategory.id" value="%{#request.currentCreditCategory.id}"/>
         </div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>
         </font>
         <div class="info_center"><div class="title-left">分类名：</div>
-			<s:textarea name="prepairToChangeCategory.categoryName" placeholder="分类名" value="%{#request.currentCreditCategory.categoryName}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<s:textarea name="prepairToChangeCategory.categoryName" placeholder="分类名" value="%{#request.currentCreditCategory.categoryName}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
        <div class="info_center"><div class="title-left">详情：</div> 
-			<s:textarea name="prepairToChangeCategory.detail" placeholder="详情" value="%{#request.currentCreditCategory.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<s:textarea name="prepairToChangeCategory.detail" placeholder="详情" value="%{#request.currentCreditCategory.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
          <div class="info_center"><div class="title-left">分数：</div> 
-			<s:textarea name="prepairToChangeCategory.score" placeholder="分数" value="%{#request.currentCreditCategory.score}" cssClass="password user_id_password" cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/>
+			<s:textarea name="prepairToChangeCategory.score" placeholder="分数" value="%{#request.currentCreditCategory.score}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
          <div class="info_center"></div>
          <div class="info_center"></div>
          <div class="info_center">	
-        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/>
+        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/>
         <s:if test="#request.currentUser.cCategoryId == #session.cCategoryId ">
         	 <a class="center_div" href="/admin/Creditcategory.jsp">返回主页</a>
         </s:if>

@@ -22,21 +22,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-<<<<<<< HEAD
-  	<div style="margin: e10px 0px 0px 15px">
-=======
   <div class="header">
   <div class="center_title">申请</div>
   </div>
   	<div class="center_body">
->>>>>>> 22459a98cebff20243a20c91eba4979c2b68d208
   	<!-- 这里还有字符串格式的问题 -->
     <s:form action = "addStuApplication.action" theme="simple">
-    	<div class="info_center"><div class="title-left">类别：</div><s:textarea name = "applicationCategory" placeholder="申请类比"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/></div>
-    	<div class="info_center"><div class="title-left">详情：</div><s:textarea name = "applicationWhat" placeholder="申请详情"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">类别：</div><s:textarea name = "applicationCategory" placeholder="申请类比"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">详情：</div><s:textarea name = "applicationWhat" placeholder="申请详情"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
     	<div class="info_center"></div>
     	<div class="info_center"></div>
-    	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
+    	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
     </s:form>
     </div>
 

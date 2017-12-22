@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'newsManager.jsp' starting page</title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -28,12 +29,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   	<div class="center_body">
     <s:form action = "addInfo.action" theme="simple">
-    	<div class="info_center"><div class="title-left">通知标题：</div><s:textarea name = "infoTittle" placeholder="通知标题"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/></div>
-    	<div class="info_center"><div class="title-left">通知内容：</div><s:textarea name = "infoContent" placeholder="通知内容"  cssStyle="margin-bottom: 0;height: 40px;width: 300px; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">通知标题：</div><s:textarea name = "infoTittle" placeholder="通知标题"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">通知内容：</div><s:textarea name = "infoContent" placeholder="通知内容" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
     	
     	<div class="info_center"></div>
     	<div class="info_center"></div>
-    	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 20px;color: white;height: 40px;width: 400px; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
+    	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
     </s:form>
     </div>
   </body>

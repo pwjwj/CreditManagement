@@ -17,15 +17,23 @@
  		</action>
  		
  		<action name="addStuFromExcel"  class="baseInfoAction" method="addStuFromExcel">
- 			<result name="success">/admin/BaseInfo.jsp</result>
- 			<result name="input">/MyJsp.jsp</result>
+ 			
  		</action>
  		<action name="getAdminSelfInfo" class="baseInfoAction" method="getAdminSelfInfo">
  			<result type="json"/>
  		</action>
  		
+<<<<<<< HEAD
+ 		<action name="upload" class="baseInfoAction" method="upload">
+ 			<result name="success">/admin/BaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
  		<action name="modifyAdminInfo" class="baseInfoAction" method="modifyAdminInfo">
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
+=======
+ 		<action name="modifyAdminInfos" class="baseInfoAction" method="modifyAdminInfo">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
+>>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		<action name="getAdminById"  class="baseInfoAction" method="getAdminById">
@@ -49,6 +57,9 @@
  		</action>
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
+ 		</action>
+ 		<action name="getAdminByUserName"  class="baseInfoAction" method="getAdminByUserName">
+ 			<result name="success">/adminSu/adminInfochange.jsp</result>
  		</action>
  		
  		<action name="modify" class="baseInfoAction" method="modify">

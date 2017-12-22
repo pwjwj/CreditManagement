@@ -6,16 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="../demo.css">
-	<script type="text/javascript" src="../../jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="../../jquery.min.js"></script>
 	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
 </head>
 <body>
 	<h2>TreeGrid with Footer</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>Show summary information on TreeGrid footer.</div>
-	</div>
-	<div style="margin:10px 0;"></div>
+	<p>Show summary information on TreeGrid footer.</p>
+	<div style="margin:20px 0;"></div>
 	<table id="tg"></table>
 	<script type="text/javascript">
 		$(function(){
@@ -28,7 +25,8 @@
 				animate:true,
 				collapsible:true,
 				fitColumns:true,
-				url:'../treegrid/treegrid_data2.json',
+				url:'treegrid_data2.json',
+				method: 'get',
 				idField:'id',
 				treeField:'name',
 				showFooter:true,
