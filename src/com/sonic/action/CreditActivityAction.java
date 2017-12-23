@@ -218,14 +218,14 @@ public class CreditActivityAction extends ActionSupport {
 	public String getAllStudentCreditActivity() {
 
 		try {
-			String hql = "from Creditactivity";
+			String hql = "SELECT C,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number";
 			System.out.println("number all  " + keyword);
 			if (keyword != null) {
 				hql += " where number =" + keyword;
 				System.out.println("after add number  " + hql);
 				keyword = null;
 			}
-
+			
 			toBeJson(creditactivityService.getStuCreditActivityList(hql, page,
 					rows), creditactivityService.getCreditActivityTotal());
 		} catch (Exception e) {
@@ -247,28 +247,22 @@ public class CreditActivityAction extends ActionSupport {
 		System.out.println("addCreditActivity access");
 		try {
 			creditactivityService.saveCreditActivityOrUpdate(ca);
-			//return "success";
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
 			return INPUT;
 		}
 	}
 
-	
 	public void deleteAct(int number){
 		try {
-			
 			creditactivityService.deleteCreditActivity(number);
 			System.out.println("inin");
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			
 		}
 	}
 	public void deleteCreditActivityByIds() {
-		
 		System.out.println("stuIds   "+creditActivityIds);
 		if(creditActivityIds.contains(",")){
 			String[] strings = creditActivityIds.split(",");
