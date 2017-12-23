@@ -3,7 +3,45 @@
 /***** -----   Initialization   -----*****/
 
 body {margin:0; padding:0;}
-div.top_header {position:relative; left:0px; top:0px; width:100%; height:15%;}
+div.top_header {position:relative; left:0%; top:0%; width:100%; height:15%;}
 div.center_content {position:relative; width:70%; height:70%; top:0%; left:15%; background-repeat:no-repeat; background-position:center; background-size:100%;}
-div.bottom_footer {position:relative; bottom:0px; background-color:rgb(40,40,40); width:100%; height:20%;}
-div.header_login {font-family:Georgia, serif; font-weight:bold; font-size:2.6em; color:white; text-align: center; opacity:1.0; width:6%; height:70%; position:absolute; top:30%; left:47%;}
+div.bottom_footer {position:relative; bottom:0%; background-color:rgb(40,40,40); width:100%; height:20%;}
+div.header_login {font-family:Georgia, serif; font-weight:bold; font-size:3.2em; color:white; text-align: center; opacity:1.0; width:8%; height:70%; position:relative; top:20%; left:45%;}
+
+
+.register {
+	width: 27%;
+	line-height: 240%;
+	font-size: 1.2em;
+	text-align: center;
+	cursor: pointer
+	
+	color: #555;
+	display: inline-block;
+	height: 6%;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	margin: 10px 0 0 27px
+	
+}
+.register:hover {
+	background: #f7f7f7
+}
+
+.login {
+	width: 27%;
+	line-height: 240%;
+	font-size: 1.2em;
+	text-align: center;
+	cursor: pointer
+	
+	height: 6%;
+	border: 1px solid #0381AA;
+	border-radius: 2px;
+	color: #fff;
+	background-color: #00A7DE;
+	margin-top: 10px
+}
+.login:hover {
+	background: #00bee7
+}

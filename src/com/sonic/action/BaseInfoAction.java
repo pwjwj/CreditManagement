@@ -66,6 +66,17 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
+	
+	private String AdminName;
+
+
+	public String getAdminName() {
+		return AdminName;
+	}
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
 
 	public String getStuName() {
 		return stuName;
@@ -298,6 +309,14 @@ public class BaseInfoAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String getAdminByUserName()
+	{
+		if(AdminName == null || AdminName.equals(""))
+			AdminName = (String) ServletActionContext.getRequest().getAttribute("AdminName");
+		ServletActionContext.getRequest().setAttribute("currentAdmin",
+				userService.getTUser(AdminName));
+		return SUCCESS;
+	}
 	public boolean check(StuBase u) {
 		boolean flag = true;
 		System.out.println("½øÀ´ÁË");

@@ -17,20 +17,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
+	<link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
   </head>
   
   <body>
-  	<div style="margin: e10px 0px 0px 15px">
-  	这里还有字符串格式的问题
+  <div class="header">
+  <div class="center_title">申请</div>
+  </div>
+  	<div class="center_body">
+  	<!-- 这里还有字符串格式的问题 -->
     <s:form action = "addStuApplication.action" theme="simple">
-    	<s:textarea name = "applicationCategory" placeholder="申请类比"  cssStyle="height:28px;width:500px"/><br/>
-    	<s:textarea name = "applicationWhat" placeholder="申请详情"  cssStyle="height:28px;width:500px"/><br/>
-    	<s:submit value = "新增" cssStyle="height:28px;width:60px"/>
+    	<div class="info_center"><div class="title-left">类别：</div><s:textarea name = "applicationCategory" placeholder="申请类比"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">详情：</div><s:textarea name = "applicationWhat" placeholder="申请详情"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"></div>
+    	<div class="info_center"></div>
+    	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
     </s:form>
-    
     </div>
 
   </body>

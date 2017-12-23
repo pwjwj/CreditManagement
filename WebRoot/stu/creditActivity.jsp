@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">  
     $(function() {  
         $('#commUserDatagrid').datagrid({  
-            title : '普通用户列表',  
+            title : '信用足迹列表',  
             iconCls : 'icon-ok',  
             width : 1080,  
             pageSize : 5,//默认选择的分页是每页5行数据  

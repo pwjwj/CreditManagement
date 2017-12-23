@@ -12,17 +12,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'user1.jsp' starting page</title>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
-	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js" charset="utf-8"></script>
 <script type="text/javascript">  
     $(function() {  
@@ -55,17 +53,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
     });  
     
-    <%-- function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
-	}  
-	function changeInfo2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>getUserByUserId.action?userId='+rows[0].username;
-            window.location.href=url;
-        }  
-	}  --%>
 	function formatOper2(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
@@ -77,8 +64,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             window.location.href=url;
         }  
 	}
-	
-	
 	
 	function changeUrl(){
 		alert("进来了");
@@ -99,8 +84,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <%-- action="stuSearch.action" --%>
-	这里可以试一下能不能让第一个id不显示
+  
+	<!-- 这里可以试一下能不能让第一个id不显示 -->
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  

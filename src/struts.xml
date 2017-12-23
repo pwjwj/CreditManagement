@@ -45,6 +45,9 @@
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
+		<action name="getAdminByUserName"  class="baseInfoAction" method="getAdminByUserName">
+ 			<result name="success">/adminSu/adminInfochange.jsp</result>
+ 		</action>
  		
  		<action name="modify" class="baseInfoAction" method="modify">
  			<result name="success">/admin/BaseInfo.jsp</result>
