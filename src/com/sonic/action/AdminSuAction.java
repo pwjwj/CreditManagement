@@ -155,77 +155,81 @@ public class AdminSuAction extends ActionSupport {
 		response.getWriter().write(jobj.toString());
 	}
 
-	// 查询出所有学生信息
-		public String getAllAdminBaseInfo() {
-
-			try {
-				toBeJson(userService.getAdminBaseList(page, rows),
+	// 查询出所有事务管理员信息
+	public String getAllAdminBaseInfo() {
+		try {
+			toBeJson(userService.getAdminBaseList(page, rows),
 						userService.getAdminTotal());
 				// authority = null;
-				System.out.println("查询完毕");
-				System.out.println(userService.getAdminTotal());
-				System.out.println(userService.getAdminBaseList(page, rows).get(0)
+			System.out.println("查询完毕");
+			System.out.println(userService.getAdminTotal());
+			System.out.println(userService.getAdminBaseList(page, rows).get(0)
 						.getUsername());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return null;
+	}
 		
-		public String getCurrentAdminSu() {
+	public String getCurrentAdminSu() {
 			
-			String Name = (String) ServletActionContext.getRequest().getSession()
-					.getAttribute("userName");
-			System.out.println("Name  "+Name);
-			if (Name == null)
-				return "login";
-			ServletActionContext.getRequest().setAttribute("currentUser",
-					userService.getUser(Name));
+		String Name = (String) ServletActionContext.getRequest().getSession()
+				.getAttribute("userName");
+		System.out.println("Name  "+Name);
+		if (Name == null)
+			//return "login";
+			return LOGIN;
+		ServletActionContext.getRequest().setAttribute("currentUser",
+				userService.getUser(Name));
+		return SUCCESS;
+	}
+	public String adminSearch() {
+		List<Admin> list1 = list;
+		try {
+			System.out.println("keyword   " + keyword);
+			String hql = "from Admin where username like '%" + keyword
+						+ "%'or tel like '%" + keyword + "%'";
+			list = userService.getAdminSearchList(hql, page, rows);
+			System.out.println("result list size  " + list.size());
+			toBeJson(list, userService.getSearchedTotal(hql));
+			return null;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			list = list1;
 			return SUCCESS;
 		}
-		public String adminSearch() {
-			List<Admin> list1 = list;
-			try {
-				System.out.println("keyword   " + keyword);
-				String hql = "from Admin where username like '%" + keyword
-						+ "%'or tel like '%" + keyword + "%'";
-				list = userService.getAdminSearchList(hql, page, rows);
-				System.out.println("result list size  " + list.size());
-				toBeJson(list, userService.getSearchedTotal(hql));
-				return null;
-			} catch (Exception e) {
-				System.out.print(e.getMessage());
-				list = list1;
-				return SUCCESS;
-			}
-		}
+	}
 
-		public String addAdminBase() {
-			Admin admin = new Admin();
-			admin.setUsername(username);
-			admin.setPwd(pwd);
-			admin.setTel(tel);
-			admin.setOther(other);
+	public String addAdminBase() {
+		Admin admin = new Admin();
+		admin.setUsername(username);
+		admin.setPwd(pwd);
+		admin.setTel(tel);
+		admin.setOther(other);
 			
-			System.out.println("addAdmin access");
-			try {
-				userService.saveStuBaseOrUpdate(admin);
-				return "success";
-			} catch (Exception e) {
-				System.out.print(e.getMessage());
-				return "input";
-			}
+		System.out.println("addAdmin access");
+		try {
+			userService.saveStuBaseOrUpdate(admin);
+			//return "success";
+			return SUCCESS;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			//return "input";
+			return INPUT;
 		}
+	}
 
-		public String deleteAdminById() {
-			try {
-				System.out.println("adminId  " + adminId);
-				userService.deleteAdmin(adminId);
-				return "success";
-			} catch (Exception e) {
-				System.out.print(e.getMessage());
-				return "input";
+	public String deleteAdminById() {
+		try {
+			System.out.println("adminId  " + adminId);
+			userService.deleteAdmin(adminId);
+			//return "success";
+			return SUCCESS;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			//return "input";
+			return INPUT;
 
-			}
 		}
+	}
 }

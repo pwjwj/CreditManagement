@@ -16,10 +16,25 @@
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
  		</action>
  		
+ 		<action name="addStuFromExcel"  class="baseInfoAction" method="addStuFromExcel">
+ 			
+ 		</action>
  		<action name="getAdminSelfInfo" class="baseInfoAction" method="getAdminSelfInfo">
  			<result type="json"/>
  		</action>
  		
+<<<<<<< HEAD
+ 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
+=======
+<<<<<<< HEAD
+ 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
+=======
+ 		<action name="upload" class="baseInfoAction" method="upload">
+>>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
+>>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
+ 			<result name="success">/admin/BaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
  		<action name="modifyAdminInfo" class="baseInfoAction" method="modifyAdminInfo">
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
@@ -30,10 +45,8 @@
  		<action name="logout" class="baseInfoAction" method="logout">
  			<result name="success">/login.jsp</result>
  		</action>
- 		<!-- 这里就得看一下这个该url -->
- 		<action name="stuSearch" class="baseInfoAction" method="stuSearch">
- 			<result  type="json"/> 
- 		</action>
+ 		
+ 		
  		<action name="addStuBase" class="baseInfoAction" method="addStuBase">
  			<result name="success">/admin/BaseInfo.jsp</result>
  		</action>
@@ -42,10 +55,15 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+ 		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds">
+ 			
+ 		</action>
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
- 		
+ 		<action name="getAdminByUserName"  class="baseInfoAction" method="getAdminByUserName">
+ 			<result name="success">/adminSu/adminInfochange.jsp</result>
+ 		</action>
  		<action name="modify" class="baseInfoAction" method="modify">
  			<result name="success">/admin/BaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
@@ -68,17 +86,17 @@
  			<result name="success">/admin/CreditActivity.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
-		<action name="creditActivitySearch" class="creditActivityAction" method="creditActivitySearch">
- 			<result  type="json"/>
- 		</action>
- 		
- 		
+		
  		<action name="creditActivitySearchTest" class="creditActivityAction" method="creditActivitySearchTest">
  			<result  type="json"/>
  		</action>
 		<action name="deleteCreditActivityById"  class="creditActivityAction" method="deleteCreditActivityById">
  			<result name="success">/admin/CreditActivity.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
+ 		<action name="deleteCreditActivityByIds"  class="creditActivityAction" method="deleteCreditActivityByIds">
+ 			
  		</action>
  		<action name="getAllCreditCategory" class="creditCategoryAction" method="getAllCreditCategory">
  			<result type="json"/>
@@ -91,10 +109,6 @@
 			<result name="success">/admin/Creditcategory.jsp</result>
 		</action>
 		
-		<action name="creditCategorySearch" class="creditCategoryAction" method="creditCategorySearch">
- 			<result  type="json"/>
- 		</action>
- 		
  		<action name="modifyCreditCategory" class="creditCategoryAction" method="modifyCreditCategory">
  			<result name="success">/admin/Creditcategory.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
@@ -102,6 +116,10 @@
  		<action name="deleteCategoryById"  class="creditCategoryAction" method="deleteCategoryById">
  			<result name="success">/admin/Creditcategory.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
+ 		<action name="deleteCategoryByIds"  class="creditCategoryAction" method="deleteCategoryByIds">
+ 			
  		</action>
  		<action name="getAllInfo" class="infoAction" method="getAllInfo">
  			<result type="json"/>
@@ -116,6 +134,8 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
 		
+		<action name="deleteInfoByIds"  class="infoAction" method="deleteInfoByIds">
+ 		</action>
 		<action name="getInfoById"  class="infoAction" method="getInfoById">
  			<result name="success">/admin/InfoDeatails.jsp</result>
  		</action>
@@ -135,22 +155,18 @@
 			<result name="success">/admin/Goods.jsp</result>
 		</action>
 		
-		<action name="goodsSearch" class="goodsAction" method="goodsSearch">
- 			<result  type="json"/>
- 		</action>
- 		
 		<action name="deleteGoodsById"  class="goodsAction" method="deleteGoodsById">
  			<result name="success">/admin/Goods.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+ 		<action name="deleteGoodsByIds"  class="goodsAction" method="deleteGoodsByIds">
+ 		</action>
  		<action name="getAllApplication" class="applicationAction" method="getAllApplication">
  			<result type="json"/>
  		</action>
  		
- 		<action name="applicationSearch" class="applicationAction" method="applicationSearch">
- 			<result  type="json"/>
- 		</action>
+ 		
  		
  		<action name="chekToPass"  class="applicationAction" method="chekToPass">
  			<result name="success">/admin/Application.jsp</result>
@@ -161,6 +177,8 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
+ 		<action name="deleteApplicationByIds"  class="applicationAction" method="deleteApplicationByIds">
+ 		</action>
  		<action name="getAllMoneyApplication" class="applicationMoneyAction" method="getAllMoneyApplication">
  			<result type="json"/>
  		</action>
@@ -176,7 +194,8 @@
  			<result name="success">/admin/ApplicationMoney.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
- 		
+ 		<action name="deleteMoneyApplicationByIds"  class="applicationMoneyAction" method="deleteMoneyApplicationByIds">
+ 		</action>
  		
  		
  		
@@ -185,9 +204,7 @@
  		<action name="getAllGoodsApplication" class="applicationGoodsAction" method="getAllGoodsApplication">
  			<result type="json"/>
  		</action>
- 		<action name="applicationGoodsSearch" class="applicationGoodsAction" method="applicationGoodsSearch">
- 			<result  type="json"/>
- 		</action>
+ 		
  		
  		<action name="chekToPassGoods"  class="applicationGoodsAction" method="chekToPassGoods">
  			<result name="success">/admin/ApplicationGoods.jsp</result>
@@ -198,7 +215,8 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
- 		
+ 		<action name="deleteGoodsApplicationByIds"  class="applicationGoodsAction" method="deleteGoodsApplicationByIds">
+ 		</action>
  		<action name="getAllAdminBaseInfo" class="adminSuAction" method="getAllAdminBaseInfo">
  			<result type="json"/>
  		</action>
@@ -248,11 +266,6 @@
  		<action name="getAllInfoStu" class="stuAction" method="getAllInfoStu">
  			<result type="json"/>
  		</action>
- 		
- 		<action name="infoSearchStuInfo" class="stuAction" method="infoSearchStuInfo">
- 			<result  type="json"/>
- 		</action>
- 		
  		<action name="getAllApplicationStu" class="stuAction" method="getAllApplicationStu">
  			<result type="json"/>
  		</action>

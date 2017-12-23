@@ -35,7 +35,15 @@ public class InfoAction extends ActionSupport {
 	private Integer infoSelectedId;
 	private Info prepairToInfo;
 	
-    public Info getPrepairToInfo() {
+	private String infoIds;
+	
+    public String getInfoIds() {
+		return infoIds;
+	}
+	public void setInfoIds(String infoIds) {
+		this.infoIds = infoIds;
+	}
+	public Info getPrepairToInfo() {
 		return prepairToInfo;
 	}
 	public void setPrepairToInfo(Info prepairToInfo) {
@@ -120,20 +128,18 @@ public class InfoAction extends ActionSupport {
     	jconfig.setIgnoreDefaultExcludes(false);
     	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
 
-         HttpServletResponse response = ServletActionContext.getResponse();  
+        HttpServletResponse response = ServletActionContext.getResponse();  
               
-         JSONObject jobj = new JSONObject();//new一个JSON  
-         jobj.accumulate("total",total );//total代表一共有多少数据  
-         jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
+        JSONObject jobj = new JSONObject();//new一个JSON  
+        jobj.accumulate("total",total );//total代表一共有多少数据  
+        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
   
-         response.setCharacterEncoding("utf-8");//指定为utf-8  
-         response.getWriter().write(jobj.toString());     
+        response.setCharacterEncoding("utf-8");//指定为utf-8  
+        response.getWriter().write(jobj.toString());     
     }  
 	//获取所有通知
     public String getAllInfo() { 
-    	
         try {
-        	
         	String hql="from Info";
         	System.out.println("number all  "+keyword);
         	if(keyword != null){
@@ -143,8 +149,6 @@ public class InfoAction extends ActionSupport {
         		keyword=null;
         	}
 			toBeJson(infoService.getAllInfoList(hql,page, rows),infoService.getInfoTotal());
-			//authority = null;
-			
         } catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -153,54 +157,45 @@ public class InfoAction extends ActionSupport {
     
     public String addInfo() {
 		Info info = new Info();
-		
 		info.setInfoTittle(infoTittle);
 		info.setInfoContent(infoContent);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		info.setInfoTime(df.format(new Date()));
-		
-		
 		System.out.println("addinfo access");
 		try {
 			infoService.saveInfoOrUpdate(info);
-			return "success";
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			return "input";
-		}
-	}
-    
-    public String deleteInfoById() {
-		try {
-			
-			infoService.deleteInfoById(infoId);
-			return "success";
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			return "input";
-
-		}
-	}
-    
-    public String infoSearch() {
-		List<Info> list1 = list;
-		try {
-			System.out.println("keyword   " + keyword);
-			/*String hql = "from Info where id like '%" + keyword
-					+ "%'";*/
-			String hql = "from Info where infoTittle like '%" + keyword
-					+ "%'or infoContent like '%" + keyword + "%'";
-			list = infoService.getInfoSearchList(hql, page, rows);
-			System.out.println("result list size  " + list.size());
-			toBeJson(list, infoService.getInfoSearchedTotal(hql));
-			return null;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			list = list1;
+			//return "success";
 			return SUCCESS;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			//return "input";
+			return INPUT;
 		}
 	}
     
+    
+    
+    public void deleteAct(int number){
+    	try {
+			infoService.deleteInfoById(number);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+	}
+	public void deleteInfoByIds() {
+		
+		System.out.println("infoIds   "+infoIds);
+		if(infoIds.contains(",")){
+			String[] strings = infoIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(infoIds));
+		}
+	}
     public String getInfoById() {
 		
 		if (infoSelectedId == null || infoSelectedId.equals("")) {
@@ -213,8 +208,6 @@ public class InfoAction extends ActionSupport {
 	}
     
     public String modifyInfo(){
-		
-		
 		try{
 			infoService.saveInfoOrUpdate(prepairToInfo);
 			return SUCCESS;

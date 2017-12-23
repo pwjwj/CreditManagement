@@ -10,7 +10,6 @@ public interface AdminSuService {
 	public int getAdminTotal();
 	public List<Admin> getAdminSearchList(String hql, String page, String rows);
 	public int getSearchedTotal(String hql);
-	
 	public void saveStuBaseOrUpdate(Admin admin);
 	
 	public void deleteAdmin(int adminId);

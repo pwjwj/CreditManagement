@@ -1,36 +1,98 @@
 package com.sonic.action;
 
 import java.io.File;
-import java.util.Date;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-
 import com.sonic.pojo.Admin;
 import com.sonic.pojo.AdminSu;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.BaseInfoService;
-import com.sonic.utills.DateJsonValueProcessor;
+import com.sonic.utills.DataFromDB;
+import com.sonic.utills.FileUtils;
 
 public class BaseInfoAction extends ActionSupport {
 	private JSONObject jsonObj;
 	private BaseInfoService userService;
 	private BaseInfoService prepairUserService;
-	
-
 	private String rows;// 每页显示的记录数
 	private String page;// 当前第几页
 	private StuBase user;
 	private StuBase prepairToChangeUser;
 	private Admin prepairToChangeAdmin;
+
+	private String userId;
+	private Integer keyword;
+	private String name;
+	private String college;
+	private String class_;
+	private Integer number;
+	private Integer stuId;
+	private String stuName;
+
+	private String stuIds;
+	private File source;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
+	private DataFromDB dataFromDB;
+	private boolean isWriteSuccess=false;
+	
+	private String AdminName;
+<<<<<<< HEAD
+=======
+=======
+	
+	private boolean isWriteSuccess=false;
+	
+	private String AdminName;
+
+
+	public String getAdminName() {
+		return AdminName;
+	}
+>>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
+>>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
+
+
+<<<<<<< HEAD
+	public String getAdminName() {
+		return AdminName;
+	}
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
+
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
+>>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
+	public File getSource() {
+		return source;
+	}
+
+	public void setSource(File source) {
+		this.source = source;
+	}
+
+	public String getStuIds() {
+		return stuIds;
+	}
+
+	public void setStuIds(String stuIds) {
+		this.stuIds = stuIds;
+	}
+
 	public Admin getPrepairToChangeAdmin() {
 		return prepairToChangeAdmin;
 	}
@@ -40,8 +102,7 @@ public class BaseInfoAction extends ActionSupport {
 	}
 
 	private Integer adminId;
-	
-	
+
 	public Integer getAdminId() {
 		return adminId;
 	}
@@ -58,6 +119,7 @@ public class BaseInfoAction extends ActionSupport {
 		this.prepairToChangeUser = prepairToChangeUser;
 	}
 
+<<<<<<< HEAD
 	private String userId;
 	private Integer keyword;
 	private String name;
@@ -78,6 +140,8 @@ public class BaseInfoAction extends ActionSupport {
 		AdminName = adminName;
 	}
 
+=======
+>>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
 	public String getStuName() {
 		return stuName;
 	}
@@ -133,8 +197,6 @@ public class BaseInfoAction extends ActionSupport {
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
-
-	
 
 	public Integer getKeyword() {
 		return keyword;
@@ -193,7 +255,7 @@ public class BaseInfoAction extends ActionSupport {
 	public void setList(List<StuBase> list) {
 		this.list = list;
 	}
-	
+
 	public BaseInfoService getPrepairUserService() {
 		return prepairUserService;
 	}
@@ -202,34 +264,32 @@ public class BaseInfoAction extends ActionSupport {
 		this.prepairUserService = prepairUserService;
 	}
 
-	private void toBeJson(List list, int total) throws Exception {
-		JsonConfig jconfig = new JsonConfig();
-		JSONArray ja = new JSONArray();
-		jconfig.setIgnoreDefaultExcludes(false);
-		jconfig.registerJsonValueProcessor(java.util.Date.class,
-				new DateJsonValueProcessor("yyyy-MM-dd"));
-
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		JSONObject jobj = new JSONObject();// new一个JSON
-		jobj.accumulate("total", total);// total代表一共有多少数据
-		jobj.accumulate("rows", ja.fromObject(list, jconfig));// row是代表显示的页的数据
-
+	/*private void toBeJson(List list, int total) throws Exception {
+		
 		response.setCharacterEncoding("utf-8");// 指定为utf-8
-		response.getWriter().write(jobj.toString());
-	}
+		response.getWriter().write();
+	}*/
 
+	public void toDataGrid(String gridData) throws Exception{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");// 指定为utf-8
+		response.getWriter().write(gridData);
+	}
 	public String login() {
 		Object users;
 		String result = ERROR;
-
 		if (user.getName().startsWith("T")) {
 			// 事务管理员
+			//根据参数创建不同的用户
 			users = (Admin) userService.getTUser(user.getName());
 			if (users != null) {
 				if (((Admin) users).getPwd().equals(user.getPwd())) {
 					result = "commAdmin";
-					ServletActionContext.getRequest().getSession().setAttribute("userName", ((Admin)users).getUsername());
+					ServletActionContext
+							.getRequest()
+							.getSession()
+							.setAttribute("userName",
+									((Admin) users).getUsername());
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
 							"密码或账号错误");
@@ -245,7 +305,11 @@ public class BaseInfoAction extends ActionSupport {
 				if (((AdminSu) users).getPwd().equals(user.getPwd())) {
 					System.out.println("a user");
 					result = "superAdmin";
-					ServletActionContext.getRequest().getSession().setAttribute("userName", ((AdminSu)users).getUsername());
+					ServletActionContext
+							.getRequest()
+							.getSession()
+							.setAttribute("userName",
+									((AdminSu) users).getUsername());
 					System.out.println("superAdmin send completeed");
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
@@ -258,7 +322,13 @@ public class BaseInfoAction extends ActionSupport {
 			if (users != null) {
 				if (((StuBase) users).getPwd().equals(user.getPwd())) {
 					result = "stu";
-					ServletActionContext.getRequest().getSession().setAttribute("userName", ((StuBase)users).getName()+"/"+((StuBase)users).getNumber());
+					ServletActionContext
+							.getRequest()
+							.getSession()
+							.setAttribute(
+									"userName",
+									((StuBase) users).getName() + "/"
+											+ ((StuBase) users).getNumber());
 				} else {
 					ServletActionContext.getRequest().setAttribute("Erro",
 							"密码或账号错误");
@@ -266,33 +336,16 @@ public class BaseInfoAction extends ActionSupport {
 			}
 
 		}
-		/*
-		 * if(users != null && users.getPassword().equals(user.getPassword())){
-		 * if (users.getAuthority().equals("0")){ result="superAdmin"; }else
-		 * if(users.getAuthority().equals("1")){ result="commAdmin"; }else
-		 * if(users.getAuthority().equals("2")){ result="commUser"; }else{
-		 * 
-		 * }
-		 */
-		/*
-		 * if(users != null && users.getPwd().equals(user.getPwd())){
-		 * result="commAdmin";
-		 * ServletActionContext.getRequest().getSession().setAttribute("userId",
-		 * users.getName());
-		 * 
-		 * }else{ ServletActionContext.getRequest().setAttribute("Erro",
-		 * "密码或账号错误"); }
-		 */
 		return result;
 	}
 
 	public String getCurrentAdmin() {
-		
 		String Name = (String) ServletActionContext.getRequest().getSession()
 				.getAttribute("userName");
-		System.out.println("Name  "+Name);
+		System.out.println("Name  " + Name);
 		if (Name == null)
-			return "login";
+			// return "login";
+			return LOGIN;
 		ServletActionContext.getRequest().setAttribute("currentUser",
 				userService.getUser(Name));
 		return SUCCESS;
@@ -308,7 +361,10 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUser(stuName));
 		return SUCCESS;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
 	public String getAdminByUserName()
 	{
 		if(AdminName == null || AdminName.equals(""))
@@ -330,19 +386,18 @@ public class BaseInfoAction extends ActionSupport {
 					"你的密码长度太小");
 			flag = false;
 		}
-		
-		System.out.println("flag  "+flag);
+
+		System.out.println("flag  " + flag);
 		return flag;
 	}
 
-	
-	public String modify(){
-		System.out.println("prepairToChangeUser.getPwd()  "+prepairToChangeUser.getPwd());
-		
-		try{
+	public String modify() {
+		System.out.println("prepairToChangeUser.getPwd()  "
+				+ prepairToChangeUser.getPwd());
+		try {
 			userService.saveStuBaseOrUpdate(prepairToChangeUser);
 			return SUCCESS;
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.print(e.getMessage());
 			return INPUT;
 		}
@@ -358,41 +413,26 @@ public class BaseInfoAction extends ActionSupport {
 	public String getAllStudentBaseInfo() {
 
 		try {
-			String hql="from StuBase";
-			if(keyword != null){
-				System.out.println("keyword  "+keyword);
-        		hql+=" where number ="+keyword;
-        		System.out.println("after add number  "+hql);
-        		keyword=null;
-        	}
-			toBeJson(userService.getStuBaseList(hql,page, rows),
-					userService.getUserTotal());
-			// authority = null;
+			String hql = "from StuBase";
+			if (keyword != null) {
+				System.out.println("keyword  " + keyword);
+				hql += " where number =" + keyword;
+				System.out.println("after add number  " + hql);
+				keyword = null;
+			}
+			System.out.println("page   " + page);
+			System.out.println("rows   " + rows);
+			dataFromDB=new DataFromDB(userService.getStuBaseList(hql, page, rows)
+					,userService.getUserTotal());
+			toDataGrid(dataFromDB.setAdapter());
 			System.out.println("查询完毕");
 			System.out.println(userService.getUserTotal());
-			System.out.println(userService.getStuBaseList(hql,page, rows).get(0)
-					.getName());
+			System.out.println(userService.getStuBaseList(hql, page, rows)
+					.get(0).getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	public String stuSearch() {
-		List<StuBase> list1 = list;
-		try {
-			System.out.println("keyword   " + keyword);
-			String hql = "from StuBase where name like '%" + keyword
-					+ "%'or number like '%" + keyword + "%'";
-			list = userService.getStuSearchList(hql, page, rows);
-			System.out.println("result list size  " + list.size());
-			toBeJson(list, userService.getSearchedTotal(hql));
-			return null;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			list = list1;
-			return SUCCESS;
-		}
 	}
 
 	public String addStuBase() {
@@ -409,41 +449,56 @@ public class BaseInfoAction extends ActionSupport {
 		System.out.println("addStuBase access");
 		try {
 			userService.saveStuBaseOrUpdate(stu);
-			return "success";
+			// return "success";
+			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			return "input";
+			// return "input";
+			return INPUT;
 		}
 	}
 
-	public String deleteStuById() {
+	public void deleteAct(int number) {
 		try {
-			System.out.println("stuId  " + stuId);
-			userService.deleteStu(stuId);
-			return "success";
+			userService.deleteStu(number);
+			// return "true";
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			return "input";
-
+			// return INPUT;
 		}
 	}
 
-	
+	public void deleteStuByIds() {
+
+		System.out.println("stuIds   " + stuIds);
+		if (stuIds.contains(",")) {
+			String[] strings = stuIds.split(",");
+			for (int i = 0; i < strings.length; i++) {
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		} else {
+			deleteAct(Integer.parseInt(stuIds));
+		}
+	}
+
 	public String getAdminSelfInfo() {
 
 		try {
 			String Name = (String) ServletActionContext.getRequest()
 					.getSession().getAttribute("userName");
-			toBeJson(userService.getAdminSelfBaseList(Name), 1);
-			// authority = null;
+			dataFromDB=new DataFromDB(userService.getAdminSelfBaseList(Name)
+					,1);
+			toDataGrid(dataFromDB.setAdapter());
+			//toBeJson(, 1);
 			System.out.println("查询完毕");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public String getAdminById() {
 		System.out.println("adminId");
 		if (adminId == null || adminId.equals("")) {
@@ -454,15 +509,79 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUserById(adminId));
 		return SUCCESS;
 	}
-	
-	public String modifyAdminInfo(){
-		
-		
-		try{
+
+	public String modifyAdminInfo() {
+
+		try {
 			userService.saveAdminOrUpdate(prepairToChangeAdmin);
 			return SUCCESS;
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.print(e.getMessage());
+			return INPUT;
+		}
+	}
+
+	/*public void addStuFromExcel(String fileName) {
+		try {
+			isWriteSuccess=false;
+			File file=new File(ServletActionContext.getServletContext().getRealPath("/")
+					+fileName);
+			Workbook wb = Workbook.getWorkbook(file);
+			//System.out.println("wb.getSheet(0).getRows()  "+wb.getSheet(0).getRows());
+			for (int i = 1; i < wb.getSheet(0).getRows()-1; i++) {
+				Cell[] cell = wb.getSheet(0).getRow(i);
+				userService.saveStuBaseOrUpdate(new StuBase(Integer
+						.parseInt(cell[0].getContents()),
+						cell[1].getContents(), cell[2].getContents(), cell[3]
+								.getContents(), cell[4].getContents(), Integer
+								.parseInt(cell[5].getContents())));
+				System.out.println(cell[1].getContents());
+			}
+			isWriteSuccess=true;
+			wb.close();
+			// 在这里应该还有一个删除的操作
+			file.delete();
+			//return SUCCESS;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			//return INPUT;
+		}
+
+	}
+*/
+	/*public String upload() throws IOException {
+		if (source != null && source.isFile()) {
+			String uploadPath = ServletActionContext.getServletContext()
+					.getRealPath("/") ;
+			File dir = new File(uploadPath);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			File destFile = new File(uploadPath, "templeate.xls");
+			FileUtils.copyFile(source, destFile);
+			System.out.println("upload ok");
+			addStuFromExcel("templeate.xls");
+			if(isWriteSuccess){
+				return SUCCESS;
+			}else {
+				return INPUT;
+			}
+		}
+		return null;
+
+	}*/
+	
+	
+	//外观模式
+	public String batchIncrease() throws Exception{
+		boolean isOperateSuccess=false;
+		FileUtils fileUtils=new FileUtils(source, userService);
+		isOperateSuccess=fileUtils.operateOfFileUtils();
+		
+		if(isOperateSuccess){
+			return SUCCESS;
+		}else {
 			return INPUT;
 		}
 	}

@@ -35,15 +35,25 @@ public class GoodsAction extends ActionSupport {
 	
 	private Integer GoodsId;
 	
+	private String GoodsIds;
 	
-    public Integer getGoodsId() {
+	
+    public String getGoodsIds() {
+		return GoodsIds;
+	}
+
+	public void setGoodsIds(String goodsIds) {
+		GoodsIds = goodsIds;
+	}
+
+	public Integer getGoodsId() {
 		return GoodsId;
 	}
 
 	public void setGoodsId(Integer goodsId) {
 		GoodsId = goodsId;
 	}
-
+	
 	public String getKeyword() {
 		return keyword;
 	}
@@ -130,21 +140,18 @@ public class GoodsAction extends ActionSupport {
     	jconfig.setIgnoreDefaultExcludes(false);
     	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
 
-         HttpServletResponse response = ServletActionContext.getResponse();  
+        HttpServletResponse response = ServletActionContext.getResponse();  
               
-         JSONObject jobj = new JSONObject();//new一个JSON  
-         jobj.accumulate("total",total );//total代表一共有多少数据  
-         jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
+        JSONObject jobj = new JSONObject();//new一个JSON  
+        jobj.accumulate("total",total );//total代表一共有多少数据  
+        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
   
-         response.setCharacterEncoding("utf-8");//指定为utf-8  
-         response.getWriter().write(jobj.toString());     
+        response.setCharacterEncoding("utf-8");//指定为utf-8  
+        response.getWriter().write(jobj.toString());     
     }  
-    
-  //获取所有物资
+	//获取所有物资
     public String getAllGoods() { 
-    	
         try {
-        	
         	String hql="from Goods";
         	System.out.println("number all  "+keyword);
         	if(keyword != null){
@@ -154,8 +161,6 @@ public class GoodsAction extends ActionSupport {
         		keyword=null;
         	}
 			toBeJson(goodsService.getAllGoodsList(hql,page, rows),goodsService.getGoodsTotal());
-			//authority = null;
-			
         } catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -164,50 +169,43 @@ public class GoodsAction extends ActionSupport {
     
     public String addGoods() {
 		Goods goods = new Goods();
-		
 		goods.setGoodsBorrower("");
 		goods.setGoodsName(goodsName);
 		goods.setGoodsNumberBorrowed(0);
 		goods.setGoodsNumberRemain(goodsNumberRemain);
-		
-		
 		System.out.println("addGoods access");
 		try {
 			goodsService.saveGoodsOrUpdate(goods);
-			return "success";
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			return "input";
-		}
-	}
-    
-    public String goodsSearch() {
-		List<Goods> list1 = list;
-		try {
-			System.out.println("keyword   " + keyword);
-			
-			String hql = "from Goods where goodsName like '%" + keyword
-					+ "%'or goodsBorrower like '%" + keyword + "%'";
-			list = goodsService.getGoodsSearchList(hql, page, rows);
-			System.out.println("result list size  " + list.size());
-			toBeJson(list, goodsService.getGoodsSearchedTotal(hql));
-			return null;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			list = list1;
+			//return "success";
 			return SUCCESS;
-		}
-	}
-    
-    public String deleteGoodsById() {
-		try {
-			
-			goodsService.deleteGoodsById(GoodsId);
-			return "success";
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			return "input";
-
+			//return "input";
+			return INPUT;
+		}
+	}
+   
+   
+    
+    public void deleteAct(int number){
+    	try {
+			goodsService.deleteGoodsById(number);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+	}
+	public void deleteGoodsByIds() {
+		
+		System.out.println("GoodsIds   "+GoodsIds);
+		if(GoodsIds.contains(",")){
+			String[] strings = GoodsIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(GoodsIds));
 		}
 	}
 }

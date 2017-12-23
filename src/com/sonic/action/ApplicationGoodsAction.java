@@ -23,9 +23,7 @@ public class ApplicationGoodsAction extends ActionSupport {
     private String page;// 当前第几页 
     private StuBase user;
     private String userId;
-    
-    
-	
+   
 	private List<Application> list;
 	private Integer keyword;
 	
@@ -37,8 +35,14 @@ public class ApplicationGoodsAction extends ActionSupport {
 	private String checkWhat;
 	
 	private String checkTime;
+	private String applicationIds;
 	
-	
+	public String getApplicationIds() {
+		return applicationIds;
+	}
+	public void setApplicationIds(String applicationIds) {
+		this.applicationIds = applicationIds;
+	}
 	public Integer getCheckId() {
 		return checkId;
 	}
@@ -130,16 +134,16 @@ public class ApplicationGoodsAction extends ActionSupport {
     	jconfig.setIgnoreDefaultExcludes(false);
     	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
 
-         HttpServletResponse response = ServletActionContext.getResponse();  
+        HttpServletResponse response = ServletActionContext.getResponse();  
               
-         JSONObject jobj = new JSONObject();//new一个JSON  
-         jobj.accumulate("total",total );//total代表一共有多少数据  
-         jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
+        JSONObject jobj = new JSONObject();//new一个JSON  
+        jobj.accumulate("total",total );//total代表一共有多少数据  
+        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
   
-         response.setCharacterEncoding("utf-8");//指定为utf-8  
-         response.getWriter().write(jobj.toString());     
+        response.setCharacterEncoding("utf-8");//指定为utf-8  
+        response.getWriter().write(jobj.toString());     
     }  
-	//获取所有通知
+	//获取所有通知 
     public String getAllGoodsApplication() { 
     	
         try {
@@ -151,45 +155,35 @@ public class ApplicationGoodsAction extends ActionSupport {
         		keyword=null;
         	}
 			toBeJson(applicationService.getGoodsApplicationList(hql,page, rows),applicationService.getGoodsApplicationTotal());
-			//authority = null;
-			
         } catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;  
     } 
     
-    public String applicationGoodsSearch() {
-		List<Application> list1 = list;
-		try {
-			System.out.println("keyword   " + keyword);
-			String hql = "from Application where applicationCategory ='goods' and applicationName like '%" + keyword
-					+ "%'or applicationWhat like '%" + keyword + "%'";
-			list = applicationService.getGoodsApplicationSearchList(hql, page, rows);
-			System.out.println("result list size  " + list.size());
-			toBeJson(list, applicationService.getGoodsApplicationSearchedTotal(hql));
-			return null;
+    
+    public void deleteAct(int number){
+    	try {
+			applicationService.deleteGoodsApplicationById(number);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			list = list1;
-			return SUCCESS;
 		}
 	}
-    
-    public String deleteGoodsApplicationById() {
-		try {
-			
-			applicationService.deleteGoodsApplicationById(applicationId);
-			return "success";
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			return "input";
-
-		}
-	}
-    
-    public String chekToPassGoods(){
+	public void deleteGoodsApplicationByIds() {
 		
+		System.out.println("applicationIds   "+applicationIds);
+		if(applicationIds.contains(",")){
+			String[] strings = applicationIds.split(",");
+			for(int i=0;i<strings.length;i++){
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		}else {
+			deleteAct(Integer.parseInt(applicationIds));
+		}
+	}
+    public String chekToPassGoods(){
 		
 		try{
 			Application application=new Application();

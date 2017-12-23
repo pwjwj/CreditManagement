@@ -20,6 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	
 	<link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
+<<<<<<< HEAD
 	
 	<script type="text/javascript">
 function beforemodify()
@@ -68,6 +69,8 @@ function beforemodify()
 	}
 }
 </script>
+=======
+>>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
   </head>
   
   <body>
@@ -76,6 +79,7 @@ function beforemodify()
   </div>
   	<div class="center_body">
     <s:form action = "addCreditActivity.action" theme="simple">
+<<<<<<< HEAD
     	<div class="info_center"><div class="title-left">学号：</div><s:textarea id="uNumber" name = "number" placeholder="学号"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" onkeyup="value=value.replace(/[^1234567890-]+/g,'')"/></div>
     	<div class="info_center"><div class="title-left">姓名：</div><s:textarea id="uName" name = "name" placeholder="姓名"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
     	<div class="info_center"><div class="title-left">分类号：</div><s:textarea id="uCategoryId" name = "categoryId" placeholder="分类号"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" onkeyup="value=value.replace(/[^1234567890-]+/g,'')"/></div>
@@ -83,6 +87,15 @@ function beforemodify()
     	<div class="info_center"><div class="title-left">日期：</div><s:textarea id="uDates" name = "dates"  placeholder="日期 YYYY-MM-DD"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
     	<div class="info_center"></div>
     	<div class="info_center"><s:submit value = "新增"  cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" onclick="return beforeadd();"/></div>
+=======
+    	<div class="info_center"><div class="title-left">学号：</div><s:textarea name = "number" placeholder="学号"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">姓名：</div><s:textarea name = "name" placeholder="姓名"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">分类号：</div><s:textarea name = "categoryId" placeholder="分类号"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">事项详情：</div><s:textarea name = "detail" placeholder="事项详情"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"><div class="title-left">日期：</div><s:textarea name = "dates"  placeholder="日期 YYYY-MM-DD"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
+    	<div class="info_center"></div>
+    	<div class="info_center"><s:submit value = "新增"  cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
+>>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
     </s:form>
     
     </div>

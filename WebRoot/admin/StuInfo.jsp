@@ -34,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <link charset="utf-8" rel="stylesheet" href="<%=basePath %>/bilibili/jquery-ui.css">
 <link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
+<<<<<<< HEAD
 
 <script type="text/javascript">
 function beforemodify()
@@ -54,6 +55,8 @@ function beforemodify()
 		return true;
 }
 </script>
+=======
+>>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
   </head>
   
   <body>
@@ -74,14 +77,22 @@ function beforemodify()
     		<div class="info_center"><div class="title-left">班级：</div><span  style="color:gray;font-size:1.2em;"><s:text name="%{#request.currentUser.class_}"/></span></div>
     		<div class="info_center"><div class="title-left">信用：</div><span  style="color:gray;font-size:1.2em;"><s:text name="%{#request.currentUser.credit}"/></span></div>
         <div class="info_center"><div class="title-left">密码：</div>
+<<<<<<< HEAD
 			<s:password id="uPass" name="prepairToChangeUser.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%;"/>
+=======
+			<s:password name="prepairToChangeUser.pwd" placeholder="密码" value="%{#request.currentUser.pwd}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%;"/>
+>>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
         </div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>
         </font>
         <div class="info_center"></div>
         <div class="info_center" >
+<<<<<<< HEAD
         <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" onclick="return beforemodify();"/>
+=======
+        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/>
+>>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
         <s:if test="#request.currentUser.name == #session.stuName ">
         	 <a class="center_div" href="/admin/BaseInfo.jsp">返回主页</a>
         </s:if>
