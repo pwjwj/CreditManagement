@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<<<<<<< HEAD
+
 <head>
 <base href="<%=basePath%>">
 
@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript"
 	src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js"
 	charset="utf-8"></script>
-=======
+
   <head>
     <base href="<%=basePath%>">
     
@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js" charset="utf-8"></script>
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
+
 <script type="text/javascript">  
     $(function() {  
         $('#commUserDatagrid').datagrid({  
@@ -192,7 +192,7 @@ function deletedata() {
 		<button id="download_moban_button" class="easyui-submit"
 			onclick="download_moban()">下载批量添加模板</button>
 		<form id="addForm" method="post"
-			action="upload.action" enctype="multipart/form-data">
+			action="batchIncrease.action" enctype="multipart/form-data">
 			<font>批量添加:</font>
 			<input class="easyui-filebox" name="source"
 				id="source_sign" data-options="buttonText:'请选择文件'"/>

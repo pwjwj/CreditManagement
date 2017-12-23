@@ -14,9 +14,9 @@ public class Creditactivity implements java.io.Serializable {
 	private String categoryId;
 	private String detail;
 	private String dates;
-
 	// T-private String credit;
 	// Constructors
+
 
 	/** default constructor */
 	public Creditactivity() {

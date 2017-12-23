@@ -2,29 +2,21 @@ package com.sonic.action;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import jxl.Cell;
-import jxl.Workbook;
-
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-
 import com.sonic.pojo.Admin;
 import com.sonic.pojo.AdminSu;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.BaseInfoService;
-import com.sonic.utills.DateJsonValueProcessor;
+import com.sonic.utills.DataFromDB;
+import com.sonic.utills.FileUtils;
 
 public class BaseInfoAction extends ActionSupport {
 	private JSONObject jsonObj;
@@ -44,37 +36,22 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
-	
-	private String AdminName;
-<<<<<<< HEAD
-=======
 
-
-	public String getAdminName() {
-		return AdminName;
-	}
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-
-	public void setAdminName(String adminName) {
-		AdminName = adminName;
-	}
-
-	public String getAdminName() {
-		return AdminName;
-	}
-
-<<<<<<< HEAD
-=======
-	public void setAdminName(String adminName) {
-		AdminName = adminName;
-	}
-
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 	private String stuIds;
 	private File source;
-	
+	private DataFromDB dataFromDB;
 	private boolean isWriteSuccess=false;
 	
+	private String AdminName;
+
+
+	public String getAdminName() {
+		return AdminName;
+	}
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
 
 	public File getSource() {
 		return source;
@@ -240,28 +217,23 @@ public class BaseInfoAction extends ActionSupport {
 		this.prepairUserService = prepairUserService;
 	}
 
-	private void toBeJson(List list, int total) throws Exception {
-		JsonConfig jconfig = new JsonConfig();
-		JSONArray ja = new JSONArray();
-		jconfig.setIgnoreDefaultExcludes(false);
-		jconfig.registerJsonValueProcessor(java.util.Date.class,
-				new DateJsonValueProcessor("yyyy-MM-dd"));
-
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		JSONObject jobj = new JSONObject();// new一个JSON
-		jobj.accumulate("total", total);// total代表一共有多少数据
-		jobj.accumulate("rows", ja.fromObject(list, jconfig));// row是代表显示的页的数据
-
+	/*private void toBeJson(List list, int total) throws Exception {
+		
 		response.setCharacterEncoding("utf-8");// 指定为utf-8
-		response.getWriter().write(jobj.toString());
-	}
+		response.getWriter().write();
+	}*/
 
+	public void toDataGrid(String gridData) throws Exception{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");// 指定为utf-8
+		response.getWriter().write(gridData);
+	}
 	public String login() {
 		Object users;
 		String result = ERROR;
 		if (user.getName().startsWith("T")) {
 			// 事务管理员
+			//根据参数创建不同的用户
 			users = (Admin) userService.getTUser(user.getName());
 			if (users != null) {
 				if (((Admin) users).getPwd().equals(user.getPwd())) {
@@ -342,7 +314,6 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUser(stuName));
 		return SUCCESS;
 	}
-	
 	public String getAdminByUserName()
 	{
 		if(AdminName == null || AdminName.equals(""))
@@ -351,7 +322,6 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getTUser(AdminName));
 		return SUCCESS;
 	}
-
 	public boolean check(StuBase u) {
 		boolean flag = true;
 		System.out.println("进来了");
@@ -401,8 +371,9 @@ public class BaseInfoAction extends ActionSupport {
 			}
 			System.out.println("page   " + page);
 			System.out.println("rows   " + rows);
-			toBeJson(userService.getStuBaseList(hql, page, rows),
-					userService.getUserTotal());
+			dataFromDB=new DataFromDB(userService.getStuBaseList(hql, page, rows)
+					,userService.getUserTotal());
+			toDataGrid(dataFromDB.setAdapter());
 			System.out.println("查询完毕");
 			System.out.println(userService.getUserTotal());
 			System.out.println(userService.getStuBaseList(hql, page, rows)
@@ -436,31 +407,9 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void deleteAct(int number) {
-=======
-=======
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-
-	public String deleteStuById() {
-		try {
-			System.out.println("stuId  " + stuId);
-			userService.deleteStu(stuId);
-			//return "success";
-			return SUCCESS;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
-
-		}
-	}
-	public void deleteAct(int number){
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 		try {
 			userService.deleteStu(number);
-
 			// return "true";
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -488,7 +437,10 @@ public class BaseInfoAction extends ActionSupport {
 		try {
 			String Name = (String) ServletActionContext.getRequest()
 					.getSession().getAttribute("userName");
-			toBeJson(userService.getAdminSelfBaseList(Name), 1);
+			dataFromDB=new DataFromDB(userService.getAdminSelfBaseList(Name)
+					,1);
+			toDataGrid(dataFromDB.setAdapter());
+			//toBeJson(, 1);
 			System.out.println("查询完毕");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -518,7 +470,7 @@ public class BaseInfoAction extends ActionSupport {
 		}
 	}
 
-	public void addStuFromExcel(String fileName) {
+	/*public void addStuFromExcel(String fileName) {
 		try {
 			isWriteSuccess=false;
 			File file=new File(ServletActionContext.getServletContext().getRealPath("/")
@@ -541,14 +493,13 @@ public class BaseInfoAction extends ActionSupport {
 			//return SUCCESS;
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
 			//return INPUT;
 		}
 
 	}
-
-	public String upload() throws IOException {
+*/
+	/*public String upload() throws IOException {
 		if (source != null && source.isFile()) {
 			String uploadPath = ServletActionContext.getServletContext()
 					.getRealPath("/") ;
@@ -568,5 +519,19 @@ public class BaseInfoAction extends ActionSupport {
 		}
 		return null;
 
+	}*/
+	
+	
+	//外观模式
+	public String batchIncrease() throws Exception{
+		boolean isOperateSuccess=false;
+		FileUtils fileUtils=new FileUtils(source, userService);
+		isOperateSuccess=fileUtils.operateOfFileUtils();
+		
+		if(isOperateSuccess){
+			return SUCCESS;
+		}else {
+			return INPUT;
+		}
 	}
 }
