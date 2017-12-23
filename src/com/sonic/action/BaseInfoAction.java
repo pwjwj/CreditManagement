@@ -39,7 +39,13 @@ public class BaseInfoAction extends ActionSupport {
 
 	private String stuIds;
 	private File source;
+<<<<<<< HEAD
 	private DataFromDB dataFromDB;
+	private boolean isWriteSuccess=false;
+	
+	private String AdminName;
+=======
+	
 	private boolean isWriteSuccess=false;
 	
 	private String AdminName;
@@ -48,11 +54,20 @@ public class BaseInfoAction extends ActionSupport {
 	public String getAdminName() {
 		return AdminName;
 	}
+>>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
+
+
+<<<<<<< HEAD
+	public String getAdminName() {
+		return AdminName;
+	}
 
 	public void setAdminName(String adminName) {
 		AdminName = adminName;
 	}
 
+=======
+>>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
 	public File getSource() {
 		return source;
 	}

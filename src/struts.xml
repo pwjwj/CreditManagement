@@ -23,7 +23,11 @@
  			<result type="json"/>
  		</action>
  		
+<<<<<<< HEAD
  		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
+=======
+ 		<action name="upload" class="baseInfoAction" method="upload">
+>>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
  			<result name="success">/admin/BaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
