@@ -82,4 +82,8 @@ public class StuBase implements java.io.Serializable {
 		this.credit = credit;
 	}
 
+	public static void main(String[] args) {
+		
+	}
+
 }

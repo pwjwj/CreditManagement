@@ -30,7 +30,7 @@
 	href="<%=basePath%>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 
 <script type="text/javascript"
-	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js"
+	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.min.js"
 	charset="utf-8"></script>
 <script type="text/javascript"
 	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js"

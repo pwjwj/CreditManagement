@@ -36,7 +36,7 @@ public class CreditActivityServiceImp implements CreditActivityService{
 		// TODO Auto-generated method stub
 		return genericDao.countQuery("from Creditactivity");
 	}
-
+	
 	@Override
 	public void saveCreditActivityOrUpdate(Creditactivity ca) {
 		// TODO Auto-generated method stub
@@ -78,6 +78,27 @@ public class CreditActivityServiceImp implements CreditActivityService{
 		// TODO Auto-generated method stub
 		System.out.println("ca.getDetail()   "+ca.getDetail());
 		genericDao.saveOrUpdate(ca);
+	}
+
+	
+
+	@Override
+	public void updateStuBase(String hql) {
+		// TODO Auto-generated method stub
+		genericDao.update(hql);
+	}
+
+	@Override
+	public int getCreditActivityTotal(String hql) {
+		// TODO Auto-generated method stub
+		
+		return genericDao.countQuery(hql);
+	}
+
+	@Override
+	public List getData(String hql) {
+		// TODO Auto-generated method stub
+		return genericDao.query(hql);
 	}
 
 }

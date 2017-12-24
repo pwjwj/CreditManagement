@@ -183,15 +183,17 @@ public class ApplicationAction extends ActionSupport {
         jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
   
         response.setCharacterEncoding("utf-8");//指定为utf-8  
-        response.getWriter().write(jobj.toString());     
+        response.getWriter().write(jobj.toString());   
+        System.out.println(jobj.toString());
     }  
 	//获取所有申请 也负担有查询的功能
     public String getAllApplication() { 
         try {
-        	String hql="from Application";
+        	String hql="select ac FROM Application ac,StuBase stu where ac.applicationNumber=stu.number ORDER BY stu.credit DESC";
 			if(keyword != null){
 				System.out.println("keyword  "+keyword);
-        		hql+=" where applicationNumber ="+keyword;
+				hql="select ac FROM Application ac,StuBase stu where ac.applicationNumber=stu.number and applicationNumber ="+keyword+" ORDER BY stu.credit DESC";
+        		//hql+=" where applicationNumber ="+keyword;
         		System.out.println("after add number  "+hql);
         		keyword=null;
         	}

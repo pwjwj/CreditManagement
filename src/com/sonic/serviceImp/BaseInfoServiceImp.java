@@ -114,5 +114,11 @@ public class BaseInfoServiceImp implements BaseInfoService {
 		// TODO Auto-generated method stub
 		genericDao.saveOrUpdate(admin);
 	}
+
+	@Override
+	public List<StuBase> getStuBaseList(String hql) {
+		// TODO Auto-generated method stub
+		return genericDao.query(hql);
+	}
 	
 }

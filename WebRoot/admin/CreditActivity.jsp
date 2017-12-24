@@ -14,7 +14,6 @@
 
 <title>My JSP 'user1.jsp' starting page</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -28,7 +27,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
 <script type="text/javascript"
-	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js"
+	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.min.js"
 	charset="utf-8"></script>
 <script type="text/javascript"
 	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js"
@@ -121,21 +120,11 @@ function deletedata() {
         }else{      
             var temID="";  
             //批量获取选中行的ID  
-            for (var i = 0; i < selRow.length;i++) {  
+            for (i = 0; i < selRow.length;i++) {  
                 if (temID =="") {  
                     temID = selRow[i].id;  
                 } else {  
-
                     temID = selRow[i].id + "," + temID;  
-
-                    temID = selRow[i].id + "," + id;  
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-=======
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
                 }                 
             }  
                         
@@ -188,7 +177,7 @@ function deletedata() {
 					<th data-options="field:'categoryId',width:100,align:'center'">分类号</th>
 					<th data-options="field:'detail',width:100,align:'center'">事项详情</th>
 					<th data-options="field:'dates',width:100,align:'center'">时间</th>
-					<th data-options="field:'credit',width:100,align:'center'">信用分</th>
+					<th data-options="field:'score',width:100,align:'center'">信用分</th>
 					<th
 						data-options="field:'_operate2',width:80,align:'center',formatter:formatOper2"></th>
 					<th
