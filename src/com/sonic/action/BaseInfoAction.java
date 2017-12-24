@@ -2,17 +2,22 @@ package com.sonic.action;
 
 import java.io.File;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import net.sf.json.JSONArray;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -22,7 +27,10 @@ import com.sonic.pojo.AdminSu;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.BaseInfoService;
 import com.sonic.utills.DataFromDB;
+<<<<<<< HEAD
 import com.sonic.utills.DateJsonValueProcessor;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 import com.sonic.utills.FileUtils;
 
 public class BaseInfoAction extends ActionSupport {
@@ -43,6 +51,7 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
+<<<<<<< HEAD
 
 	private String stuIds;
 	private File source;
@@ -50,8 +59,21 @@ public class BaseInfoAction extends ActionSupport {
 	private boolean isWriteSuccess=false;
 	
 	private String AdminName;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+
+	private String stuIds;
+	private File source;
+
+<<<<<<< HEAD
+=======
+	private DataFromDB dataFromDB;
+	private boolean isWriteSuccess=false;
+	
+	private String AdminName;
 
 
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 	public String getAdminName() {
 		return AdminName;
 	}
@@ -59,7 +81,10 @@ public class BaseInfoAction extends ActionSupport {
 	public void setAdminName(String adminName) {
 		AdminName = adminName;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 	public File getSource() {
 		return source;
 	}
@@ -101,7 +126,6 @@ public class BaseInfoAction extends ActionSupport {
 	public void setPrepairToChangeUser(StuBase prepairToChangeUser) {
 		this.prepairToChangeUser = prepairToChangeUser;
 	}
-
 	public String getStuName() {
 		return stuName;
 	}
@@ -234,7 +258,10 @@ public class BaseInfoAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setCharacterEncoding("utf-8");// Ö¸¶¨Îªutf-8
 		response.getWriter().write(gridData);
+<<<<<<< HEAD
 		System.out.println("gridData  "+gridData);
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 	}
 	public String login() {
 		Object users;
@@ -513,7 +540,10 @@ public class BaseInfoAction extends ActionSupport {
 			return INPUT;
 		}
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 	/*public void addStuFromExcel(String fileName) {
 		try {
 			isWriteSuccess=false;

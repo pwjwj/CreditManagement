@@ -30,6 +30,7 @@
 <script type="text/javascript"
 	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js"
 	charset="utf-8"></script>
+<<<<<<< HEAD
 <script type="text/javascript"
 	src="<%=basePath%>/highchart/code/highcharts.js"></script>
 	<script type="text/javascript"
@@ -55,6 +56,24 @@
 <script type="text/javascript"
 	src="<%=basePath%>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js"
 	charset="utf-8"></script>
+=======
+
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'user1.jsp' starting page</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
+	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
+	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js" charset="utf-8"></script>
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 
 <script type="text/javascript">  
     $(function() {  
@@ -276,12 +295,20 @@ function createGraphic() {
 			onclick="deletedata()">批量删除</button>
 		<button id="download_moban_button" class="easyui-submit"
 			onclick="download_moban()">下载批量添加模板</button>
+<<<<<<< HEAD
 		<button id="createGraphicButton" class="easyui-submit"
 			onclick="createGraphic()">生成图标</button>
 		<form id="addForm" method="post" action="batchIncrease.action"
 			enctype="multipart/form-data">
 			<font>批量添加:</font> <input class="easyui-filebox" name="source"
 				id="source_sign" data-options="buttonText:'请选择文件'" />
+=======
+		<form id="addForm" method="post"
+			action="batchIncrease.action" enctype="multipart/form-data">
+			<font>批量添加:</font>
+			<input class="easyui-filebox" name="source"
+				id="source_sign" data-options="buttonText:'请选择文件'"/>
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 			<button id="submit_button" class="easyui-submit">添加</button>
 		</form>
 	</div>

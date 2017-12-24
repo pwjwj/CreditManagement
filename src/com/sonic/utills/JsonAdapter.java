@@ -24,9 +24,13 @@ public class JsonAdapter extends Adapter{
 		
 
 		JSONObject jobj = new JSONObject();// new一个JSON
+<<<<<<< HEAD
 		if(total!=-1){
 			jobj.accumulate("total", total);// total代表一共有多少数据
 		}
+=======
+		jobj.accumulate("total", total);// total代表一共有多少数据
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 		jobj.accumulate("rows", ja.fromObject(list, jconfig));// row是代表显示的页的数据
 		
 		return jobj.toString();

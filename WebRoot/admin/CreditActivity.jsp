@@ -125,6 +125,12 @@ function deletedata() {
                     temID = selRow[i].id;  
                 } else {  
                     temID = selRow[i].id + "," + temID;  
+<<<<<<< HEAD
+=======
+
+                    temID = selRow[i].id + "," + id;  
+
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
                 }                 
             }  
                         

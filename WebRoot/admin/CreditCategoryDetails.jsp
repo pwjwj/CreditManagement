@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title></title>
+    <title>规则修改</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
@@ -33,35 +33,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link charset="utf-8" rel="stylesheet" href="<%=basePath %>/bilibili/jquery-ui.css">
 	<link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
+	
+	<script type="text/javascript">
+	function beforemodify()
+	{
+		var categoryId = document.getElementById("categoryId").value;
+		var categoryName = document.getElementById("categoryName").value;
+		var detail = document.getElementById("detail").value;
+		var score = document.getElementById("score").value;
+	if(categoryId=="")
+	{
+		alert("分类号不能为空!");
+		return false;
+	}
+	else if(categoryName=="")
+	{
+		alert("分类名不能为空!");
+		return false;
+	}
+	else if(detail=="")
+	{
+		alert("详情不能为空!");
+		return false;
+	}
+	else if(score=="")
+	{
+		alert("分数不能为空!");
+		return false;
+	}
+	else if(categoryId=="${request.currentCreditCategory.id}"&&categoryName=="${request.currentCreditCategory.categoryName}"&&detail=="${request.currentCreditCategory.detail}"&&score=="${request.currentCreditCategory.score}")
+	{
+		alert("规则未更改!");
+		setTimeout("history.go(-1)",1000);
+		return false;
+	}
+	else
+		return true;
+	}
+	</script>
 </head>
   
   <body>
-       <!--   如果什么也没修改  需要使用js来拦截一下-->
    <div class="header">
   <div class="center_title">奖惩事项规则修改</div>
   </div>
   <div class="center_body">
     <s:form action="modifyCreditCategory.action" theme="simple">
          <div class="info_center"><div class="title-left">分类号：</div>
-			<s:textarea name="prepairToChangeCategory.categoryId" placeholder="分类号" value="%{#request.currentCreditCategory.categoryId}" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
+			<s:textarea id="categoryId" name="prepairToChangeCategory.categoryId" placeholder="分类号" value="%{#request.currentCreditCategory.categoryId}" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" onkeyup="value=value.replace(/[^1234567890-]+/g,'')"/>
 			<s:hidden name="prepairToChangeCategory.id" value="%{#request.currentCreditCategory.id}"/>
         </div>
         <font color="#FF0000" size="3">
         	<s:property value="#request.passwordErro"/>
         </font>
         <div class="info_center"><div class="title-left">分类名：</div>
-			<s:textarea name="prepairToChangeCategory.categoryName" placeholder="分类名" value="%{#request.currentCreditCategory.categoryName}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
+			<s:textarea id="categoryName" name="prepairToChangeCategory.categoryName" placeholder="分类名" value="%{#request.currentCreditCategory.categoryName}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
        <div class="info_center"><div class="title-left">详情：</div> 
-			<s:textarea name="prepairToChangeCategory.detail" placeholder="详情" value="%{#request.currentCreditCategory.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
+			<s:textarea id="detail" name="prepairToChangeCategory.detail" placeholder="详情" value="%{#request.currentCreditCategory.detail}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div>
          <div class="info_center"><div class="title-left">分数：</div> 
-			<s:textarea name="prepairToChangeCategory.score" placeholder="分数" value="%{#request.currentCreditCategory.score}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
+			<s:textarea id="score" name="prepairToChangeCategory.score" placeholder="分数" value="%{#request.currentCreditCategory.score}" cssClass="password user_id_password" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" onkeyup="value=value.replace(/[^1234567890-]+/g,'')"/>
+			
         </div>
          <div class="info_center"></div>
          <div class="info_center"></div>
          <div class="info_center">	
-        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/>
+        <s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" onclick="return beforemodify();"/>
         <s:if test="#request.currentUser.cCategoryId == #session.cCategoryId ">
         	 <a class="center_div" href="/admin/Creditcategory.jsp">返回主页</a>
         </s:if>

@@ -23,14 +23,27 @@
  			<result type="json"/>
  		</action>
  		
+<<<<<<< HEAD
  		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
+=======
+ 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease"/>
+ 		<action name="upload" class="baseInfoAction" method="upload">
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
  			<result name="success">/admin/BaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		<action name="modifyAdminInfo" class="baseInfoAction" method="modifyAdminInfo">
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
+<<<<<<< HEAD
+=======
  			<result name="input">/MyJsp.jsp</result>
  		</action>
+ 		<action name="modifyAdminInfos" class="baseInfoAction" method="modifyAdminInfo">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
  		<action name="getAdminById"  class="baseInfoAction" method="getAdminById">
  			<result name="success">/admin/CurrentAdminInfoChange.jsp</result>
  		</action>
@@ -47,9 +60,9 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
- 		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds">
+ 		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds"/>
  			
- 		</action>
+ 		
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>

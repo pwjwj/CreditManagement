@@ -51,6 +51,7 @@
 
 <body>
 	<div class="header">
+		<div class="center_title">信息修改</div>
 		<div class="center_title">增加学生信息</div>
 	</div>
 	<div class="center_body">

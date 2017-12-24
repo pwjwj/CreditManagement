@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
-	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js" charset="utf-8"></script>
 <script type="text/javascript">  
     $(function() {  
@@ -72,7 +72,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
+<<<<<<< HEAD
             var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
+=======
+            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
             window.location.href=url;
         }  
 	}

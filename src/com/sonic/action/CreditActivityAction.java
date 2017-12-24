@@ -221,13 +221,18 @@ public class CreditActivityAction extends ActionSupport {
 	public String getAllStudentCreditActivity() {
 
 		try {
+<<<<<<< HEAD
 			String hql = "SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number";
+=======
+			String hql = "SELECT C,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number";
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 			System.out.println("number all  " + keyword);
 			if (keyword != null) {
 				hql += " where number =" + keyword;
 				System.out.println("after add number  " + hql);
 				keyword = null;
 			}
+<<<<<<< HEAD
 			List<Object> dataList = creditactivityService.getStuCreditActivityList(hql, page,rows);
 			ArrayList<CreditActivityBean> arrayList = new ArrayList<CreditActivityBean>();
 			Iterator its=dataList.iterator();    
@@ -245,6 +250,11 @@ public class CreditActivityAction extends ActionSupport {
 	            arrayList.add(activityBean);
 	        }  
 			toBeJson(arrayList, creditactivityService.getCreditActivityTotal("SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number"));
+=======
+			
+			toBeJson(creditactivityService.getStuCreditActivityList(hql, page,
+					rows), creditactivityService.getCreditActivityTotal());
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -277,12 +287,15 @@ public class CreditActivityAction extends ActionSupport {
 		//再最后再数据库完成更新
 		try {
 			creditactivityService.saveCreditActivityOrUpdate(ca);
+<<<<<<< HEAD
 			System.out.println("save  success");
 			int scoreFinal=creditStuBase+creditActivityScore;
 			String hql="update StuBase stu set stu.credit="+scoreFinal+" where stu.number="+number;
 			System.out.println("hql   "+hql);
 			creditactivityService.updateStuBase(hql );
 			System.out.println("update success");
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -299,7 +312,11 @@ public class CreditActivityAction extends ActionSupport {
 		}
 	}
 	public void deleteCreditActivityByIds() {
+<<<<<<< HEAD
 		System.out.println("creditActivityIds   "+creditActivityIds);
+=======
+		System.out.println("stuIds   "+creditActivityIds);
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 		if(creditActivityIds.contains(",")){
 			String[] strings = creditActivityIds.split(",");
 			for(int i=0;i<strings.length;i++){
