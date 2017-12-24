@@ -51,11 +51,8 @@
 
 <body>
 	<div class="header">
-<<<<<<< HEAD
 		<div class="center_title">信息修改</div>
-=======
 		<div class="center_title">增加学生信息</div>
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
 	</div>
 	<div class="center_body">
 		<s:form action="modifyAdminInfo.action" theme="simple">

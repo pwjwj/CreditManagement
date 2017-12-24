@@ -39,31 +39,13 @@ public class BaseInfoAction extends ActionSupport {
 
 	private String stuIds;
 	private File source;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
+
 	private DataFromDB dataFromDB;
 	private boolean isWriteSuccess=false;
 	
 	private String AdminName;
-<<<<<<< HEAD
-=======
-=======
-	
-	private boolean isWriteSuccess=false;
-	
-	private String AdminName;
 
 
-	public String getAdminName() {
-		return AdminName;
-	}
->>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
->>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
-
-
-<<<<<<< HEAD
 	public String getAdminName() {
 		return AdminName;
 	}
@@ -71,12 +53,6 @@ public class BaseInfoAction extends ActionSupport {
 	public void setAdminName(String adminName) {
 		AdminName = adminName;
 	}
-
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
->>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
 	public File getSource() {
 		return source;
 	}
@@ -118,30 +94,6 @@ public class BaseInfoAction extends ActionSupport {
 	public void setPrepairToChangeUser(StuBase prepairToChangeUser) {
 		this.prepairToChangeUser = prepairToChangeUser;
 	}
-
-<<<<<<< HEAD
-	private String userId;
-	private Integer keyword;
-	private String name;
-	private String college;
-	private String class_;
-	private Integer number;
-	private Integer stuId;
-	private String stuName;
-	
-	private String AdminName;
-
-
-	public String getAdminName() {
-		return AdminName;
-	}
-
-	public void setAdminName(String adminName) {
-		AdminName = adminName;
-	}
-
-=======
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
 	public String getStuName() {
 		return stuName;
 	}
@@ -361,10 +313,6 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUser(stuName));
 		return SUCCESS;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
 	public String getAdminByUserName()
 	{
 		if(AdminName == null || AdminName.equals(""))
@@ -520,7 +468,6 @@ public class BaseInfoAction extends ActionSupport {
 			return INPUT;
 		}
 	}
-
 	/*public void addStuFromExcel(String fileName) {
 		try {
 			isWriteSuccess=false;

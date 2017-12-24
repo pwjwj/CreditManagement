@@ -23,15 +23,8 @@
  			<result type="json"/>
  		</action>
  		
-<<<<<<< HEAD
- 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
-=======
-<<<<<<< HEAD
- 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
-=======
+ 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease"/>
  		<action name="upload" class="baseInfoAction" method="upload">
->>>>>>> 6993c33af4f50db89dd54ddeb87bf75a16762478
->>>>>>> 1da15feb5be02900349720ccf3993f8fa9e4a250
  			<result name="success">/admin/BaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
@@ -39,6 +32,11 @@
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
+ 		<action name="modifyAdminInfos" class="baseInfoAction" method="modifyAdminInfo">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
  		<action name="getAdminById"  class="baseInfoAction" method="getAdminById">
  			<result name="success">/admin/CurrentAdminInfoChange.jsp</result>
  		</action>
@@ -55,22 +53,15 @@
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		
- 		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds">
+ 		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds"/>
  			
- 		</action>
+ 		
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
-<<<<<<< HEAD
-		<action name="getAdminByUserName"  class="baseInfoAction" method="getAdminByUserName">
- 			<result name="success">/adminSu/adminInfochange.jsp</result>
- 		</action>
- 		
-=======
  		<action name="getAdminByUserName"  class="baseInfoAction" method="getAdminByUserName">
  			<result name="success">/adminSu/adminInfochange.jsp</result>
  		</action>
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
  		<action name="modify" class="baseInfoAction" method="modify">
  			<result name="success">/admin/BaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>

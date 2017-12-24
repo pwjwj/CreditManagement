@@ -63,11 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     
                     <div class="box">
                         <span id="userIdSpt">&nbsp;</span>
-<<<<<<< HEAD
 						<s:textfield id="uName" name="user.name" placeholder="用户名" cssStyle="margin-bottom: 0;height: 5%;width: 60%;" cssClass="email ui-autocomplete-input jv-box-default"/>    	
-=======
-						<s:textfield id="uEmail" name="user.name" placeholder="用户名" cssStyle="margin-bottom: 0;height: 5%;width: 60%;" cssClass="email ui-autocomplete-input jv-box-default"/>    	
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
+						  	
                     </div>
                     <div class="box">
                         <span id="userPwdTip">&nbsp;</span>
@@ -76,11 +73,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <font color="#FF0000" size="3">
         				<s:property value="#request.Erro"/><br/>
         			</font>
-<<<<<<< HEAD
                     <s:submit value="登录" cssClass="login" onclick="return beforelogin();"/>
-=======
-                    <s:submit value="登录" cssClass="login"/>
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
+                   
                     <a class="register" href="./regist.jsp">注册</a>
                 </s:form>
                 

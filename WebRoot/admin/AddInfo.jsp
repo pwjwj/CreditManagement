@@ -20,7 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	
 	<link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
-<<<<<<< HEAD
 	
 	<script type="text/javascript">
 	function beforeadd()
@@ -41,8 +40,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return true;
 	}
 	</script>
-=======
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
   </head>
   
   <body>
@@ -52,21 +49,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   	<div class="center_body">
     <s:form action = "addInfo.action" theme="simple">
-<<<<<<< HEAD
     	<div class="info_center"><div class="title-left">通知标题：</div><s:textarea id="infoTitle" name = "infoTittle" placeholder="通知标题"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
     	<div class="info_center"><div class="title-left">通知内容：</div><s:textarea id="infoContent" name = "infoContent" placeholder="通知内容" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
     	
     	<div class="info_center"></div>
     	<div class="info_center"></div>
     	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" onclick="return beforeadd();"/></div>
-=======
-    	<div class="info_center"><div class="title-left">通知标题：</div><s:textarea name = "infoTittle" placeholder="通知标题"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
-    	<div class="info_center"><div class="title-left">通知内容：</div><s:textarea name = "infoContent" placeholder="通知内容" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/></div>
-    	
-    	<div class="info_center"></div>
-    	<div class="info_center"></div>
-    	<div class="info_center"><s:submit value = "新增" cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/></div>
->>>>>>> e1fd9dc08a0cceb1ae067ed70184513611738339
     </s:form>
     </div>
   </body>
