@@ -50,12 +50,13 @@ function beforeadd()
 	}
 	else
 	{
-		var fdStart = name.indexOf("T");
-		if(fdStart == 0)
+		var partten=/^T/g;
+		var Start=name.match(partten);
+		if(!Start)
 		{
 			alert("姓名必须以T开头!");
 			return false;
-		}else if(fdStart == -1)
+		}else
 		{
 			return true;
 		}

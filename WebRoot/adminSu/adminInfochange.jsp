@@ -100,8 +100,6 @@ function beforemodify()
 					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
 				<s:hidden name="prepairToChangeAdmin.id"
 					value="%{#request.currentAdmin.id}" />
-
-
 			</div>
 
 			<div class="info_center">

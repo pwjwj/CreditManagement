@@ -55,9 +55,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
     });  
 	 function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="deletedata()">删除</a>';   
+    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
 	}  
-	
+	function delete2(index){
+		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
+    	var rows = $("#commUserDatagrid").datagrid("getSelections");
+    	if (rows.length==1){    
+            var url = '<%=basePath %>deleteAdminById.action?adminId='+rows[0].id;
+             window.location.href=url;
+        }  
+	}
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
@@ -65,15 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-<<<<<<< HEAD
-            var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
-=======
-<<<<<<< HEAD
-            var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
-=======
             var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
->>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
->>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
             window.location.href=url;
         }  
 	}
@@ -89,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             striped : true,//设置为true将交替显示行背景。  
             collapsible : true,//显示可折叠按钮 
             toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个  
-             url:'getAllAdminBaseInfo.action?keyword='+value,//url调用Action方法  
+             url:'getAllAdminBaseInfo.action',//url调用Action方法  
             loadMsg : '数据装载中......',  
             
             nowrap:false,  
@@ -110,65 +109,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             rownumbers : true//行数  
         });   
 }
-	function deletedata() {  
-        //返回选中多行  
-        var selRow = $('#commUserDatagrid').datagrid('getSelections')  
-        //判断是否选中行  
-        if (selRow.length==0) {  
-            $.messager.alert("提示", "请选择要删除的行！", "info");  
-            return;  
-        }else{      
-            var temID="";  
-            //批量获取选中行的ID  
-            for (var i = 0; i < selRow.length;i++) {  
-                if (temID =="") {  
-                    temID = selRow[i].id;  
-                } else {  
-                    temID = selRow[i].id + "," + temID;  
-                }                 
-            }           
-            $.messager.confirm('提示', '是否删除选中数据?', function (r) {  
-  
-                if (!r) {  
-                    return;  
-                }  
-                alert(temID);
-                //提交  
-                $.ajax({  
-                    type: "POST",  
-                    async: false,  
-                    url: "deleteAdminByIds.action?adminIds=" + temID,  
-                    data: temID,  
-                    success: function (result) {  
-                    	alert(result);
-                        if (result.indexOf("t") <= 0) {  
-                            $('#commUserDatagrid').datagrid('clearSelections');  
-                            $.messager.alert("提示", "恭喜您，信息删除成功！", "info");  
-                            $('#commUserDatagrid').datagrid('reload');  
-                        } else {  
-                            $.messager.alert("提示", "删除失败，请重新操作！", "info");  
-                            return;  
-                        }  
-                    }  
-                });  
-            });  
-  
-        }  
-    };  
 	
 </script>  
   </head>
   
   <body>
   
-<<<<<<< HEAD
-=======
   <%-- <s:form  action="adminSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
   		 <span id="userPwdTip">&nbsp;输入关键字:</span>
   		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
   		 <input type="submit" value="搜索" ">
   </s:form> --%>
->>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
   <div id="tb" >
 		<input id="keyword" name="keyword" class="easyui-searchbox"
 			searcher="doSearch" prompt="搜索"
