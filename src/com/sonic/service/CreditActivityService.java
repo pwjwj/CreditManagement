@@ -9,6 +9,8 @@ public interface CreditActivityService {
 	//获取信用活动信息
 	public List<Object> getStuCreditActivityList(String hql,String page,String rows);
 	public int getCreditActivityTotal();
+	public int getCreditActivityTotal(String hql);
+	public List getData(String hql);
 	public void saveCreditActivityOrUpdate(Creditactivity ca);
 	public List<Creditactivity> getCreditActivitySearchList(String hql, String page, String rows);
 	public int getCreditActivitySearchedTotal(String hql);
@@ -16,4 +18,7 @@ public interface CreditActivityService {
 	
 	public void saveCreditactivityBaseOrUpdate(Creditactivity ca);
 	public Creditactivity getCreditActivity(int activityId);
+	public void updateStuBase(String hql);
+	
+	
 }

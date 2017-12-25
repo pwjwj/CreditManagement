@@ -17,6 +17,7 @@ import com.sonic.pojo.Creditcategory;
 import com.sonic.pojo.Info;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.InfoService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class InfoAction extends ActionSupport {
@@ -29,12 +30,11 @@ public class InfoAction extends ActionSupport {
     
     private String infoTittle;
 	private String infoContent;
-	private Integer infoId;
 	private List<Info> list;
 	private String keyword;
 	private Integer infoSelectedId;
 	private Info prepairToInfo;
-	
+	private DataFromDB dataFromDB;
 	private String infoIds;
 	
     public String getInfoIds() {
@@ -68,12 +68,7 @@ public class InfoAction extends ActionSupport {
 	public void setList(List<Info> list) {
 		this.list = list;
 	}
-	public Integer getInfoId() {
-		return infoId;
-	}
-	public void setInfoId(Integer infoId) {
-		this.infoId = infoId;
-	}
+	
 	public String getInfoTittle() {
 		return infoTittle;
 	}
@@ -122,21 +117,6 @@ public class InfoAction extends ActionSupport {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	private void toBeJson(List list,int total) throws Exception{ 
-    	JsonConfig jconfig = new JsonConfig();
-    	JSONArray ja = new JSONArray(); 
-    	jconfig.setIgnoreDefaultExcludes(false);
-    	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
-
-        HttpServletResponse response = ServletActionContext.getResponse();  
-              
-        JSONObject jobj = new JSONObject();//new一个JSON  
-        jobj.accumulate("total",total );//total代表一共有多少数据  
-        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
-  
-        response.setCharacterEncoding("utf-8");//指定为utf-8  
-        response.getWriter().write(jobj.toString());     
-    }  
 	//获取所有通知
     public String getAllInfo() { 
         try {
@@ -148,7 +128,10 @@ public class InfoAction extends ActionSupport {
         		System.out.println("after add number  "+hql);
         		keyword=null;
         	}
-			toBeJson(infoService.getAllInfoList(hql,page, rows),infoService.getInfoTotal());
+        	dataFromDB=new DataFromDB(infoService.getAllInfoList(hql,page, rows)
+					,infoService.getInfoTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
         } catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -164,16 +147,12 @@ public class InfoAction extends ActionSupport {
 		System.out.println("addinfo access");
 		try {
 			infoService.saveInfoOrUpdate(info);
-			//return "success";
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
 			return INPUT;
 		}
 	}
-    
-    
     
     public void deleteAct(int number){
     	try {

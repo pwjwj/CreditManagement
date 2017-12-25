@@ -1,6 +1,8 @@
 package com.sonic.action;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +14,11 @@ import net.sf.json.JsonConfig;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.sonic.dto.CreditActivityBean;
 import com.sonic.pojo.Creditactivity;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.CreditActivityService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class CreditActivityAction extends ActionSupport {
@@ -36,7 +40,7 @@ public class CreditActivityAction extends ActionSupport {
 	private Integer activityId;
 	private Creditactivity prepairToChangeActivity;
 	private String creditActivityIds;
-	
+	private DataFromDB dataFromDB;
 	public String getCreditActivityIds() {
 		return creditActivityIds;
 	}
@@ -197,7 +201,7 @@ public class CreditActivityAction extends ActionSupport {
 		this.userId = userId;
 	}
 
-	private void toBeJson(List list, int total) throws Exception {
+	/*private void toBeJson(List list, int total) throws Exception {
 		JsonConfig jconfig = new JsonConfig();
 		JSONArray ja = new JSONArray();
 		jconfig.setIgnoreDefaultExcludes(false);
@@ -212,22 +216,41 @@ public class CreditActivityAction extends ActionSupport {
 		System.out.println(jobj.toString());
 		response.setCharacterEncoding("utf-8");// 指定为utf-8
 		response.getWriter().write(jobj.toString());
-	}
+	}*/
 
 	// 信用信息查看
 	public String getAllStudentCreditActivity() {
 
 		try {
-			String hql = "from Creditactivity";
+			String hql = "SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number";
 			System.out.println("number all  " + keyword);
 			if (keyword != null) {
-				hql += " where number =" + keyword;
+				hql += " and S.number =" + keyword;
 				System.out.println("after add number  " + hql);
 				keyword = null;
 			}
-
-			toBeJson(creditactivityService.getStuCreditActivityList(hql, page,
-					rows), creditactivityService.getCreditActivityTotal());
+			List<Object> dataList = creditactivityService.getStuCreditActivityList(hql, page,rows);
+			ArrayList<CreditActivityBean> arrayList = new ArrayList<CreditActivityBean>();
+			Iterator its=dataList.iterator();    
+	        //iterator遍历  最后一条数据没有
+	        while(its.hasNext()){    
+	            Object[] a=(Object[])its.next();    
+	            CreditActivityBean activityBean = new CreditActivityBean();
+	            activityBean.setId(Integer.valueOf(a[0].toString()));
+	            activityBean.setNumber(Integer.valueOf(a[1].toString()));
+	            activityBean.setName(a[2].toString());
+	            activityBean.setCategoryId(a[3].toString());
+	            activityBean.setDetail(a[4].toString());
+	            activityBean.setDates(a[5].toString());
+	            activityBean.setScore(Integer.valueOf(a[6].toString()));
+	            arrayList.add(activityBean);
+	        } 
+	        dataFromDB=new DataFromDB(arrayList
+					,creditactivityService.getCreditActivityTotal("SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number"));
+			dataFromDB.setJsonAdapter();
+			System.out.println("dataFromDB.result  "+dataFromDB.result);
+			dataFromDB.toJsp();
+			//toBeJson(arrayList, creditactivityService.getCreditActivityTotal("SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -245,31 +268,44 @@ public class CreditActivityAction extends ActionSupport {
 		System.out.println("ca.number   " + ca.getNumber());
 		System.out.println("number   " + getNumber());
 		System.out.println("addCreditActivity access");
+		
+		
+		//List data = creditactivityService.getData("select cc.score from Creditcategory cc where cc.detail="+detail);
+		
+		//现在还需要在添加的时候  先拿到这个学号对应的基础的信用分
+		Object creditObject=creditactivityService.getData("select stu.credit from StuBase stu where stu.number="+number).get(0);
+		int creditStuBase = Integer.valueOf(creditObject.toString());
+		System.out.println("creditStuBase   "+creditStuBase);
+		//再拿到这个活动对应的信用分
+		Object activityScoreobject = creditactivityService.getData("select cc.score from Creditcategory cc where cc.detail='"+detail+"'").get(0);
+		int creditActivityScore=Integer.valueOf(activityScoreobject.toString());
+		System.out.println("creditActivityScore  "+creditActivityScore);
+		//再最后再数据库完成更新
 		try {
 			creditactivityService.saveCreditActivityOrUpdate(ca);
-			//return "success";
+			System.out.println("save  success");
+			int scoreFinal=creditStuBase+creditActivityScore;
+			String hql="update StuBase stu set stu.credit="+scoreFinal+" where stu.number="+number;
+			System.out.println("hql   "+hql);
+			creditactivityService.updateStuBase(hql );
+			System.out.println("update success");
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
 			return INPUT;
 		}
 	}
 
-	
 	public void deleteAct(int number){
 		try {
-			
 			creditactivityService.deleteCreditActivity(number);
 			System.out.println("inin");
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			
 		}
 	}
 	public void deleteCreditActivityByIds() {
-		
-		System.out.println("stuIds   "+creditActivityIds);
+		System.out.println("creditActivityIds   "+creditActivityIds);
 		if(creditActivityIds.contains(",")){
 			String[] strings = creditActivityIds.split(",");
 			for(int i=0;i<strings.length;i++){
@@ -290,8 +326,12 @@ public class CreditActivityAction extends ActionSupport {
 			list = creditactivityService.getCreditActivitySearchList(hql, page,
 					rows);
 			System.out.println("result list size  " + list.size());
-			toBeJson(list,
-					creditactivityService.getCreditActivitySearchedTotal(hql));
+			dataFromDB=new DataFromDB(list
+					,creditactivityService.getCreditActivitySearchedTotal(hql));
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
+			/*toBeJson(list,
+					creditactivityService.getCreditActivitySearchedTotal(hql));*/
 			return null;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());

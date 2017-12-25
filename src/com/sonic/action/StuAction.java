@@ -18,12 +18,13 @@ import com.sonic.pojo.Creditactivity;
 import com.sonic.pojo.Info;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.StuService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class StuAction extends ActionSupport {
 	private JSONObject jsonObj;
 	private StuService userService;
-
+	private DataFromDB dataFromDB;
 	public JSONObject getJsonObj() {
 		return jsonObj;
 	}
@@ -196,23 +197,6 @@ public class StuAction extends ActionSupport {
 		this.list = list;
 	}
 
-	private void toBeJson(List list, int total) throws Exception {
-		JsonConfig jconfig = new JsonConfig();
-		JSONArray ja = new JSONArray();
-		jconfig.setIgnoreDefaultExcludes(false);
-		jconfig.registerJsonValueProcessor(java.util.Date.class,
-				new DateJsonValueProcessor("yyyy-MM-dd"));
-
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		JSONObject jobj = new JSONObject();// new一个JSON
-		jobj.accumulate("total", total);// total代表一共有多少数据
-		jobj.accumulate("rows", ja.fromObject(list, jconfig));// row是代表显示的页的数据
-
-		response.setCharacterEncoding("utf-8");// 指定为utf-8
-		response.getWriter().write(jobj.toString());
-	}
-
 	// 查询出所有学生信息
 	public String getStuSelfBaseInfo() {
 
@@ -220,7 +204,10 @@ public class StuAction extends ActionSupport {
 			String Name = (String) ServletActionContext.getRequest()
 					.getSession().getAttribute("userName");
 			String actualName=(Name.split("/"))[0];
-			toBeJson(userService.getStuSelfBaseList(actualName), 1);
+			dataFromDB=new DataFromDB(userService.getStuSelfBaseList(actualName)
+					,1);
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
 			System.out.println("查询完毕");
 
 		} catch (Exception e) {
@@ -249,8 +236,10 @@ public class StuAction extends ActionSupport {
 			String actualName=(Name.split("/"))[0];
 			String hql = "from Creditactivity where name='" + actualName
 					+ "' ";
-			toBeJson(userService.getStuSelfCreditActivityList(page, rows,actualName),
-					userService.getStuSelfCreditActivityTotal(hql));
+			dataFromDB=new DataFromDB(userService.getStuSelfCreditActivityList(page, rows,actualName)
+					,userService.getStuSelfCreditActivityTotal(hql));
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
 			System.out.println("查询完毕");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -281,7 +270,10 @@ public class StuAction extends ActionSupport {
 	
 	public String getAllInfoStu() { 
         try {
-			toBeJson(userService.getAllInfoList(page, rows),userService.getInfoTotal());
+        	dataFromDB=new DataFromDB(userService.getAllInfoList(page, rows)
+					,userService.getInfoTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
         } catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -295,7 +287,10 @@ public class StuAction extends ActionSupport {
     				.getAttribute("userName");
         	String actualName=(Name.split("/"))[0];
         	int actualNumber=Integer.parseInt((Name.split("/"))[1]);
-			toBeJson(userService.getAllApplicationsList(page, rows,actualName,actualNumber),userService.getApplicationsTotal(actualName,actualNumber));
+        	dataFromDB=new DataFromDB(userService.getAllApplicationsList(page, rows,actualName,actualNumber)
+					,userService.getApplicationsTotal(actualName,actualNumber));
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
         } catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -318,11 +313,9 @@ public class StuAction extends ActionSupport {
 		System.out.println("addApplicationStuSelf access");
 		try {
 			userService.saveApplocationSelfOrUpdate(application);
-			//return "success";
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
 			return INPUT;
 		}
 	}

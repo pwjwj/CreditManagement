@@ -18,6 +18,7 @@ import com.sonic.pojo.Creditactivity;
 import com.sonic.pojo.Creditcategory;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.CreditCategoryService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class CreditCategoryAction extends ActionSupport {
@@ -37,12 +38,11 @@ public class CreditCategoryAction extends ActionSupport {
 
 	private String keyword;
 
-	private Integer creditCategoryId;
 	private Integer idss;
 	private Creditcategory prepairToChangeCategory;
 
 	private String creditCategoryIds;
-	
+	private DataFromDB dataFromDB;
 	public String getCreditCategoryIds() {
 		return creditCategoryIds;
 	}
@@ -66,14 +66,6 @@ public class CreditCategoryAction extends ActionSupport {
 
 	public void setIdss(Integer idss) {
 		this.idss = idss;
-	}
-
-	public Integer getCreditCategoryId() {
-		return creditCategoryId;
-	}
-
-	public void setCreditCategoryId(Integer creditCategoryId) {
-		this.creditCategoryId = creditCategoryId;
 	}
 
 	public String getKeyword() {
@@ -173,23 +165,6 @@ public class CreditCategoryAction extends ActionSupport {
 		this.userId = userId;
 	}
 
-	private void toBeJson(List list, int total) throws Exception {
-		JsonConfig jconfig = new JsonConfig();
-		JSONArray ja = new JSONArray();
-		jconfig.setIgnoreDefaultExcludes(false);
-		jconfig.registerJsonValueProcessor(java.util.Date.class,
-				new DateJsonValueProcessor("yyyy-MM-dd"));
-		
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		JSONObject jobj = new JSONObject();// new一个JSON
-		jobj.accumulate("total", total);// total代表一共有多少数据
-		jobj.accumulate("rows", ja.fromObject(list, jconfig));// row是代表显示的页的数据
-
-		response.setCharacterEncoding("utf-8");// 指定为utf-8
-		response.getWriter().write(jobj.toString());
-	}
-
 	//奖惩事项条目查看
 	public String getAllCreditCategory() {
 
@@ -200,8 +175,12 @@ public class CreditCategoryAction extends ActionSupport {
 				System.out.println("after add number  " + hql);
 				keyword = null;
 			}
-			toBeJson(creditcategoryService.getCreditCategoryList(hql, page,
-					rows), creditcategoryService.getCreditCategoryTotal());
+			dataFromDB=new DataFromDB(creditcategoryService.getCreditCategoryList(hql, page,rows)
+					,creditcategoryService.getCreditCategoryTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
+			/*toBeJson(creditcategoryService.getCreditCategoryList(hql, page,
+					rows), creditcategoryService.getCreditCategoryTotal());*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

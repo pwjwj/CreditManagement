@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sonic.pojo.Admin;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.AdminSuService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class AdminSuAction extends ActionSupport {
@@ -31,15 +32,23 @@ public class AdminSuAction extends ActionSupport {
 	private String tel;
 	private String other;
 	private List<Admin> list;
-	private Integer adminId;
+	private DataFromDB dataFromDB;
+	private String adminIds;
 	
-
-	public Integer getAdminId() {
-		return adminId;
+	public DataFromDB getDataFromDB() {
+		return dataFromDB;
 	}
 
-	public void setAdminId(Integer adminId) {
-		this.adminId = adminId;
+	public void setDataFromDB(DataFromDB dataFromDB) {
+		this.dataFromDB = dataFromDB;
+	}
+
+	public String getAdminIds() {
+		return adminIds;
+	}
+
+	public void setAdminIds(String adminIds) {
+		this.adminIds = adminIds;
 	}
 
 	public List<Admin> getList() {
@@ -138,33 +147,24 @@ public class AdminSuAction extends ActionSupport {
 		this.other = other;
 	}
 
-	private void toBeJson(List list, int total) throws Exception {
-		JsonConfig jconfig = new JsonConfig();
-		JSONArray ja = new JSONArray();
-		jconfig.setIgnoreDefaultExcludes(false);
-		jconfig.registerJsonValueProcessor(java.util.Date.class,
-				new DateJsonValueProcessor("yyyy-MM-dd"));
-
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		JSONObject jobj = new JSONObject();// new一个JSON
-		jobj.accumulate("total", total);// total代表一共有多少数据
-		jobj.accumulate("rows", ja.fromObject(list, jconfig));// row是代表显示的页的数据
-
-		response.setCharacterEncoding("utf-8");// 指定为utf-8
-		response.getWriter().write(jobj.toString());
-	}
-
 	// 查询出所有事务管理员信息
 	public String getAllAdminBaseInfo() {
 		try {
-			toBeJson(userService.getAdminBaseList(page, rows),
-						userService.getAdminTotal());
-				// authority = null;
+			String hql = "from Admin";
+			if (keyword != null) {
+				System.out.println("keyword  " + keyword);
+				hql += " where username like '%" + keyword
+						+ "%'or tel like '%" + keyword + "%'";
+				System.out.println("after add keyword  " + hql);
+				keyword = null;
+			}
+			dataFromDB=new DataFromDB(userService.getAdminBaseList(hql,page, rows)
+					,userService.getAdminTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
 			System.out.println("查询完毕");
 			System.out.println(userService.getAdminTotal());
-			System.out.println(userService.getAdminBaseList(page, rows).get(0)
-						.getUsername());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -172,7 +172,6 @@ public class AdminSuAction extends ActionSupport {
 	}
 		
 	public String getCurrentAdminSu() {
-			
 		String Name = (String) ServletActionContext.getRequest().getSession()
 				.getAttribute("userName");
 		System.out.println("Name  "+Name);
@@ -183,30 +182,13 @@ public class AdminSuAction extends ActionSupport {
 				userService.getUser(Name));
 		return SUCCESS;
 	}
-	public String adminSearch() {
-		List<Admin> list1 = list;
-		try {
-			System.out.println("keyword   " + keyword);
-			String hql = "from Admin where username like '%" + keyword
-						+ "%'or tel like '%" + keyword + "%'";
-			list = userService.getAdminSearchList(hql, page, rows);
-			System.out.println("result list size  " + list.size());
-			toBeJson(list, userService.getSearchedTotal(hql));
-			return null;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			list = list1;
-			return SUCCESS;
-		}
-	}
-
+	
 	public String addAdminBase() {
 		Admin admin = new Admin();
 		admin.setUsername(username);
 		admin.setPwd(pwd);
 		admin.setTel(tel);
-		admin.setOther(other);
-			
+		admin.setOther(other);	
 		System.out.println("addAdmin access");
 		try {
 			userService.saveStuBaseOrUpdate(admin);
@@ -219,17 +201,25 @@ public class AdminSuAction extends ActionSupport {
 		}
 	}
 
-	public String deleteAdminById() {
+	public void deleteAct(int number) {
 		try {
-			System.out.println("adminId  " + adminId);
-			userService.deleteAdmin(adminId);
-			//return "success";
-			return SUCCESS;
+			userService.deleteAdmin(number);
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
+		}
+	}
+	public void deleteAdminByIds() {
 
+		System.out.println("adminIds   " + adminIds);
+		if (adminIds.contains(",")) {
+			String[] strings = adminIds.split(",");
+			for (int i = 0; i < strings.length; i++) {
+				deleteAct(Integer.parseInt(strings[i]));
+			}
+			ServletActionContext.getRequest().setAttribute("passwordErro",
+					"true");
+		} else {
+			deleteAct(Integer.parseInt(adminIds));
 		}
 	}
 }

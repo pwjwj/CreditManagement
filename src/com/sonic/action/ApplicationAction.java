@@ -16,6 +16,7 @@ import com.sonic.pojo.Info;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.ApplicationService;
 import com.sonic.service.GoodsService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class ApplicationAction extends ActionSupport {
@@ -29,8 +30,6 @@ public class ApplicationAction extends ActionSupport {
 	private List<Application> list;
 	private Integer keyword;
 	
-	private Integer applicationId;
-	
 	private Integer checkId;
 	private String checkName;
 	private Integer checkNumber;
@@ -39,7 +38,7 @@ public class ApplicationAction extends ActionSupport {
 	private String checkTime;
 	
 	private String applicationIds;
-	
+	private DataFromDB dataFromDB;
 	
 	public String getApplicationIds() {
 		return applicationIds;
@@ -97,14 +96,6 @@ public class ApplicationAction extends ActionSupport {
 		this.checkTime = checkTime;
 	}
 
-	public Integer getApplicationId() {
-		return applicationId;
-	}
-
-	public void setApplicationId(Integer applicationId) {
-		this.applicationId = applicationId;
-	}
-
 	public JSONObject getJsonObj() {
 		return jsonObj;
 	}
@@ -112,8 +103,6 @@ public class ApplicationAction extends ActionSupport {
 	public void setJsonObj(JSONObject jsonObj) {
 		this.jsonObj = jsonObj;
 	}
-
-	
 
 	public ApplicationService getApplicationService() {
 		return applicationService;
@@ -170,8 +159,13 @@ public class ApplicationAction extends ActionSupport {
 	public void setKeyword(Integer keyword) {
 		this.keyword = keyword;
 	}
-
-	private void toBeJson(List list,int total) throws Exception{ 
+	/*public void toDataGrid(String gridData) throws Exception{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");// 指定为utf-8
+		response.getWriter().write(gridData);
+		System.out.println("gridData  "+gridData);
+	}*/
+	/*private void toBeJson(List list,int total) throws Exception{ 
     	JsonConfig jconfig = new JsonConfig();
     	JSONArray ja = new JSONArray(); 
     	jconfig.setIgnoreDefaultExcludes(false);
@@ -183,19 +177,26 @@ public class ApplicationAction extends ActionSupport {
         jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
   
         response.setCharacterEncoding("utf-8");//指定为utf-8  
-        response.getWriter().write(jobj.toString());     
-    }  
+        response.getWriter().write(jobj.toString());   
+        System.out.println(jobj.toString());
+    }  */
 	//获取所有申请 也负担有查询的功能
     public String getAllApplication() { 
         try {
-        	String hql="from Application";
+        	String hql="select ac FROM Application ac,StuBase stu where ac.applicationNumber=stu.number ORDER BY stu.credit DESC";
 			if(keyword != null){
 				System.out.println("keyword  "+keyword);
-        		hql+=" where applicationNumber ="+keyword;
+				hql="select ac FROM Application ac,StuBase stu where ac.applicationNumber=stu.number and applicationNumber ="+keyword+" ORDER BY stu.credit DESC";
+        		//hql+=" where applicationNumber ="+keyword;
         		System.out.println("after add number  "+hql);
         		keyword=null;
         	}
-			toBeJson(applicationService.getApplicationList(hql,page, rows),applicationService.getApplicationTotal());
+			dataFromDB=new DataFromDB(applicationService.getApplicationList(hql,page, rows)
+					,applicationService.getApplicationTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
+			
+			/*toBeJson(applicationService.getApplicationList(hql,page, rows),applicationService.getApplicationTotal());*/
         } catch (Exception e) {
 			e.printStackTrace();
 		}

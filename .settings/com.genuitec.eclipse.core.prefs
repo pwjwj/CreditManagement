@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-validator.Checked=WebRoot/easyUI,WebRoot/bilibili/sea.js
+validator.Checked=WebRoot/highchart,WebRoot/easyUI,WebRoot/bilibili/sea.js
 validator.Revalidate=true
 validator.Unchecked=

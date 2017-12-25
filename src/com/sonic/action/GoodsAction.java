@@ -17,6 +17,7 @@ import com.sonic.pojo.Goods;
 import com.sonic.pojo.Info;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.GoodsService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class GoodsAction extends ActionSupport {
@@ -33,11 +34,9 @@ public class GoodsAction extends ActionSupport {
 	private List<Goods> list;
 	private String keyword;
 	
-	private Integer GoodsId;
-	
 	private String GoodsIds;
 	
-	
+	private DataFromDB dataFromDB;
     public String getGoodsIds() {
 		return GoodsIds;
 	}
@@ -46,14 +45,6 @@ public class GoodsAction extends ActionSupport {
 		GoodsIds = goodsIds;
 	}
 
-	public Integer getGoodsId() {
-		return GoodsId;
-	}
-
-	public void setGoodsId(Integer goodsId) {
-		GoodsId = goodsId;
-	}
-	
 	public String getKeyword() {
 		return keyword;
 	}
@@ -134,21 +125,6 @@ public class GoodsAction extends ActionSupport {
 		this.userId = userId;
 	}
 
-	private void toBeJson(List list,int total) throws Exception{ 
-    	JsonConfig jconfig = new JsonConfig();
-    	JSONArray ja = new JSONArray(); 
-    	jconfig.setIgnoreDefaultExcludes(false);
-    	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
-
-        HttpServletResponse response = ServletActionContext.getResponse();  
-              
-        JSONObject jobj = new JSONObject();//new一个JSON  
-        jobj.accumulate("total",total );//total代表一共有多少数据  
-        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
-  
-        response.setCharacterEncoding("utf-8");//指定为utf-8  
-        response.getWriter().write(jobj.toString());     
-    }  
 	//获取所有物资
     public String getAllGoods() { 
         try {
@@ -160,7 +136,11 @@ public class GoodsAction extends ActionSupport {
         		System.out.println("after add number  "+hql);
         		keyword=null;
         	}
-			toBeJson(goodsService.getAllGoodsList(hql,page, rows),goodsService.getGoodsTotal());
+        	dataFromDB=new DataFromDB(goodsService.getAllGoodsList(hql,page, rows)
+        			,goodsService.getGoodsTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
+			//toBeJson(goodsService.getAllGoodsList(hql,page, rows),goodsService.getGoodsTotal());
         } catch (Exception e) {
 			e.printStackTrace();
 		}

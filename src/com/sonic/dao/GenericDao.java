@@ -41,6 +41,7 @@ public interface GenericDao {
 	 public int countQuery(String hql);
 	 
 	 /** 条件更新数据 */
-	 public int update(String hql);
+	public int update(String hql);
+	
 	 
 }

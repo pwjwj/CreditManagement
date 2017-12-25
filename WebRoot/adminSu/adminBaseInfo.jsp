@@ -12,7 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>My JSP 'user1.jsp' starting page</title>
     
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -20,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/default/easyui.css" >
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/easyUI/jquery-easyui-1.3.2/themes/icon.css">
-	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery-1.8.0.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="<%=basePath %>/easyUI/jquery-easyui-1.3.2/jquery.easyui.min.js" charset="utf-8"></script>
 <script type="text/javascript">  
     $(function() {  
@@ -56,16 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
     });  
 	 function formatOper2(val,row,index){ 
-    	return '<a href="javascript:void(0)" onclick="delete2('+index+')">删除</a>';   
+    	return '<a href="javascript:void(0)" onclick="deletedata()">删除</a>';   
 	}  
-	function delete2(index){
-		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
-    	var rows = $("#commUserDatagrid").datagrid("getSelections");
-    	if (rows.length==1){    
-            var url = '<%=basePath %>deleteAdminById.action?adminId='+rows[0].id;
-             window.location.href=url;
-        }  
-	}
+	
 	function formatOper2_1(val,row,index){ 
     	return '<a href="javascript:void(0)" onclick="changeInfo2('+index+')">修改信息</a>';   
 	}  
@@ -73,15 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
-<<<<<<< HEAD
-<<<<<<< HEAD
             var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
-=======
-            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-=======
-            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
             window.location.href=url;
         }  
 	}
@@ -97,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             striped : true,//设置为true将交替显示行背景。  
             collapsible : true,//显示可折叠按钮 
             toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个  
-             url:'getAllAdminBaseInfo.action',//url调用Action方法  
+             url:'getAllAdminBaseInfo.action?keyword='+value,//url调用Action方法  
             loadMsg : '数据装载中......',  
             
             nowrap:false,  
@@ -118,19 +102,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             rownumbers : true//行数  
         });   
 }
+	function deletedata() {  
+        //返回选中多行  
+        var selRow = $('#commUserDatagrid').datagrid('getSelections')  
+        //判断是否选中行  
+        if (selRow.length==0) {  
+            $.messager.alert("提示", "请选择要删除的行！", "info");  
+            return;  
+        }else{      
+            var temID="";  
+            //批量获取选中行的ID  
+            for (var i = 0; i < selRow.length;i++) {  
+                if (temID =="") {  
+                    temID = selRow[i].id;  
+                } else {  
+                    temID = selRow[i].id + "," + temID;  
+                }                 
+            }           
+            $.messager.confirm('提示', '是否删除选中数据?', function (r) {  
+  
+                if (!r) {  
+                    return;  
+                }  
+                alert(temID);
+                //提交  
+                $.ajax({  
+                    type: "POST",  
+                    async: false,  
+                    url: "deleteAdminByIds.action?adminIds=" + temID,  
+                    data: temID,  
+                    success: function (result) {  
+                    	alert(result);
+                        if (result.indexOf("t") <= 0) {  
+                            $('#commUserDatagrid').datagrid('clearSelections');  
+                            $.messager.alert("提示", "恭喜您，信息删除成功！", "info");  
+                            $('#commUserDatagrid').datagrid('reload');  
+                        } else {  
+                            $.messager.alert("提示", "删除失败，请重新操作！", "info");  
+                            return;  
+                        }  
+                    }  
+                });  
+            });  
+  
+        }  
+    };  
 	
 </script>  
   </head>
   
   <body>
   
-  <%-- <s:form  action="adminSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
-  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
-  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  		 <input type="submit" value="搜索" ">
-  </s:form> --%>
   <div id="tb" >
 		<input id="keyword" name="keyword" class="easyui-searchbox"
 			searcher="doSearch" prompt="搜索"
@@ -138,12 +160,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<button id="delete_button" class="easyui-submit"
 			onclick="deletedata()">批量删除</button>
 	</div>
-=======
-=======
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-  		 <input type="submit" value="搜索" >
-  </s:form>
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
     <div style="margin: 10px 0px 0px 15px">
 	<table id="commUserDatagrid">  
        <thead>  

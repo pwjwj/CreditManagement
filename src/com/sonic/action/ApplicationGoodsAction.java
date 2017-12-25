@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sonic.pojo.Application;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.ApplicationGoodsService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class ApplicationGoodsAction extends ActionSupport {
@@ -26,9 +27,7 @@ public class ApplicationGoodsAction extends ActionSupport {
    
 	private List<Application> list;
 	private Integer keyword;
-	
-	private Integer applicationId;
-	
+
 	private Integer checkId;
 	private String checkName;
 	private Integer checkNumber;
@@ -36,7 +35,7 @@ public class ApplicationGoodsAction extends ActionSupport {
 	
 	private String checkTime;
 	private String applicationIds;
-	
+	private DataFromDB dataFromDB;
 	public String getApplicationIds() {
 		return applicationIds;
 	}
@@ -122,27 +121,7 @@ public class ApplicationGoodsAction extends ActionSupport {
 	public void setKeyword(Integer keyword) {
 		this.keyword = keyword;
 	}
-	public Integer getApplicationId() {
-		return applicationId;
-	}
-	public void setApplicationId(Integer applicationId) {
-		this.applicationId = applicationId;
-	}
-	private void toBeJson(List list,int total) throws Exception{ 
-    	JsonConfig jconfig = new JsonConfig();
-    	JSONArray ja = new JSONArray(); 
-    	jconfig.setIgnoreDefaultExcludes(false);
-    	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
-
-        HttpServletResponse response = ServletActionContext.getResponse();  
-              
-        JSONObject jobj = new JSONObject();//new一个JSON  
-        jobj.accumulate("total",total );//total代表一共有多少数据  
-        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
-  
-        response.setCharacterEncoding("utf-8");//指定为utf-8  
-        response.getWriter().write(jobj.toString());     
-    }  
+	
 	//获取所有通知 
     public String getAllGoodsApplication() { 
     	
@@ -154,7 +133,11 @@ public class ApplicationGoodsAction extends ActionSupport {
         		System.out.println("after add number  "+hql);
         		keyword=null;
         	}
-			toBeJson(applicationService.getGoodsApplicationList(hql,page, rows),applicationService.getGoodsApplicationTotal());
+			dataFromDB=new DataFromDB(applicationService.getGoodsApplicationList(hql,page, rows)
+					,applicationService.getGoodsApplicationTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
+			//toBeJson(applicationService.getGoodsApplicationList(hql,page, rows),applicationService.getGoodsApplicationTotal());
         } catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -193,9 +176,7 @@ public class ApplicationGoodsAction extends ActionSupport {
 			application.setApplicationTime(checkTime);
 			application.setApplicationWhat(checkWhat);
 			application.setId(checkId);
-			
 			application.setIsPass("true");
-			
 			applicationService.saveApplicationOrUpdate(application);
 			return SUCCESS;
 		}catch(Exception e){

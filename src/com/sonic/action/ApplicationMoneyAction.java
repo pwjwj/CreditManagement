@@ -15,6 +15,7 @@ import com.sonic.pojo.Application;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.ApplicationMoneyService;
 import com.sonic.service.ApplicationService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
 
 public class ApplicationMoneyAction extends ActionSupport {
@@ -28,8 +29,6 @@ public class ApplicationMoneyAction extends ActionSupport {
 	private List<Application> list;
 	private Integer keyword;
 	
-	private Integer applicationId;
-	
 	private Integer checkId;
 	private String checkName;
 	private Integer checkNumber;
@@ -38,7 +37,7 @@ public class ApplicationMoneyAction extends ActionSupport {
 	private String checkTime;
 
 	private String applicationIds;
-	
+	private DataFromDB dataFromDB;
 	public String getApplicationIds() {
 		return applicationIds;
 	}
@@ -85,14 +84,6 @@ public class ApplicationMoneyAction extends ActionSupport {
 
 	public void setCheckTime(String checkTime) {
 		this.checkTime = checkTime;
-	}
-
-	public Integer getApplicationId() {
-		return applicationId;
-	}
-
-	public void setApplicationId(Integer applicationId) {
-		this.applicationId = applicationId;
 	}
 
 	public JSONObject getJsonObj() {
@@ -158,22 +149,6 @@ public class ApplicationMoneyAction extends ActionSupport {
 	public void setKeyword(Integer keyword) {
 		this.keyword = keyword;
 	}
-
-	private void toBeJson(List list,int total) throws Exception{ 
-    	JsonConfig jconfig = new JsonConfig();
-    	JSONArray ja = new JSONArray(); 
-    	jconfig.setIgnoreDefaultExcludes(false);
-    	jconfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
-
-        HttpServletResponse response = ServletActionContext.getResponse();  
-              
-        JSONObject jobj = new JSONObject();//new一个JSON  
-        jobj.accumulate("total",total );//total代表一共有多少数据  
-        jobj.accumulate("rows", ja.fromObject(list,jconfig));//row是代表显示的页的数据  
-  
-        response.setCharacterEncoding("utf-8");//指定为utf-8  
-        response.getWriter().write(jobj.toString());     
-    }  
 	//获取所有资金申请
     public String getAllMoneyApplication() { 
     	
@@ -185,7 +160,11 @@ public class ApplicationMoneyAction extends ActionSupport {
         		System.out.println("after add number  "+hql);
         		keyword=null;
         	}
-			toBeJson(applicationService.getMoneyApplicationList(hql,page, rows),applicationService.getMoneyApplicationTotal());
+			dataFromDB=new DataFromDB(applicationService.getMoneyApplicationList(hql,page, rows)
+					,applicationService.getMoneyApplicationTotal());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
+			//toBeJson(applicationService.getMoneyApplicationList(hql,page, rows),applicationService.getMoneyApplicationTotal());
         } catch (Exception e) {
 			e.printStackTrace();
 		}

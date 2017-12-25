@@ -2,29 +2,28 @@ package com.sonic.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
-
-import jxl.Cell;
-import jxl.Workbook;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-
 import com.sonic.pojo.Admin;
 import com.sonic.pojo.AdminSu;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.BaseInfoService;
+import com.sonic.utills.DataFromDB;
 import com.sonic.utills.DateJsonValueProcessor;
+import com.sonic.utills.FileUtils;
 
 public class BaseInfoAction extends ActionSupport {
 	private JSONObject jsonObj;
@@ -44,37 +43,19 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
-	
-	private String AdminName;
-<<<<<<< HEAD
-=======
 
-
-	public String getAdminName() {
-		return AdminName;
-	}
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-
-	public void setAdminName(String adminName) {
-		AdminName = adminName;
-	}
-
-	public String getAdminName() {
-		return AdminName;
-	}
-
-<<<<<<< HEAD
-=======
-	public void setAdminName(String adminName) {
-		AdminName = adminName;
-	}
-
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 	private String stuIds;
 	private File source;
-	
+	private DataFromDB dataFromDB;
 	private boolean isWriteSuccess=false;
-	
+	private String AdminName;
+	public String getAdminName() {
+		return AdminName;
+	}
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
+	}
 
 	public File getSource() {
 		return source;
@@ -239,29 +220,13 @@ public class BaseInfoAction extends ActionSupport {
 	public void setPrepairUserService(BaseInfoService prepairUserService) {
 		this.prepairUserService = prepairUserService;
 	}
-
-	private void toBeJson(List list, int total) throws Exception {
-		JsonConfig jconfig = new JsonConfig();
-		JSONArray ja = new JSONArray();
-		jconfig.setIgnoreDefaultExcludes(false);
-		jconfig.registerJsonValueProcessor(java.util.Date.class,
-				new DateJsonValueProcessor("yyyy-MM-dd"));
-
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		JSONObject jobj = new JSONObject();// new一个JSON
-		jobj.accumulate("total", total);// total代表一共有多少数据
-		jobj.accumulate("rows", ja.fromObject(list, jconfig));// row是代表显示的页的数据
-
-		response.setCharacterEncoding("utf-8");// 指定为utf-8
-		response.getWriter().write(jobj.toString());
-	}
-
+	//简单工厂模式
 	public String login() {
 		Object users;
 		String result = ERROR;
 		if (user.getName().startsWith("T")) {
 			// 事务管理员
+			//根据参数创建不同的用户
 			users = (Admin) userService.getTUser(user.getName());
 			if (users != null) {
 				if (((Admin) users).getPwd().equals(user.getPwd())) {
@@ -342,7 +307,6 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getUser(stuName));
 		return SUCCESS;
 	}
-	
 	public String getAdminByUserName()
 	{
 		if(AdminName == null || AdminName.equals(""))
@@ -351,7 +315,6 @@ public class BaseInfoAction extends ActionSupport {
 				userService.getTUser(AdminName));
 		return SUCCESS;
 	}
-
 	public boolean check(StuBase u) {
 		boolean flag = true;
 		System.out.println("进来了");
@@ -381,13 +344,11 @@ public class BaseInfoAction extends ActionSupport {
 			return INPUT;
 		}
 	}
-
 	public String logout() {
 		ServletActionContext.getRequest().getSession()
 				.removeAttribute("userId");
 		return SUCCESS;
 	}
-
 	// 查询出所有学生信息
 	public String getAllStudentBaseInfo() {
 
@@ -401,8 +362,11 @@ public class BaseInfoAction extends ActionSupport {
 			}
 			System.out.println("page   " + page);
 			System.out.println("rows   " + rows);
-			toBeJson(userService.getStuBaseList(hql, page, rows),
-					userService.getUserTotal());
+			dataFromDB=new DataFromDB(userService.getStuBaseList(hql, page, rows)
+					,userService.getUserTotal());
+			//toDataGrid(dataFromDB.setJsonAdapter());
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
 			System.out.println("查询完毕");
 			System.out.println(userService.getUserTotal());
 			System.out.println(userService.getStuBaseList(hql, page, rows)
@@ -412,7 +376,40 @@ public class BaseInfoAction extends ActionSupport {
 		}
 		return null;
 	}
+	
+	public String getAllStudentBaseInfoNoTotal() throws Exception {
+		String hql = "from StuBase";
 
+		List<StuBase> list = null;
+		List _list = new ArrayList();
+		try {
+			list = (ArrayList<StuBase>) userService.getStuBaseList(hql); // 调用查询方法
+			if (list.size() > 0) {
+				for (StuBase stu : list) { // 遍历后台传值
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("name", stu.getName());
+					map.put("credit", stu.getCredit());
+					_list.add(map);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		JsonConfig jconfig = new JsonConfig();
+		jconfig.setIgnoreDefaultExcludes(false);
+		jconfig.registerJsonValueProcessor(java.util.Date.class,
+				new DateJsonValueProcessor("yyyy-MM-dd"));
+		Map<String, Object> jsonMap = new HashMap<String, Object>();// 定义map
+		jsonMap.put("rows", _list);// rows键 存放每页记录 list
+		String result = JSONObject.fromObject(jsonMap, jconfig).toString();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		out.flush();
+		out.close();
+		return null;
+	}
 	public String addStuBase() {
 		StuBase stu = new StuBase();
 		System.out.println("name  " + name);
@@ -427,49 +424,21 @@ public class BaseInfoAction extends ActionSupport {
 		System.out.println("addStuBase access");
 		try {
 			userService.saveStuBaseOrUpdate(stu);
-			// return "success";
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			// return "input";
 			return INPUT;
 		}
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void deleteAct(int number) {
-=======
-=======
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
-
-	public String deleteStuById() {
-		try {
-			System.out.println("stuId  " + stuId);
-			userService.deleteStu(stuId);
-			//return "success";
-			return SUCCESS;
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-			//return "input";
-			return INPUT;
-
-		}
-	}
-	public void deleteAct(int number){
->>>>>>> 9b8ce22b1266c4b73a1058acc9ef865493a42098
 		try {
 			userService.deleteStu(number);
-
-			// return "true";
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			// return INPUT;
 		}
 	}
-
 	public void deleteStuByIds() {
-
 		System.out.println("stuIds   " + stuIds);
 		if (stuIds.contains(",")) {
 			String[] strings = stuIds.split(",");
@@ -484,18 +453,20 @@ public class BaseInfoAction extends ActionSupport {
 	}
 
 	public String getAdminSelfInfo() {
-
 		try {
 			String Name = (String) ServletActionContext.getRequest()
 					.getSession().getAttribute("userName");
-			toBeJson(userService.getAdminSelfBaseList(Name), 1);
+			dataFromDB=new DataFromDB(userService.getAdminSelfBaseList(Name)
+					,1);
+			dataFromDB.setJsonAdapter();
+			dataFromDB.toJsp();
+			
 			System.out.println("查询完毕");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 	public String getAdminById() {
 		System.out.println("adminId");
 		if (adminId == null || adminId.equals("")) {
@@ -508,7 +479,6 @@ public class BaseInfoAction extends ActionSupport {
 	}
 
 	public String modifyAdminInfo() {
-
 		try {
 			userService.saveAdminOrUpdate(prepairToChangeAdmin);
 			return SUCCESS;
@@ -517,56 +487,16 @@ public class BaseInfoAction extends ActionSupport {
 			return INPUT;
 		}
 	}
-
-	public void addStuFromExcel(String fileName) {
-		try {
-			isWriteSuccess=false;
-			File file=new File(ServletActionContext.getServletContext().getRealPath("/")
-					+fileName);
-			Workbook wb = Workbook.getWorkbook(file);
-			//System.out.println("wb.getSheet(0).getRows()  "+wb.getSheet(0).getRows());
-			for (int i = 1; i < wb.getSheet(0).getRows()-1; i++) {
-				Cell[] cell = wb.getSheet(0).getRow(i);
-				userService.saveStuBaseOrUpdate(new StuBase(Integer
-						.parseInt(cell[0].getContents()),
-						cell[1].getContents(), cell[2].getContents(), cell[3]
-								.getContents(), cell[4].getContents(), Integer
-								.parseInt(cell[5].getContents())));
-				System.out.println(cell[1].getContents());
-			}
-			isWriteSuccess=true;
-			wb.close();
-			// 在这里应该还有一个删除的操作
-			file.delete();
-			//return SUCCESS;
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			//return INPUT;
+	//外观模式
+	public String batchIncrease() throws Exception{
+		boolean isOperateSuccess=false;
+		FileUtils fileUtils=new FileUtils(source, userService);
+		isOperateSuccess=fileUtils.operateOfFileUtils();
+		
+		if(isOperateSuccess){
+			return SUCCESS;
+		}else {
+			return INPUT;
 		}
-
-	}
-
-	public String upload() throws IOException {
-		if (source != null && source.isFile()) {
-			String uploadPath = ServletActionContext.getServletContext()
-					.getRealPath("/") ;
-			File dir = new File(uploadPath);
-			if (!dir.exists()) {
-				dir.mkdirs();
-			}
-			File destFile = new File(uploadPath, "templeate.xls");
-			FileUtils.copyFile(source, destFile);
-			System.out.println("upload ok");
-			addStuFromExcel("templeate.xls");
-			if(isWriteSuccess){
-				return SUCCESS;
-			}else {
-				return INPUT;
-			}
-		}
-		return null;
-
 	}
 }
