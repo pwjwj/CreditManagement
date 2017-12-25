@@ -222,13 +222,25 @@ public class CreditActivityAction extends ActionSupport {
 	public String getAllStudentCreditActivity() {
 
 		try {
+<<<<<<< HEAD
 			String hql = "SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number";
+=======
+<<<<<<< HEAD
+			String hql = "SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number";
+=======
+			String hql = "SELECT C,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number";
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 			System.out.println("number all  " + keyword);
 			if (keyword != null) {
 				hql += " and S.number =" + keyword;
 				System.out.println("after add number  " + hql);
 				keyword = null;
 			}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 			List<Object> dataList = creditactivityService.getStuCreditActivityList(hql, page,rows);
 			ArrayList<CreditActivityBean> arrayList = new ArrayList<CreditActivityBean>();
 			Iterator its=dataList.iterator();    
@@ -244,6 +256,7 @@ public class CreditActivityAction extends ActionSupport {
 	            activityBean.setDates(a[5].toString());
 	            activityBean.setScore(Integer.valueOf(a[6].toString()));
 	            arrayList.add(activityBean);
+<<<<<<< HEAD
 	        } 
 	        dataFromDB=new DataFromDB(arrayList
 					,creditactivityService.getCreditActivityTotal("SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number"));
@@ -251,6 +264,15 @@ public class CreditActivityAction extends ActionSupport {
 			System.out.println("dataFromDB.result  "+dataFromDB.result);
 			dataFromDB.toJsp();
 			//toBeJson(arrayList, creditactivityService.getCreditActivityTotal("SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number"));
+=======
+	        }  
+			toBeJson(arrayList, creditactivityService.getCreditActivityTotal("SELECT C.id,C.number,C.name,C.categoryId,C.detail,C.dates,S.credit from Creditactivity C,StuBase S WHERE C.number = S.number"));
+=======
+			
+			toBeJson(creditactivityService.getStuCreditActivityList(hql, page,
+					rows), creditactivityService.getCreditActivityTotal());
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -283,12 +305,21 @@ public class CreditActivityAction extends ActionSupport {
 		//再最后再数据库完成更新
 		try {
 			creditactivityService.saveCreditActivityOrUpdate(ca);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 			System.out.println("save  success");
 			int scoreFinal=creditStuBase+creditActivityScore;
 			String hql="update StuBase stu set stu.credit="+scoreFinal+" where stu.number="+number;
 			System.out.println("hql   "+hql);
 			creditactivityService.updateStuBase(hql );
 			System.out.println("update success");
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 			return SUCCESS;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -305,7 +336,15 @@ public class CreditActivityAction extends ActionSupport {
 		}
 	}
 	public void deleteCreditActivityByIds() {
+<<<<<<< HEAD
 		System.out.println("creditActivityIds   "+creditActivityIds);
+=======
+<<<<<<< HEAD
+		System.out.println("creditActivityIds   "+creditActivityIds);
+=======
+		System.out.println("stuIds   "+creditActivityIds);
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 		if(creditActivityIds.contains(",")){
 			String[] strings = creditActivityIds.split(",");
 			for(int i=0;i<strings.length;i++){

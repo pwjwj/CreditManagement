@@ -23,14 +23,34 @@
  			<result type="json"/>
  		</action>
  		
+<<<<<<< HEAD
  		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
+=======
+<<<<<<< HEAD
+ 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease">
+=======
+ 		<action name="batchIncrease" class="baseInfoAction" method="batchIncrease"/>
+ 		<action name="upload" class="baseInfoAction" method="upload">
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
  			<result name="success">/admin/BaseInfo.jsp</result>
  			<result name="input">/MyJsp.jsp</result>
  		</action>
  		<action name="modifyAdminInfo" class="baseInfoAction" method="modifyAdminInfo">
  			<result name="success">/admin/CurrentAdminInfo.jsp</result>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
  			<result name="input">/MyJsp.jsp</result>
  		</action>
+ 		<action name="modifyAdminInfos" class="baseInfoAction" method="modifyAdminInfo">
+ 			<result name="success">/adminSu/adminBaseInfo.jsp</result>
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
+ 			<result name="input">/MyJsp.jsp</result>
+ 		</action>
+ 		
  		<action name="getAdminById"  class="baseInfoAction" method="getAdminById">
  			<result name="success">/admin/CurrentAdminInfoChange.jsp</result>
  		</action>
@@ -42,8 +62,14 @@
  			<result name="success">/admin/BaseInfo.jsp</result>
  		</action>
  		
+<<<<<<< HEAD
  		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds">
  		</action>
+=======
+ 		<action name="deleteStuByIds"  class="baseInfoAction" method="deleteStuByIds"/>
+ 			
+ 		
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
  		<action name="getUserByUserName"  class="baseInfoAction" method="getUserByUserName">
  			<result name="success">/admin/StuInfo.jsp</result>
  		</action>
@@ -57,6 +83,10 @@
  		<action name="getAllStudentBaseInfo" class="baseInfoAction" method="getAllStudentBaseInfo">
  			<result type="json"/>
  		</action>
+<<<<<<< HEAD
+=======
+ 		
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
  		<action name="getAllStudentBaseInfoNoTotal" class="baseInfoAction" method="getAllStudentBaseInfoNoTotal">
  			<result type="json"/>
  		</action>

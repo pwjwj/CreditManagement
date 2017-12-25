@@ -3,10 +3,13 @@ package com.sonic.utills;
 import com.sonic.service.BaseInfoService;
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
+=======
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 public class DataFromDB {
 	//先从baseInfo里面抽 看能不能成功
 	//成功的话在抽出来一个大的
@@ -21,6 +24,7 @@ public class DataFromDB {
 		result="";
 	}
 
+<<<<<<< HEAD
 	public void setJsonAdapter(){
 		adapter=new JsonAdapter();
 		result=adapter.doAdapt(list, total);
@@ -32,4 +36,14 @@ public class DataFromDB {
 		response.getWriter().write(result);
 		System.out.println("gridData  "+result);
 	}
+=======
+
+
+	public String setAdapter(){
+		adapter=new JsonAdapter();
+		result=adapter.doAdapt(list, total);
+		return result;
+	}
+	
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 }

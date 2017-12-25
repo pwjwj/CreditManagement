@@ -48,31 +48,66 @@
 
 <link rel="stylesheet" href="<%=basePath%>/css/admin_stuinfo.css">
 
+<script type="text/javascript">
+function beforemodify()
+{
+	var name = document.getElementById("adminName").value;
+	var adminTel = document.getElementById("adminTel").value;
+	var adminOther = document.getElementById("adminOther").value;
+	var adminPwd = document.getElementById("adminPwd").value;
+	if(name=="")
+	{
+		alert("姓名不能为空!");
+		return false;
+	}else if(adminTel=="")
+	{
+		alert("联系方式不能为空!");
+		return false;
+	}else if(adminOther=="")
+	{
+		alert("备注不能为空!");
+		return false;
+	}
+	else if(adminPwd=="")
+	{
+		alert("密码不能为空!");
+		return false;
+	}
+	else if(name=="${request.currentAdmin.username}"&&adminTel=="${request.currentAdmin.tel}"&&adminOther=="${request.currentAdmin.other}"&&adminPwd=="${request.currentAdmin.pwd}")
+	{
+		alert("信息未更改!");
+		setTimeout("history.go(-1)",1000);
+		return false;
+	}
+	else
+		return true;
+}
+</script>
+
 </head>
 
 <body>
 	<div class="header">
-		<div class="center_title">管理員信息變更</div>
+		<div class="center_title">管理员信息变更</div>
 	</div>
 	<div class="center_body">
 		<s:form action="modifyAdminInfos.action" theme="simple">
 			<div class="info_center">
 				<div class="title-left">姓名：</div>
-				<s:textarea name="prepairToChangeAdmin.username" placeholder="姓名"
+				<s:textarea id="adminName" name="prepairToChangeAdmin.username" placeholder="姓名"
 					value="%{#request.currentAdmin.username}"
 					cssClass="password user_id_password"
 					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
 				<s:hidden name="prepairToChangeAdmin.id"
 					value="%{#request.currentAdmin.id}" />
-				<%-- <s:hidden name="prepairToChangeAdmin.username"
-					value="%{#request.currentAdmin.username}" /> --%>
+
 
 			</div>
 
 			<div class="info_center">
 				<div class="title-left">联系方式：</div>
 
-				<s:textarea name="prepairToChangeAdmin.tel" placeholder="联系方式"
+				<s:textarea id="adminTel" name="prepairToChangeAdmin.tel" placeholder="联系方式"
 					value="%{#request.currentAdmin.tel}"
 					cssClass="password user_id_password"
 					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
@@ -80,14 +115,14 @@
 			<div class="info_center">
 				<div class="title-left">备注：</div>
 
-				<s:textarea name="prepairToChangeAdmin.other" placeholder="备注"
+				<s:textarea id="adminOther" name="prepairToChangeAdmin.other" placeholder="备注"
 					value="%{#request.currentAdmin.other}"
 					cssClass="password user_id_password"
 					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
 			</div>
 			<div class="info_center">
-				<div class="title-left">密碼：</div>
-				<s:password name="prepairToChangeAdmin.pwd" placeholder="密码"
+				<div class="title-left">密码：</div>
+				<s:password id="adminPwd" name="prepairToChangeAdmin.pwd" placeholder="密码"
 					value="%{#request.currentAdmin.pwd}"
 					cssClass="password user_id_password"
 					cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;" />
@@ -96,7 +131,7 @@
 			<div class="info_center"></div>
 			<div class="info_center">
 				<s:submit value="修改" cssClass="center_div "
-					cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" />
+					cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;" onclick="return beforemodify();"/>
 				<br>
 				<s:if test="#request.currentUser.name == #session.stuName ">
 					<a class="center_div" href="/admin/BaseInfo.jsp">返回主页</a>

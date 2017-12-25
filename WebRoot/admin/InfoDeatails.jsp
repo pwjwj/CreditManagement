@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title></title>
+    <title>通知修改</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="pragma" content="no-cache">
@@ -34,7 +34,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link charset="utf-8" rel="stylesheet" href="<%=basePath %>/bilibili/jquery-ui.css">
 	<link rel="stylesheet" href="<%=basePath %>/css/admin_stuinfo.css">
-
+	
+	<script type="text/javascript">
+	function beforemodify()
+	{
+		var infoTitle = document.getElementById("infoTitle").value;
+		var infoContent = document.getElementById("infoContent").value;
+		if(infoTitle=="")
+		{
+			alert("通知标题不能为空!");
+			return false;
+		}
+		else if(infoContent=="")
+		{
+			alert("通知内容不能为空!");
+			return false;
+		}
+		else if(infoTitle=="${request.currentInfoSelectedId.id}"&&infoContent=="${request.currentInfoSelectedId.infoContent}")
+		{
+			alert("通知未更改!");
+			setTimeout("history.go(-1)",1000);
+		    return false;
+		}
+		else
+			return true;
+	}
+	</script>
   </head>
   
   <body>
@@ -46,17 +71,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:form action="modifyInfo.action" theme="simple">
     	
         <div class="info_center"><div class="title-left">标题名称：</div>
-        <s:textarea name="prepairToInfo.infoTittle" placeholder="通知标题" value="%{#request.currentInfoSelectedId.infoTittle}" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
+        <s:textarea id="infoTitle" name="prepairToInfo.infoTittle" placeholder="通知标题" value="%{#request.currentInfoSelectedId.infoTittle}" cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
             <s:hidden name="prepairToInfo.id" value="%{#request.currentInfoSelectedId.id}"/>
     		<s:hidden name="prepairToInfo.infoTime" value="%{#request.currentInfoSelectedId.infoTime}"/>
         </div>
 
          <div class="info_center"><div class="title-left">通知内容：</div>
-			<s:textarea name="prepairToInfo.infoContent" placeholder="通知内容" value="%{#request.currentInfoSelectedId.infoContent}"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
+			<s:textarea id="infoContent" name="prepairToInfo.infoContent" placeholder="通知内容" value="%{#request.currentInfoSelectedId.infoContent}"  cssStyle="margin-bottom: 0%;height: 90%;width: 30%; resize: none;"/>
         </div> 
         <div class="info_center"></div>
         <div class="info_center"></div>
-        <div class="info_center"><s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"/><br>
+        <div class="info_center"><s:submit value="修改" cssClass="center_div " cssStyle="cursor: pointer;font-size: 1.2em;color: white;height: 100%;width: 38%; margin:0 0 0 4%;background-color:#00a1d6;"
+        onclick="return beforemodify();"/>
         <s:if test="#request.currentUser.cCategoryId == #session.cCategoryId ">
         	 <a class="center_div" href="/admin/Creditcategory.jsp">返回主页</a>
         </s:if>

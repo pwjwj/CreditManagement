@@ -2,17 +2,31 @@ package com.sonic.action;
 
 import java.io.File;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+=======
+<<<<<<< HEAD
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 import net.sf.json.JSONArray;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -22,7 +36,14 @@ import com.sonic.pojo.AdminSu;
 import com.sonic.pojo.StuBase;
 import com.sonic.service.BaseInfoService;
 import com.sonic.utills.DataFromDB;
+<<<<<<< HEAD
 import com.sonic.utills.DateJsonValueProcessor;
+=======
+<<<<<<< HEAD
+import com.sonic.utills.DateJsonValueProcessor;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 import com.sonic.utills.FileUtils;
 
 public class BaseInfoAction extends ActionSupport {
@@ -43,12 +64,38 @@ public class BaseInfoAction extends ActionSupport {
 	private Integer number;
 	private Integer stuId;
 	private String stuName;
+<<<<<<< HEAD
 
 	private String stuIds;
 	private File source;
 	private DataFromDB dataFromDB;
 	private boolean isWriteSuccess=false;
 	private String AdminName;
+=======
+<<<<<<< HEAD
+
+	private String stuIds;
+	private File source;
+	private DataFromDB dataFromDB;
+	private boolean isWriteSuccess=false;
+	
+	private String AdminName;
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+
+	private String stuIds;
+	private File source;
+
+<<<<<<< HEAD
+=======
+	private DataFromDB dataFromDB;
+	private boolean isWriteSuccess=false;
+	
+	private String AdminName;
+
+
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 	public String getAdminName() {
 		return AdminName;
 	}
@@ -56,7 +103,13 @@ public class BaseInfoAction extends ActionSupport {
 	public void setAdminName(String adminName) {
 		AdminName = adminName;
 	}
+<<<<<<< HEAD
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 	public File getSource() {
 		return source;
 	}
@@ -98,7 +151,6 @@ public class BaseInfoAction extends ActionSupport {
 	public void setPrepairToChangeUser(StuBase prepairToChangeUser) {
 		this.prepairToChangeUser = prepairToChangeUser;
 	}
-
 	public String getStuName() {
 		return stuName;
 	}
@@ -220,7 +272,26 @@ public class BaseInfoAction extends ActionSupport {
 	public void setPrepairUserService(BaseInfoService prepairUserService) {
 		this.prepairUserService = prepairUserService;
 	}
+<<<<<<< HEAD
 	//简单工厂模式
+=======
+
+	/*private void toBeJson(List list, int total) throws Exception {
+		
+		response.setCharacterEncoding("utf-8");// 指定为utf-8
+		response.getWriter().write();
+	}*/
+
+	public void toDataGrid(String gridData) throws Exception{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");// 指定为utf-8
+		response.getWriter().write(gridData);
+<<<<<<< HEAD
+		System.out.println("gridData  "+gridData);
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+	}
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 	public String login() {
 		Object users;
 		String result = ERROR;
@@ -364,9 +435,13 @@ public class BaseInfoAction extends ActionSupport {
 			System.out.println("rows   " + rows);
 			dataFromDB=new DataFromDB(userService.getStuBaseList(hql, page, rows)
 					,userService.getUserTotal());
+<<<<<<< HEAD
 			//toDataGrid(dataFromDB.setJsonAdapter());
 			dataFromDB.setJsonAdapter();
 			dataFromDB.toJsp();
+=======
+			toDataGrid(dataFromDB.setAdapter());
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 			System.out.println("查询完毕");
 			System.out.println(userService.getUserTotal());
 			System.out.println(userService.getStuBaseList(hql, page, rows)
@@ -379,6 +454,7 @@ public class BaseInfoAction extends ActionSupport {
 	
 	public String getAllStudentBaseInfoNoTotal() throws Exception {
 		String hql = "from StuBase";
+<<<<<<< HEAD
 
 		List<StuBase> list = null;
 		List _list = new ArrayList();
@@ -408,6 +484,40 @@ public class BaseInfoAction extends ActionSupport {
 		out.print(result);
 		out.flush();
 		out.close();
+=======
+		
+		 List<StuBase> list = null;
+	     List _list = new ArrayList();
+	        try {
+	            list = (ArrayList<StuBase>)userService.getStuBaseList(hql);  //调用查询方法         
+	             if(list.size()>0){
+	               for(StuBase stu: list){           //遍历后台传值
+	                   Map<String,Object> map = new HashMap<String,Object>();
+	                    map.put("name",stu.getName() );
+	                    map.put("credit", stu.getCredit());
+	                    _list.add(map);   
+	            }
+	             }
+	        } catch (Exception e) {
+	           e.printStackTrace();
+	        }
+	        JsonConfig jconfig = new JsonConfig();
+			jconfig.setIgnoreDefaultExcludes(false);
+			jconfig.registerJsonValueProcessor(java.util.Date.class,
+					new DateJsonValueProcessor("yyyy-MM-dd"));
+
+	        Map<String, Object> jsonMap = new HashMap<String, Object>();//定义map 
+	        jsonMap.put("rows", _list);//rows键 存放每页记录 list 
+	        String result =   JSONObject.fromObject(jsonMap,jconfig).toString();
+	        HttpServletResponse response = ServletActionContext.getResponse();
+	        response.setContentType("text/html;charset=utf-8");
+	        PrintWriter out = response.getWriter();
+	        out.print(result);
+	        out.flush();
+	        out.close();
+		
+		
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 		return null;
 	}
 	public String addStuBase() {
@@ -434,6 +544,10 @@ public class BaseInfoAction extends ActionSupport {
 	public void deleteAct(int number) {
 		try {
 			userService.deleteStu(number);
+<<<<<<< HEAD
+=======
+			// return "true";
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
@@ -458,9 +572,14 @@ public class BaseInfoAction extends ActionSupport {
 					.getSession().getAttribute("userName");
 			dataFromDB=new DataFromDB(userService.getAdminSelfBaseList(Name)
 					,1);
+<<<<<<< HEAD
 			dataFromDB.setJsonAdapter();
 			dataFromDB.toJsp();
 			
+=======
+			toDataGrid(dataFromDB.setAdapter());
+			//toBeJson(, 1);
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 			System.out.println("查询完毕");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -487,6 +606,7 @@ public class BaseInfoAction extends ActionSupport {
 			return INPUT;
 		}
 	}
+<<<<<<< HEAD
 	//外观模式
 	public String batchIncrease() throws Exception{
 		boolean isOperateSuccess=false;
@@ -498,5 +618,74 @@ public class BaseInfoAction extends ActionSupport {
 		}else {
 			return INPUT;
 		}
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+	/*public void addStuFromExcel(String fileName) {
+		try {
+			isWriteSuccess=false;
+			File file=new File(ServletActionContext.getServletContext().getRealPath("/")
+					+fileName);
+			Workbook wb = Workbook.getWorkbook(file);
+			//System.out.println("wb.getSheet(0).getRows()  "+wb.getSheet(0).getRows());
+			for (int i = 1; i < wb.getSheet(0).getRows()-1; i++) {
+				Cell[] cell = wb.getSheet(0).getRow(i);
+				userService.saveStuBaseOrUpdate(new StuBase(Integer
+						.parseInt(cell[0].getContents()),
+						cell[1].getContents(), cell[2].getContents(), cell[3]
+								.getContents(), cell[4].getContents(), Integer
+								.parseInt(cell[5].getContents())));
+				System.out.println(cell[1].getContents());
+			}
+			isWriteSuccess=true;
+			wb.close();
+			// 在这里应该还有一个删除的操作
+			file.delete();
+			//return SUCCESS;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			//return INPUT;
+		}
+
+	}
+*/
+	/*public String upload() throws IOException {
+		if (source != null && source.isFile()) {
+			String uploadPath = ServletActionContext.getServletContext()
+					.getRealPath("/") ;
+			File dir = new File(uploadPath);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			File destFile = new File(uploadPath, "templeate.xls");
+			FileUtils.copyFile(source, destFile);
+			System.out.println("upload ok");
+			addStuFromExcel("templeate.xls");
+			if(isWriteSuccess){
+				return SUCCESS;
+			}else {
+				return INPUT;
+			}
+		}
+		return null;
+
+	}*/
+	
+	
+	//外观模式
+	public String batchIncrease() throws Exception{
+		boolean isOperateSuccess=false;
+		FileUtils fileUtils=new FileUtils(source, userService);
+		isOperateSuccess=fileUtils.operateOfFileUtils();
+		
+		if(isOperateSuccess){
+			return SUCCESS;
+		}else {
+			return INPUT;
+		}
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 	}
 }

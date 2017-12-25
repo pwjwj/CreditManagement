@@ -179,7 +179,11 @@ public class ApplicationAction extends ActionSupport {
         response.setCharacterEncoding("utf-8");//指定为utf-8  
         response.getWriter().write(jobj.toString());   
         System.out.println(jobj.toString());
+<<<<<<< HEAD
     }  */
+=======
+    }  
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
 	//获取所有申请 也负担有查询的功能
     public String getAllApplication() { 
         try {

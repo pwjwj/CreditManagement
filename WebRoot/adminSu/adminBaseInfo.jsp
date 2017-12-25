@@ -65,7 +65,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#commUserDatagrid').datagrid('selectRow',index);// 关键在这里    
     	var rows = $("#commUserDatagrid").datagrid("getSelections");
     	if (rows.length==1){    
+<<<<<<< HEAD
             var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
+=======
+<<<<<<< HEAD
+            var url = '<%=basePath %>getUserByUserName.action?stuName='+rows[0].username;
+=======
+            var url = '<%=basePath %>getAdminByUserName.action?AdminName='+rows[0].username;
+>>>>>>> 9b9aee380b03c152f24fb429f1d11f8db1905faa
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
             window.location.href=url;
         }  
 	}
@@ -153,6 +161,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
+<<<<<<< HEAD
+=======
+  <%-- <s:form  action="adminSearch.action" method="post" enctype="multipart/form-data" theme="simple" >
+  		 <span id="userPwdTip">&nbsp;输入关键字:</span>
+  		 <input type="text" name="keyword" > &nbsp;&nbsp;&nbsp;&nbsp;
+  		 <input type="submit" value="搜索" ">
+  </s:form> --%>
+>>>>>>> c32516e224b90a80c1d2ab87727a4b0cb81eae8e
   <div id="tb" >
 		<input id="keyword" name="keyword" class="easyui-searchbox"
 			searcher="doSearch" prompt="搜索"

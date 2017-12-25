@@ -28,7 +28,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link id="css" rel="stylesheet" type="text/css" href="<%=basePath %>/bilibili/zclc2.1460959081.css">
 <link rel="stylesheet" href="<%=basePath %>/bilibili/base.css">
 <link rel="stylesheet" href="<%=basePath %>/css/login.css">
-
+<script type="text/javascript">
+	function beforelogin()
+	{
+		var name = document.getElementById("uName").value;
+		if(name=="")
+		{
+			alert("用户名不能为空!");
+			return false;
+		}
+		var pwd = document.getElementById("uPass").value;
+		if(pwd=="")
+		{
+			alert("密码不能为空!");
+			return false;
+		}
+		else
+			return true;
+	}
+</script>
 
   </head>
   
@@ -45,7 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     
                     <div class="box">
                         <span id="userIdSpt">&nbsp;</span>
-						<s:textfield id="uEmail" name="user.name" placeholder="用户名" cssStyle="margin-bottom: 0;height: 5%;width: 60%;" cssClass="email ui-autocomplete-input jv-box-default"/>    	
+						<s:textfield id="uName" name="user.name" placeholder="用户名" cssStyle="margin-bottom: 0;height: 5%;width: 60%;" cssClass="email ui-autocomplete-input jv-box-default"/>    	
+						  	
                     </div>
                     <div class="box">
                         <span id="userPwdTip">&nbsp;</span>
@@ -54,7 +73,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <font color="#FF0000" size="3">
         				<s:property value="#request.Erro"/><br/>
         			</font>
-                    <s:submit value="登录" cssClass="login"/>
+                    <s:submit value="登录" cssClass="login" onclick="return beforelogin();"/>
+                   
                     <a class="register" href="./regist.jsp">注册</a>
                 </s:form>
                 
